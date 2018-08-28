@@ -1,6 +1,6 @@
 ﻿body {
   font-family: 'Microsoft Yahei';
-  background: url(./首页-企业通用HTML5响应式模版网站_files/wangyou_wode_shijie-014.jpg);
+  background: url(./img/wangyou_wode_shijie-014.jpg);
 }
 
 a {
@@ -850,7 +850,7 @@ footer {
   .small-nav {
     min-height: 55px;
     /*background: rgba(75, 250, 5, 0.925);*/
-    background-image: url(./首页-企业通用HTML5响应式模版网站_files/1531497021.jpg);
+    background-image: url(./img/1531497021.jpg);
     margin-top: 0px;
   }
   .small-nav .navbar-nav>li>a {
