@@ -4,15 +4,14 @@
   background-size: cover;
 }
 
-/*导航菜单*/
+/* 导航菜单 */
 .navbar {
   margin: 0px;
   background-color: #85681bea;
   border: none;
 }
 
-/*大屏幕*/
-
+/* 大屏幕 */
 @media screen and (min-width: 769px) {
   .logo {
     margin: 16px 0px 0px 0px;
@@ -38,8 +37,6 @@
   }
   .small-nav {
     min-height: 55px;
-    /*background: rgba(75, 250, 5, 0.925);*/
-    background-image: url(./img/1531497021.jpg);
     margin-top: 0px;
   }
   .small-nav .navbar-nav>li>a {
@@ -49,28 +46,5 @@
   .small-nav img.logo {
     max-width: 200px;
     margin-top: 10px;
-  }
-  .nav_small {
-    background-color: #0282dd;
-    padding: 8px 0px 8px 0px;
-    border-radius: 0px;
-    border: none;
-    box-shadow: none;
-  }
-  .nav_small>li {}
-  .nav_small>li>a {
-    line-height: 26px;
-    color: #fff;
-    font-size: 13px;
-  }
-  .nav_small>li>a:hover {
-    color: #fff;
-    background-color: #0076ca;
-  }
-  #app_menudown, .m_flash img {
-    display: none;
-  }
-  .index_left_nav, .footer_nav {
-    display: none;
   }
 }
