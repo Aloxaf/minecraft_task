@@ -34,3 +34,15 @@
   color: #fff;
   background-color: #fa7508;
 }
+
+.flexslider {
+  width: 700px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  border: 0px;
+}
+
+.flexslider_wrapper {
+  padding-top: 100px;
+}
