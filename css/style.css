@@ -3,16 +3,18 @@
   background-size: cover;
 }
 
-.navbar {
+.logo {
+  margin: 7px 0px 0px 0px;
+  max-width: 240px;
+  max-height: 78px;
+}
+
+/* 导航栏 */
+
+.navbar, .dropdown-menu {
   margin: 0px;
   background-color: #85681bea;
   border: none;
-}
-
-.logo {
-  margin: 16px 0px 0px 0px;
-  max-width: 240px;
-  max-height: 78px;
 }
 
 .navbar-nav {
@@ -22,18 +24,24 @@
 .navbar-nav>li>a {
   text-align: center;
   padding: 25px 26px 25px 26px;
-  color: #fff;
+  color: #ffffff;
 }
 
 .navbar-default .navbar-nav>li>a {
   padding: 25px 26px 25px 26px;
-  color: #fff;
+  color: #ffffff;
+}
+
+.dropdown-menu>li>a {
+  color: #ffffff;
 }
 
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>.active>a {
-  color: #fff;
+  color: #ffffff;
   background-color: #fa7508;
 }
+
+/* 首页幻灯片 */
 
 .flexslider {
   width: 700px;
