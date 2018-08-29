@@ -1,0 +1,9 @@
+/* 内容框 */
+.content-wrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+.content {
+    background-color: rgb(240, 241, 232);
+    box-shadow: 5px 5px 5px #888888;
+}

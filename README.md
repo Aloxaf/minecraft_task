@@ -16,3 +16,5 @@
 - 使用 jQuery 插件 [FlexSlider](http://flexslider.woothemes.com/) 实现幻灯片播放效果
 - 仿照首页创建了其他页面的骨架
 - 加入了网站图标
+- 分离导航栏到单独的 html, 简化了代码
+- 使用 [markdown-js](https://github.com/evilstreak/markdown-js) 库实现以 markdown 形式编写网页内容

@@ -1,0 +1,8 @@
+# 关于我们
+
+## **【BAD-CAMP】小组**
+
+- 项目经理: Vertical923
+- CIO: tourist327
+- 技术总监: Aloxaf
+- 然后不记得ID了...
