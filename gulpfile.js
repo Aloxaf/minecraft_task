@@ -1,11 +1,8 @@
 let gulp = require('gulp'),
-    cache = require('gulp-cache'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
-    imagemin = require('gulp-imagemin'),
     lec = require('gulp-line-ending-corrector'),
     markdown = require('gulp-markdown'),
-    notify = require('gulp-notify'),
     rename = require('gulp-rename');
 
 gulp.task('clean', () => {
@@ -29,10 +26,7 @@ gulp.task('markdown', () => {
             return opt;
         }))
         .pipe(lec())
-        .pipe(gulp.dest('docs/include'))
-        .pipe(notify({
-            message: 'Markdown task complete'
-        }));
+        .pipe(gulp.dest('docs/include'));
 });
 
 // 处理 html 的 @@include
@@ -43,44 +37,27 @@ gulp.task('html', ['markdown'], () => {
             basepath: '@file'
         }))
         .pipe(lec())
-        .pipe(gulp.dest('docs'))
-        .pipe(notify({
-            message: 'Html task complete'
-        }));
+        .pipe(gulp.dest('docs'));
 });
 
-// 压缩图片
+// 图片, 啥都没做
 gulp.task('images', () => {
     return gulp.src('src/img/**/*')
-        .pipe(cache(imagemin({
-            optimizationLevel: 3,
-            progressive: true,
-            interlaced: true
-        })))
-        .pipe(gulp.dest('docs/img'))
-        .pipe(notify({
-            message: 'Image task complete'
-        }));
+        .pipe(gulp.dest('docs/img'));
 });
 
 // js, 啥都没做
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
         .pipe(lec())
-        .pipe(gulp.dest('docs/js'))
-        .pipe(notify({
-            message: 'Scripts task complete'
-        }));
+        .pipe(gulp.dest('docs/js'));
 });
 
 // css, 啥都没做
 gulp.task('styles', () => {
     return gulp.src('src/css/**/*')
         .pipe(lec())
-        .pipe(gulp.dest('docs/css'))
-        .pipe(notify({
-            message: 'Styles task complete'
-        }));
+        .pipe(gulp.dest('docs/css'));
 });
 
 gulp.task('default', ['clean'], () => {
