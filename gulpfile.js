@@ -1,15 +1,17 @@
 let gulp = require('gulp'),
     cache = require('gulp-cache'),
     del = require('del'),
-    fileinclude = require('gulp-file-include')
+    fileinclude = require('gulp-file-include'),
     imagemin = require('gulp-imagemin'),
     jshint = require('gulp-jshint'),
     markdown = require('gulp-markdown'),
     notify = require('gulp-notify'),
     rename = require('gulp-rename');
 
-gulp.task('clean', (cb) => {
-    del(['dist/*'], cb);
+gulp.task('clean', () => {
+    return del([
+        'dist/*'
+    ]);
 });
 
 // 渲染 markdown
@@ -74,6 +76,6 @@ gulp.task('styles', () => {
         }));
 });
 
-gulp.task('default', () => {
-    gulp.start('clean', 'scripts', 'images', 'styles', 'html');
+gulp.task('default', ['clean'], () => {
+    gulp.start('scripts', 'images', 'styles', 'html');
 });

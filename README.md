@@ -23,7 +23,7 @@
 ```bash
 npm install gulp -g
 npm install gulp --save-dev
-npm install gulp-jshint gulp-imagemin gulp-notify gulp-rename gulp-cache gulp-markdown gulp-file-include marked del --save-dev
+npm install gulp-jshint gulp-imagemin gulp-notify gulp-rename gulp-cache gulp-markdown gulp-file-include del jshint marked --save-dev
 ```
 
 ### 0x4 根据需求修改代码
