@@ -63,3 +63,12 @@ gulp.task('styles', () => {
 gulp.task('default', ['clean'], () => {
     gulp.start('scripts', 'images', 'styles', 'html');
 });
+
+// 监控文件变化
+gulp.task('watch', () => {
+    gulp.watch('./src/**/*.html', ['html']);
+    gulp.watch('./src/md/**/*', ['html']);
+    gulp.watch('./src/css/**/*', ['styles']);
+    gulp.watch('./src/js/**/*', ['scripts']);
+    gulp.watch('./src/img/**/*', ['images']);
+})

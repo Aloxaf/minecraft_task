@@ -4,33 +4,49 @@
 
 ## 如何参与开发
 
-### 0x0 拉取项目
+### 准备工作
 
-- 拉取项目: `git clone git@github.com:Vertical923/Vertical923.github.io.git`
-- 切换分支: `git checkout src`
+#### 安装必要软件
 
-### 0x1 安装 [Node.js](https://nodejs.org/en/download/)
+[Node.js 10.9.0 x64](https://nodejs.org/dist/v10.9.0/node-v10.9.0-x64.msi)
 
-### 0x2 npm 换源
+[Git 2.18.0 x64](https://github.com/git-for-windows/git/releases/download/v2.18.0.windows.1/Git-2.18.0-64-bit.exe)
 
-在 cmd 中执行 `npm config set registry https://registry.npm.taobao.org`
+#### 拉取项目
 
-### 0x3 安装依赖
+`git clone git@github.com:Vertical923/minecraft_task.git`
 
-打开 cmd, 切换到项目根目录  
-执行以下命令
+#### npm 换源
+
+在 cmd 中执行  
+`npm config set registry http://npmreg.mirrors.ustc.edu.cn`
+
+#### 安装依赖
+
+在 minecraft_task 文件夹中打开 cmd/git bash,
+依次执行以下命令
 
 ```bash
-npm install gulp -g
-npm install gulp --save-dev
-npm install gulp-jshint gulp-imagemin gulp-notify gulp-rename gulp-cache gulp-markdown gulp-file-include del jshint marked --save-dev
+npm install gulp browser-sync -g
+npm install
 ```
 
-### 0x4 根据需求修改代码
+### 开发
 
-### 0x5 生成网页
+在 minecraft_task 文件夹中打开 cmd/git bash 窗口,  
+并执行 `gulp watch` 以监控文件变化
 
-在项目根目录打开 cmd, 执行 `gulp`
+在 minecraft_task/docs 文件夹中打开 cmd/git bash 窗口,  
+并执行 `browser-sync start -server --files "*"` 以在浏览器中实时预览网页
+
+注: **不要关闭这两个窗口**
+
+然后可以在 src 目录中修改代码
+
+Note: **在 src 目录中修改代码**  
+Note: **在 src 目录中修改代码**  
+Note: **在 src 目录中修改代码**
+
 
 ## 开发日志
 
@@ -38,6 +54,7 @@ npm install gulp-jshint gulp-imagemin gulp-notify gulp-rename gulp-cache gulp-ma
 
 - 美化文本框, 加入边框
 - 使用 gulp 构建代码, 大幅调整结构
+- 将 markdown 的渲染放到了本地进行
 
 ### 2018.8.29
 
