@@ -3,6 +3,7 @@ let gulp = require('gulp'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
     imagemin = require('gulp-imagemin'),
+    lec = require('gulp-line-ending-corrector'),
     markdown = require('gulp-markdown'),
     notify = require('gulp-notify'),
     rename = require('gulp-rename');
@@ -27,6 +28,7 @@ gulp.task('markdown', () => {
             opt.extname = '.html';
             return opt;
         }))
+        .pipe(lec())
         .pipe(gulp.dest('docs/include'))
         .pipe(notify({
             message: 'Markdown task complete'
@@ -40,6 +42,7 @@ gulp.task('html', ['markdown'], () => {
             prefix: '@@',
             basepath: '@file'
         }))
+        .pipe(lec())
         .pipe(gulp.dest('docs'))
         .pipe(notify({
             message: 'Html task complete'
@@ -63,6 +66,7 @@ gulp.task('images', () => {
 // js, 啥都没做
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
+        .pipe(lec())
         .pipe(gulp.dest('docs/js'))
         .pipe(notify({
             message: 'Scripts task complete'
@@ -72,6 +76,7 @@ gulp.task('scripts', () => {
 // css, 啥都没做
 gulp.task('styles', () => {
     return gulp.src('src/css/**/*')
+        .pipe(lec())
         .pipe(gulp.dest('docs/css'))
         .pipe(notify({
             message: 'Styles task complete'
