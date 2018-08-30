@@ -10,12 +10,12 @@ let gulp = require('gulp'),
 
 gulp.task('clean', () => {
     return del([
-        'dist/*'
+        'docs/*'
     ]);
 });
 
 // 渲染 markdown
-// 将 ./src/md/*.md 处理为 ./dist/include/*.html
+// 将 ./src/md/*.md 处理为 ./docs/include/*.html
 // 以供 @@include
 gulp.task('markdown', () => {
     return gulp.src('src/md/**/*')
@@ -24,7 +24,7 @@ gulp.task('markdown', () => {
             opt.extname = '.html';
             return opt;
         }))
-        .pipe(gulp.dest('dist/include'))
+        .pipe(gulp.dest('docs/include'))
         .pipe(notify({
             message: 'Markdown task complete'
         }));
@@ -37,7 +37,7 @@ gulp.task('html', ['markdown'], () => {
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('docs'))
         .pipe(notify({
             message: 'Html task complete'
         }));
@@ -51,7 +51,7 @@ gulp.task('images', () => {
             progressive: true,
             interlaced: true
         })))
-        .pipe(gulp.dest('dist/img'))
+        .pipe(gulp.dest('docs/img'))
         .pipe(notify({
             message: 'Image task complete'
         }));
@@ -61,7 +61,7 @@ gulp.task('images', () => {
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
         .pipe(jshint.reporter('default'))
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest('docs/js'))
         .pipe(notify({
             message: 'Scripts task complete'
         }));
@@ -70,7 +70,7 @@ gulp.task('scripts', () => {
 // css, 啥都没做
 gulp.task('styles', () => {
     return gulp.src('src/css/**/*')
-        .pipe(gulp.dest('dist/css'))
+        .pipe(gulp.dest('docs/css'))
         .pipe(notify({
             message: 'Styles task complete'
         }));
