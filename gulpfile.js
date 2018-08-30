@@ -3,14 +3,17 @@ let gulp = require('gulp'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
     imagemin = require('gulp-imagemin'),
-    jshint = require('gulp-jshint'),
     markdown = require('gulp-markdown'),
     notify = require('gulp-notify'),
     rename = require('gulp-rename');
 
 gulp.task('clean', () => {
     return del([
-        'docs/*'
+        'docs/*.html',
+        'docs/css/*',
+        'docs/img/*',
+        'docs/include/*',
+        'docs/js/*'
     ]);
 });
 
@@ -57,10 +60,9 @@ gulp.task('images', () => {
         }));
 });
 
-// 检查js
+// js, 啥都没做
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
-        .pipe(jshint.reporter('default'))
         .pipe(gulp.dest('docs/js'))
         .pipe(notify({
             message: 'Scripts task complete'
