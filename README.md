@@ -18,3 +18,7 @@
 - 加入了网站图标
 - 分离导航栏到单独的 html, 简化了代码
 - 使用 [markdown-js](https://github.com/evilstreak/markdown-js) 库实现以 markdown 形式编写网页内容
+
+### 2018.8.30
+
+- 美化文本框, 加入边框
