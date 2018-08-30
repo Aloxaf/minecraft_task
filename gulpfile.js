@@ -21,7 +21,7 @@ gulp.task('clean', () => {
 gulp.task('markdown', () => {
     return gulp.src('src/md/**/*')
         .pipe(markdown())
-        .pipe(rename( opt => {
+        .pipe(rename(opt => {
             opt.extname = '.html';
             return opt;
         }))
@@ -67,8 +67,8 @@ gulp.task('default', ['clean'], () => {
 // 监控文件变化
 gulp.task('watch', () => {
     gulp.watch('./src/**/*.html', ['html']);
-    gulp.watch('./src/md/**/*', ['html']);
-    gulp.watch('./src/css/**/*', ['styles']);
-    gulp.watch('./src/js/**/*', ['scripts']);
-    gulp.watch('./src/img/**/*', ['images']);
+    gulp.watch('./src/md/*', ['html']);
+    gulp.watch('./src/css/*', ['styles']);
+    gulp.watch('./src/js/*', ['scripts']);
+    gulp.watch('./src/img/*', ['images']);
 })
