@@ -1,3 +1,10 @@
+/* 侧边栏 */
+.sidebar {
+    float: left;
+    background-color: white;
+    position: fixed;
+}
+
 /* 内容框 */
 .content_wrapper {
     padding-left: 50px;
@@ -12,6 +19,7 @@
 /* 边框 */
 
 .content_border {
+    float: right;
     width: 1130px;
     margin-right: auto;
     margin-left: auto;
