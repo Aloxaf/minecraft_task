@@ -2,6 +2,7 @@
 
 let gulp = require('gulp'),
     gutil = require('gulp-util'),
+    browserSync = require('browser-sync').create(),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
     marked = require('marked'),
@@ -16,10 +17,9 @@ let toc_list = {}, last = {}; // toc_list: toc 列表, key 为文件名
 function markdown() {
     return through.obj((file, enc, cb) => {
         basename = file.relative.split('.')[0];
-        if (!toc_list[basename]) {
-            toc_list[basename] = [];
-            last[basename] = [];
-        }
+        
+        toc_list[basename] = [];
+        last[basename] = [];
 
         // 自定义 renderer 以适配 toc
         renderer.heading = (text, level) => {
@@ -84,7 +84,7 @@ gulp.task('clean', () => {
         'docs/img/*',
         'docs/include/*',
         'docs/js/*',
-        'docs/video'
+        'docs/video/*'
     ]);
 });
 
@@ -150,15 +150,16 @@ gulp.task('video', () => {
 });
 
 gulp.task('default', ['clean'], () => {
+    browserSync.init({
+        server: {
+            baseDir: './docs'
+        }
+    });
     gulp.start('scripts', 'images', 'styles', 'html', 'video');
-});
-
-// 监控文件变化
-gulp.task('watch', () => {
-    gulp.watch('./src/**/*.html', ['html']);
-    gulp.watch('./src/md/*', ['html']);
-    gulp.watch('./src/css/*', ['styles']);
-    gulp.watch('./src/js/*', ['scripts']);
-    gulp.watch('./src/img/*', ['images']);
-    gulp.watch('./src/video/*', ['video']);
+    gulp.watch('./src/**/*.html', ['html']).on('change', browserSync.reload);
+    gulp.watch('./src/md/**/*.md', ['html']).on('change', browserSync.reload);
+    gulp.watch('./src/css/*.css', ['styles']).on('change', browserSync.reload);
+    gulp.watch('./src/js/*.js', ['scripts']).on('change', browserSync.reload);
+    gulp.watch('./src/img/*', ['images']).on('change', browserSync.reload);
+    gulp.watch('./src/video/*', ['video']).on('change', browserSync.reload);
 });

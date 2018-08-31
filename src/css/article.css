@@ -36,21 +36,21 @@
     float: left;
     width: 1130px;
     height: 59px;
-    background: url(../img/bg_border_top.png) center center no-repeat;
+    background: url(/img/bg_border_top.png) center center no-repeat;
     background-size: 1130px 59px;
 }
 
 .content_border_left {
     float: left;
     width: 1130px;
-    background: url(../img/bg_border_left.png) left top repeat-y;
+    background: url(/img/bg_border_left.png) left top repeat-y;
     background-size: 84px 100px;
 }
 
 .content_border_right {
     float: left;
     width: 1130px;
-    background: url(../img/bg_border_right.png) right top repeat-y;
+    background: url(/img/bg_border_right.png) right top repeat-y;
     background-size: 84px 100px;
 }
 
@@ -58,6 +58,6 @@
     float: left;
     width: 1130px;
     height: 59px;
-    background: url(../img/bg_border_foot.png) center center no-repeat;
+    background: url(/img/bg_border_foot.png) center center no-repeat;
     background-size: 1130px 59px;
 }
