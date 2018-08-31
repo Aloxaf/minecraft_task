@@ -1,6 +1,7 @@
 <h1 id="minecraft%E7%9A%84%E7%88%86%E7%82%B8%E7%AE%97%E6%B3%95"><a href="#minecraft%E7%9A%84%E7%88%86%E7%82%B8%E7%AE%97%E6%B3%95" class="anchor"></a>Minecraft的爆炸算法</h1><p>MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范围比较大；在地面爆炸破坏范围小但是破坏深度较深
 不科学的地方是它的爆炸范围是正方体，只不过一般范围小到看不出是正方体。至于为什么MOD里的核弹爆炸范围是球体，那是别人重新实现了爆炸函数把范围改掉了…类名net.minecraft.world.World</p>
-<pre><code>类名net.minecraft.world.World
+<pre><code class="language-java">
+类名net.minecraft.world.World
 
     /**
      * Creates an explosion. Args: entity, x, y, z, strength
@@ -23,7 +24,8 @@
         // 第二阶段，破坏方块，生成粒子效果和掉落物
         explosion.doExplosionB(true);
         return explosion;
-    }</code></pre><pre><code>类名net.minecraft.world.Explosion
+    }</code></pre>
+<pre><code>类名net.minecraft.world.Explosion
     public Explosion(World worldIn, Entity p_i45754_2_, double p_i45754_3_, double p_i45754_5_, double p_i45754_7_, float size, boolean p_i45754_10_, boolean p_i45754_11_)
     {
         this.explosionRNG = new Random();

@@ -4,36 +4,52 @@ let gulp = require('gulp'),
     gutil = require('gulp-util'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
-    markdown = require('gulp-markdown'),
+    marked = require('marked'),
     rename = require('gulp-rename'),
     through = require('through2');
 
-let renderer = new markdown.marked.Renderer();
-let toc_list = [], last = {};
+let renderer = new marked.Renderer();
+let toc_list = {}, last = {}; // toc_list: toc 列表, key 为文件名
 
-// 自定义 heading 的 renderer, 与 toc 适配
-renderer.heading = (text, level) => {
-    let slug = encodeURIComponent(text.toLowerCase());
-    let headline = {
-        level: level,
-        slug: slug,
-        title: text
-    };
-    
-    if (last[level - 1]) {
-        if (last[level - 1].children === undefined) 
-            last[level - 1].children = [];
-        last[level - 1].children.push(headline);
-    } else {
-        toc_list.push(headline);
-    }
-    last[level] = headline;
-    
-    return `<h${level} id="${slug}"><a href="#${slug}" class="anchor"></a>${text}</h${level}>`;
-};
+// markdown 处理, 因为 gulp 处理文件的时候好像是并行的
+// 必须想办法标识每个 toc 所属的文件
+function markdown() {
+    return through.obj((file, enc, cb) => {
+        basename = file.relative.split('.')[0];
+        if (!toc_list[basename]) {
+            toc_list[basename] = [];
+            last[basename] = [];
+        }
+
+        // 自定义 renderer 以适配 toc
+        renderer.heading = (text, level) => {
+            let slug = encodeURIComponent(text.toLowerCase());
+            let headline = {
+                level: level,
+                slug: slug,
+                title: text
+            };
+            
+            if (last[basename][level - 1]) {
+                if (last[basename][level - 1].children === undefined) 
+                    last[basename][level - 1].children = [];
+                last[basename][level - 1].children.push(headline);
+            } else {
+                toc_list[basename].push(headline);
+            }
+            last[basename][level] = headline;
+            
+            return `<h${level} id="${slug}"><a href="#${slug}" class="anchor"></a>${text}</h${level}>`;
+        };
+        // console.log(file);
+        html = marked(file.contents.toString(), {renderer: renderer});
+        file.contents = Buffer.from(html);
+
+        return cb(null, file);
+    });
+}
 
 // 生成 table of content
-// md 只能有一个一级标题
 function toc() {
     function print_toc(l, html) {
         for (let i of l) {
@@ -45,7 +61,9 @@ function toc() {
     }
 
     return through.obj((file, enc, cb) => {
-        html = '<ol>\n' + print_toc([toc_list.shift()], '') + '\n</ol>';
+        basename = file.relative.split('.')[0];
+        // console.log(basename, toc_list);
+        html = '<ol>\n' + print_toc(toc_list[basename], '') + '\n</ol>';
         file.contents = Buffer.from(html);
         return cb(null, file);
     });
@@ -75,7 +93,7 @@ gulp.task('clean', () => {
 // 将 导航栏 保存为 *_nav.html
 // 以供 @@include
 gulp.task('markdown', () => {
-    return gulp.src('src/md/**/*')
+    return gulp.src('src/md/**/*.md')
         .pipe(mylog())
         .pipe(markdown({
             renderer: renderer
@@ -99,7 +117,7 @@ gulp.task('html', ['markdown'], () => {
         .pipe(mylog())
         .pipe(fileinclude({
             prefix: '@@',
-            basepath: '@file'
+            basepath: '.'
         }))
         .pipe(gulp.dest('docs'));
 });

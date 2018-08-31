@@ -6,32 +6,25 @@
 </head>
 
 <body>
-    @@include("src/include/nav.html", {"active": "introduce"})
+    @@include("src/include/nav.html", {"active": "explore"})
+
     <div class="content_wrapper">
         <div class="sidebar">
-            @@include('docs/include/introduce_nav.html')
+            @@include('docs/include/explore/noise_nav.html')
         </div>
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
                     <div class="content">
-                        @@include('docs/include/introduce.html')
+                        @@include('docs/include/explore/noise.html')
+                        <p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/64133242">CSDN博客</a></p>
                     </div>
                 </div>
             </div>
             <div class="content_border_foot"></div>
         </div>
     </div>
-    <style>
-        /*背景图片*/
-
-        body {
-            background: url(img/bg1.jpg);
-            background-size: cover;
-            background-attachment: fixed;
-        }
-    </style>
 </body>
 
 </html>

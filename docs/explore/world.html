@@ -1,7 +1,84 @@
-<h1 id="minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90"><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90" class="anchor"></a>Minecraft中的世界生成</h1><h2 id="%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE"><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE" class="anchor"></a>世界设置</h2><p>首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>minecraft算法分析及游戏简介</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/common.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/article.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- 图标 -->
+        <div class="navbar-header">
+            <a href="/index.html">
+                <img src="/img/logo.png" class="logo" alt="首页">
+            </a>
+        </div>
+        <!-- 导航目录 -->
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="index"><a href="/index.html">首页</a></li>
+                <li id="introduce"><a href="/introduce.html">游戏简介</a></li>
+                <li id="explore" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        深入探索
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/explore/world.html">世界生成</a></li>
+						<li><a href="/explore/ecosystem.html">生物群系</a></li>
+						<li><a href="/explore/noise.html">噪声函数</a></li>
+						<li><a href="/explore/terrain.html">基本地形</a></li>
+						<li><a href="/explore/cave.html">洞穴</a></li>
+						<li><a href="/explore/explode.html">爆炸算法</a></li>
+                    </ul>
+                </li>
+                <li id="strategy"><a href="/strategy.html">游戏攻略</a></li>
+                <li id="about" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        关于我们
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/about/video.html">小组视频</a></li>
+                        <li><a href="/about/about.html">我们的话</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $('#explore').addClass('active')
+    </script>
+</nav>
+    <div class="content_wrapper">
+        <div class="sidebar">
+            <ol>
+<li><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90">Minecraft中的世界生成</a></li><ol>
+<li><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE">世界设置</a></li><li><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8">启动游戏服务器</a></li><li><a href="#%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C">加载世界</a></li>
+</ol>
+</ol>
+        </div>
+        <div class="content_border">
+            <div class="content_border_top"></div>
+            <div class="content_border_left">
+                <div class="content_border_right">
+                    <div class="content">
+                        <h1 id="minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90"><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90" class="anchor"></a>Minecraft中的世界生成</h1><h2 id="%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE"><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE" class="anchor"></a>世界设置</h2><p>首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码
 类名net.minecraft.client.Minecraft</p>
-<pre><code>
-    /**
+<pre><code class="language-java">    /**
      * Arguments: World foldername,  World ingame name, WorldSettings
      */
     public void launchIntegratedServer(String folderName, String worldName, WorldSettings worldSettingsIn)
@@ -88,7 +165,8 @@
         }
         networkmanager.sendPacket(new C00PacketLoginStart(gameProfile));
         this.myNetworkManager = networkmanager;
-    }</code></pre><h2 id="%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8" class="anchor"></a>启动游戏服务器</h2><p>这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等
+    }</code></pre>
+<h2 id="%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8" class="anchor"></a>启动游戏服务器</h2><p>这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等
 类名net.minecraft.client.Minecraft</p>
 <pre><code>    /**
      * Arguments: World foldername,  World ingame name, WorldSettings
@@ -382,3 +460,22 @@
 
         return chunk;
     }</code></pre>
+						<p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/61915888" >CSDN博客</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="content_border_foot"></div>
+        </div>
+    </div>
+    <style>
+        /*背景图片*/
+
+        body {
+            background: url(/img/bg1.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</body>
+
+</html>
