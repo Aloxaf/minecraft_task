@@ -33,13 +33,11 @@ npm install
 
 ### 开发
 
-在 minecraft_task 文件夹中打开 cmd/git bash 窗口,  
-并执行 `gulp watch` 以监控文件变化
+在 minecraft_task 文件夹中打开 cmd/git bash 窗口, 并执行 `gulp`  
 
-在 minecraft_task/docs 文件夹中打开 cmd/git bash 窗口,  
-并执行 `browser-sync start -server --files "*"` 以在浏览器中实时预览网页
+这将会打开一个网页, 当作出修改时, 该网页会自动刷新
 
-注: **不要关闭这两个窗口**
+注: **不要关闭这个窗口**
 
 然后可以在 src 目录中修改代码
 
@@ -56,6 +54,10 @@ npm install
 </div>
 
 ## 开发日志
+
+### 2018.9.1
+
+- 优化开发流程
 
 ### 2018.8.31
 
