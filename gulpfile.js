@@ -32,6 +32,7 @@ renderer.heading = (text, level) => {
 };
 
 // 生成 table of content
+// md 只能有一个一级标题
 function toc() {
     function print_toc(l, html) {
         for (let i of l) {
@@ -43,7 +44,7 @@ function toc() {
     }
 
     return through.obj((file, enc, cb) => {
-        html = '<ol>\n' + print_toc(toc_list, '') + '\n</ol>';
+        html = '<ol>\n' + print_toc([toc_list.shift()], '') + '\n</ol>';
         file.contents = Buffer.from(html);
         return cb(null, file);
     });

@@ -1,15 +1,21 @@
 /* 侧边栏 */
+
 .sidebar {
     float: left;
-    background-color: white;
+    /*侧边栏半透明*/
+    background-color: #fff;
+    /*侧边栏半透明*/
+    opacity: 0.5;
     position: fixed;
 }
 
 /* 内容框 */
+
 .content_wrapper {
     padding-left: 50px;
     padding-right: 50px;
 }
+
 .content {
     margin: -80px 168px -100px 168px;
     background-color: rgba(0, 0, 0, 0.493);
@@ -26,7 +32,7 @@
     overflow: hidden;
 }
 
-/* .content_border_top {
+.content_border_top {
     float: left;
     width: 1130px;
     height: 59px;
@@ -54,4 +60,4 @@
     height: 59px;
     background: url(../img/bg_border_foot.png) center center no-repeat;
     background-size: 1130px 59px;
-} */
+}
