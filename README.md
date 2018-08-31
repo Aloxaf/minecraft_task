@@ -43,10 +43,17 @@ npm install
 
 然后可以在 src 目录中修改代码
 
-Note: **在 src 目录中修改代码**  
-Note: **在 src 目录中修改代码**  
-Note: **在 src 目录中修改代码**
+<div style="font-size:150%">
 
+### 注意事项
+ 
+- **在 src 目录中修改代码!**  
+- **在 src 目录中修改代码!**  
+- **在 src 目录中修改代码!**
+
+- **不要直接往 master 分支 commit, 需要合并分支请发起 pull request**
+
+</div>
 
 ## 开发日志
 
