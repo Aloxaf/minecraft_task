@@ -1,9 +1,54 @@
+/* jshint esversion: 6 */
+
 let gulp = require('gulp'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
-    lec = require('gulp-line-ending-corrector'),
     markdown = require('gulp-markdown'),
-    rename = require('gulp-rename');
+    rename = require('gulp-rename'),
+    through = require('through2');
+
+let renderer = new markdown.marked.Renderer();
+let toc_list = [], last = {};
+
+// 自定义 heading 的 renderer, 与 toc 适配
+renderer.heading = (text, level) => {
+    let slug = encodeURIComponent(text.toLowerCase());
+    let headline = {
+        level: level,
+        slug: slug,
+        title: text
+    };
+    
+    if (last[level - 1]) {
+        if (last[level - 1].children === undefined) 
+            last[level - 1].children = [];
+        last[level - 1].children.push(headline);
+    } else {
+        toc_list.push(headline);
+    }
+    last[level] = headline;
+    
+    return `<h${level} id="${slug}"><a href="#${slug}" class="anchor"></a>${text}</h${level}>`;
+};
+
+// 生成 table of content
+function toc() {
+
+    function print_toc(l, html) {
+        for (let i of l) {
+            html += `<li><a href="#${i.slug}">${i.title}</a></li>`;
+            if (i.children) 
+                html += '<ol>\n' + print_toc(i.children, '') + '\n</ol>';
+        }
+        return html;
+    }
+
+    return through.obj((file, enc, cb) => {
+        html = '<ol>\n' + print_toc(toc_list, '') + '\n</ol>';
+        file.contents = Buffer.from(html);
+        return cb(null, file);
+    });
+}
 
 gulp.task('clean', () => {
     return del([
@@ -17,15 +62,22 @@ gulp.task('clean', () => {
 
 // 渲染 markdown
 // 将 ./src/md/*.md 处理为 ./docs/include/*.html
+// 将 导航栏 保存为 *_nav.html
 // 以供 @@include
 gulp.task('markdown', () => {
     return gulp.src('src/md/**/*')
-        .pipe(markdown())
+        .pipe(markdown({
+            renderer: renderer
+        }))
         .pipe(rename( opt => {
             opt.extname = '.html';
             return opt;
         }))
-        .pipe(lec())
+        .pipe(gulp.dest('docs/include'))
+        .pipe(rename( opt => {
+            opt.basename += '_nav';
+            return opt;
+        }))
         .pipe(gulp.dest('docs/include'));
 });
 
@@ -36,7 +88,6 @@ gulp.task('html', ['markdown'], () => {
             prefix: '@@',
             basepath: '@file'
         }))
-        .pipe(lec())
         .pipe(gulp.dest('docs'));
 });
 
@@ -49,14 +100,12 @@ gulp.task('images', () => {
 // js, 啥都没做
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
-        .pipe(lec())
         .pipe(gulp.dest('docs/js'));
 });
 
 // css, 啥都没做
 gulp.task('styles', () => {
     return gulp.src('src/css/**/*')
-        .pipe(lec())
         .pipe(gulp.dest('docs/css'));
 });
 
@@ -71,4 +120,4 @@ gulp.task('watch', () => {
     gulp.watch('./src/css/**/*', ['styles']);
     gulp.watch('./src/js/**/*', ['scripts']);
     gulp.watch('./src/img/**/*', ['images']);
-})
+});
