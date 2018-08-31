@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 
 let gulp = require('gulp'),
+    gutil = require('gulp-util'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
     markdown = require('gulp-markdown'),
@@ -50,6 +51,14 @@ function toc() {
     });
 }
 
+// 输出正在处理的文件名
+function mylog() {
+    return through.obj((file, enc, cb) => {
+        gutil.log('Handing', gutil.colors.magenta(file.relative));
+        return cb(null, file);
+    });
+}
+
 gulp.task('clean', () => {
     return del([
         'docs/*.html',
@@ -67,6 +76,7 @@ gulp.task('clean', () => {
 // 以供 @@include
 gulp.task('markdown', () => {
     return gulp.src('src/md/**/*')
+        .pipe(mylog())
         .pipe(markdown({
             renderer: renderer
         }))
@@ -86,6 +96,7 @@ gulp.task('markdown', () => {
 // 处理 html 的 @@include
 gulp.task('html', ['markdown'], () => {
     return gulp.src('src/**/*.html')
+        .pipe(mylog())
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'
@@ -96,23 +107,27 @@ gulp.task('html', ['markdown'], () => {
 // 图片, 啥都没做
 gulp.task('images', () => {
     return gulp.src('src/img/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/img'));
 });
 
 // js, 啥都没做
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/js'));
 });
 
 // css, 啥都没做
 gulp.task('styles', () => {
     return gulp.src('src/css/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/css'));
 });
 
 gulp.task('video', () => {
     return gulp.src('src/video/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/video'));
 });
 
