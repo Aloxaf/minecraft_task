@@ -56,7 +56,8 @@ gulp.task('clean', () => {
         'docs/css/*',
         'docs/img/*',
         'docs/include/*',
-        'docs/js/*'
+        'docs/js/*',
+        'docs/video'
     ]);
 });
 
