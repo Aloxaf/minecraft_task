@@ -21,13 +21,13 @@
     @@include("./include/nav.html", {"active": "about"})
 
     <div class="content_wrapper">
+        <div class="sidebar">
+            @@include('../docs/include/about_nav.html')
+        </div>
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
-                    <div class="content_nav">
-                        @@include('../docs/include/about_nav.html')
-                    </div>
                     <div class="content">
                         @@include('../docs/include/about.html')
                     </div>

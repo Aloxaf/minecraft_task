@@ -33,7 +33,6 @@ renderer.heading = (text, level) => {
 
 // 生成 table of content
 function toc() {
-
     function print_toc(l, html) {
         for (let i of l) {
             html += `<li><a href="#${i.slug}">${i.title}</a></li>`;
@@ -74,6 +73,7 @@ gulp.task('markdown', () => {
             return opt;
         }))
         .pipe(gulp.dest('docs/include'))
+        .pipe(toc())
         .pipe(rename( opt => {
             opt.basename += '_nav';
             return opt;
@@ -120,4 +120,4 @@ gulp.task('watch', () => {
     gulp.watch('./src/css/*', ['styles']);
     gulp.watch('./src/js/*', ['scripts']);
     gulp.watch('./src/img/*', ['images']);
-})
+});
