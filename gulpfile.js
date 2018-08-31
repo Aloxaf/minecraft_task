@@ -109,8 +109,13 @@ gulp.task('styles', () => {
         .pipe(gulp.dest('docs/css'));
 });
 
+gulp.task('video', () => {
+    return gulp.src('src/video/**/*')
+        .pipe(gulp.dest('docs/video'));
+});
+
 gulp.task('default', ['clean'], () => {
-    gulp.start('scripts', 'images', 'styles', 'html');
+    gulp.start('scripts', 'images', 'styles', 'html', 'video');
 });
 
 // 监控文件变化
@@ -120,4 +125,5 @@ gulp.task('watch', () => {
     gulp.watch('./src/css/*', ['styles']);
     gulp.watch('./src/js/*', ['scripts']);
     gulp.watch('./src/img/*', ['images']);
+    gulp.watch('./src/video/*', ['video']);
 });
