@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>minecraft算法分析及游戏简介</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/flexslider/2.7.0/flexslider.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/flexslider/2.7.0/jquery.flexslider.min.js"></script>
+    <script src="./js/common.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/article.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- 图标 -->
+        <div class="navbar-header">
+            <a href="index.html">
+                <img src="./img/logo.png" class="logo" alt="首页">
+            </a>
+        </div>
+        <!-- 导航目录 -->
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="index"><a href="index.html">首页</a></li>
+                <li id="introduce"><a href="introduce.html">游戏简介</a></li>
+                <li id="explore" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        深入探索
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="world.html">世界生成</a></li>
+						<li><a href="ecosystem.html">生物群系</a></li>
+						<li><a href="noise.html">噪声函数</a></li>
+						<li><a href="terrain.html">基本地形</a></li>
+						<li><a href="cave.html">洞穴</a></li>
+						<li><a href="explode.html">爆炸算法</a></li>
+                    </ul>
+                </li>
+                <li id="strategy"><a href="strategy.html">游戏攻略</a></li>
+                <li id="about" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        关于我们
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="video.html">小组视频</a></li>
+                        <li><a href="about.html">我们的话</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $('#explore').addClass('active')
+    </script>
+</nav>
+    <div class="content_wrapper">
+        <div class="sidebar">
+            <ol>
+<li><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90">Minecraft中的世界生成</a></li><ol>
+<li><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE">世界设置</a></li><li><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8">启动游戏服务器</a></li><li><a href="#%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C">加载世界</a></li>
+</ol>
+</ol>
+        </div>
+        <div class="content_border">
+            <div class="content_border_top"></div>
+            <div class="content_border_left">
+                <div class="content_border_right">
+                    <div class="content">
+                        <h1 id="minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90"><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90" class="anchor"></a>Minecraft中的世界生成</h1><h2 id="%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE"><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE" class="anchor"></a>世界设置</h2><p>首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码
+类名net.minecraft.client.Minecraft</p>
+<pre><code>
+    /**
+     * Arguments: World foldername,  World ingame name, WorldSettings
+     */
+    public void launchIntegratedServer(String folderName, String worldName, WorldSettings worldSettingsIn)
+    {
+        net.minecraftforge.fml.client.FMLClientHandler.instance().startIntegratedServer(folderName, worldName, worldSettingsIn);
+        // 首先卸载已经加载的世界
+        this.loadWorld((WorldClient)null);
+        System.gc();
+        ISaveHandler isavehandler = this.saveLoader.getSaveLoader(folderName, false);
+        // 世界信息，包含世界名、难度、时间、出生点等东西
+        WorldInfo worldinfo = isavehandler.loadWorldInfo();
+
+        // 因为是创造新的世界，这里worldinfo == null
+        if (worldinfo == null &amp;&amp; worldSettingsIn != null)
+        {
+            worldinfo = new WorldInfo(worldSettingsIn, folderName);
+            isavehandler.saveWorldInfo(worldinfo);
+        }
+
+        if (worldSettingsIn == null)
+        {
+            worldSettingsIn = new WorldSettings(worldinfo);
+        }
+
+        try
+        {
+            // 启动游戏服务器线程
+            this.theIntegratedServer = new IntegratedServer(this, folderName, worldName, worldSettingsIn);
+            this.theIntegratedServer.startServerThread();
+            this.integratedServerIsRunning = true;
+        }
+        catch (Throwable throwable)
+        {
+            CrashReport crashreport = CrashReport.makeCrashReport(throwable, &quot;Starting integrated server&quot;);
+            CrashReportCategory crashreportcategory = crashreport.makeCategory(&quot;Starting integrated server&quot;);
+            crashreportcategory.addCrashSection(&quot;Level ID&quot;, folderName);
+            crashreportcategory.addCrashSection(&quot;Level Name&quot;, worldName);
+            throw new ReportedException(crashreport);
+        }
+
+        this.loadingScreen.displaySavingString(I18n.format(&quot;menu.loadingLevel&quot;, new Object[0]));
+
+        // 轮询获取加载世界的进度并显示
+        while (!this.theIntegratedServer.serverIsInRunLoop())
+        {
+            if (!net.minecraftforge.fml.common.StartupQuery.check())
+            {
+                loadWorld(null);
+                displayGuiScreen(null);
+                return;
+            }
+            String s = this.theIntegratedServer.getUserMessage();
+
+            if (s != null)
+            {
+                this.loadingScreen.displayLoadingString(I18n.format(s, new Object[0]));
+            }
+            else
+            {
+                this.loadingScreen.displayLoadingString(&quot;&quot;);
+            }
+
+            try
+            {
+                Thread.sleep(200L);
+            }
+            catch (InterruptedException var9)
+            {
+                ;
+            }
+        }
+
+        // 以下是客户端与服务器连接，这里不讨论
+        this.displayGuiScreen((GuiScreen)null);
+        SocketAddress socketaddress = this.theIntegratedServer.getNetworkSystem().addLocalEndpoint();
+        NetworkManager networkmanager = NetworkManager.provideLocalClient(socketaddress);
+        networkmanager.setNetHandler(new NetHandlerLoginClient(networkmanager, this, (GuiScreen)null));
+        networkmanager.sendPacket(new C00Handshake(47, socketaddress.toString(), 0, EnumConnectionState.LOGIN, true));
+        com.mojang.authlib.GameProfile gameProfile = this.getSession().getProfile();
+        if (!this.getSession().hasCachedProperties())
+        {
+            gameProfile = sessionService.fillProfileProperties(gameProfile, true); //Forge: Fill profile properties upon game load. Fixes MC-52974.
+            this.getSession().setProperties(gameProfile.getProperties());
+        }
+        networkmanager.sendPacket(new C00PacketLoginStart(gameProfile));
+        this.myNetworkManager = networkmanager;
+    }</code></pre><h2 id="%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8" class="anchor"></a>启动游戏服务器</h2><p>这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等
+类名net.minecraft.client.Minecraft</p>
+<pre><code>    /**
+     * Arguments: World foldername,  World ingame name, WorldSettings
+     */
+    public void launchIntegratedServer(String folderName, String worldName, WorldSettings worldSettingsIn)
+    {
+        net.minecraftforge.fml.client.FMLClientHandler.instance().startIntegratedServer(folderName, worldName, worldSettingsIn);
+        // 首先卸载已经加载的世界
+        this.loadWorld((WorldClient)null);
+        System.gc();
+        ISaveHandler isavehandler = this.saveLoader.getSaveLoader(folderName, false);
+        // 世界信息，包含世界名、难度、时间、出生点等东西
+        WorldInfo worldinfo = isavehandler.loadWorldInfo();
+
+        // 因为是创造新的世界，这里worldinfo == null
+        if (worldinfo == null &amp;&amp; worldSettingsIn != null)
+        {
+            worldinfo = new WorldInfo(worldSettingsIn, folderName);
+            isavehandler.saveWorldInfo(worldinfo);
+        }
+
+        if (worldSettingsIn == null)
+        {
+            worldSettingsIn = new WorldSettings(worldinfo);
+        }
+
+        try
+        {
+            // 启动游戏服务器线程
+            this.theIntegratedServer = new IntegratedServer(this, folderName, worldName, worldSettingsIn);
+            this.theIntegratedServer.startServerThread();
+            this.integratedServerIsRunning = true;
+        }
+        catch (Throwable throwable)
+        {
+            CrashReport crashreport = CrashReport.makeCrashReport(throwable, &quot;Starting integrated server&quot;);
+            CrashReportCategory crashreportcategory = crashreport.makeCategory(&quot;Starting integrated server&quot;);
+            crashreportcategory.addCrashSection(&quot;Level ID&quot;, folderName);
+            crashreportcategory.addCrashSection(&quot;Level Name&quot;, worldName);
+            throw new ReportedException(crashreport);
+        }
+
+        this.loadingScreen.displaySavingString(I18n.format(&quot;menu.loadingLevel&quot;, new Object[0]));
+
+        // 轮询获取加载世界的进度并显示
+        while (!this.theIntegratedServer.serverIsInRunLoop())
+        {
+            if (!net.minecraftforge.fml.common.StartupQuery.check())
+            {
+                loadWorld(null);
+                displayGuiScreen(null);
+                return;
+            }
+            String s = this.theIntegratedServer.getUserMessage();
+
+            if (s != null)
+            {
+                this.loadingScreen.displayLoadingString(I18n.format(s, new Object[0]));
+            }
+            else
+            {
+                this.loadingScreen.displayLoadingString(&quot;&quot;);
+            }
+
+            try
+            {
+                Thread.sleep(200L);
+            }
+            catch (InterruptedException var9)
+            {
+                ;
+            }
+        }
+
+        // 以下是客户端与服务器连接，这里不讨论
+        this.displayGuiScreen((GuiScreen)null);
+        SocketAddress socketaddress = this.theIntegratedServer.getNetworkSystem().addLocalEndpoint();
+        NetworkManager networkmanager = NetworkManager.provideLocalClient(socketaddress);
+        networkmanager.setNetHandler(new NetHandlerLoginClient(networkmanager, this, (GuiScreen)null));
+        networkmanager.sendPacket(new C00Handshake(47, socketaddress.toString(), 0, EnumConnectionState.LOGIN, true));
+        com.mojang.authlib.GameProfile gameProfile = this.getSession().getProfile();
+        if (!this.getSession().hasCachedProperties())
+        {
+            gameProfile = sessionService.fillProfileProperties(gameProfile, true); //Forge: Fill profile properties upon game load. Fixes MC-52974.
+            this.getSession().setProperties(gameProfile.getProperties());
+        }
+        networkmanager.sendPacket(new C00PacketLoginStart(gameProfile));
+        this.myNetworkManager = networkmanager;
+    }</code></pre><h2 id="%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C"><a href="#%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C" class="anchor"></a>加载世界</h2><p>类名net.minecraft.server.integrated.IntegratedServer
+服务器线程启动后调用这个函数</p>
+<pre><code>    /**
+     * Initialises the server and starts it.
+     */
+    protected boolean startServer() throws IOException
+    {
+        logger.info(&quot;Starting integrated minecraft server version 1.8.9&quot;);
+        this.setOnlineMode(true);
+        this.setCanSpawnAnimals(true);
+        this.setCanSpawnNPCs(true);
+        this.setAllowPvp(true);
+        this.setAllowFlight(true);
+        logger.info(&quot;Generating keypair&quot;);
+        this.setKeyPair(CryptManager.generateKeyPair());
+        if (!net.minecraftforge.fml.common.FMLCommonHandler.instance().handleServerAboutToStart(this)) return false;
+        // 加载所有世界（主世界、地狱、末地等）
+        this.loadAllWorlds(this.getFolderName(), this.getWorldName(), this.theWorldSettings.getSeed(), this.theWorldSettings.getTerrainType(), this.theWorldSettings.getWorldName());
+        this.setMOTD(this.getServerOwner() + &quot; - &quot; + this.worldServers[0].getWorldInfo().getWorldName());
+        return net.minecraftforge.fml.common.FMLCommonHandler.instance().handleServerStarting(this);
+    }
+
+
+    protected void loadAllWorlds(String folderName, String worldName, long seed, WorldType type, String p_71247_6_)
+    {
+        this.convertMapIfNeeded(folderName);
+        ISaveHandler isavehandler = this.getActiveAnvilConverter().getSaveLoader(folderName, true);
+        this.setResourcePackFromWorld(this.getFolderName(), isavehandler);
+        WorldInfo worldinfo = isavehandler.loadWorldInfo();
+
+        if (worldinfo == null)
+        {
+            worldinfo = new WorldInfo(this.theWorldSettings, worldName);
+        }
+        else
+        {
+            worldinfo.setWorldName(worldName);
+        }
+
+        WorldServer overWorld = (isDemo() ? (WorldServer)(new DemoWorldServer(this, isavehandler, worldinfo, 0, this.theProfiler)).init() :
+                                            (WorldServer)(new WorldServer(this, isavehandler, worldinfo, 0, this.theProfiler)).init());
+        overWorld.initialize(this.theWorldSettings);
+
+        // 初始化各世界
+        for (int dim : net.minecraftforge.common.DimensionManager.getStaticDimensionIDs())
+        {
+            WorldServer world = (dim == 0 ? overWorld : (WorldServer)(new WorldServerMulti(this, isavehandler, dim, overWorld, this.theProfiler)).init());
+            world.addWorldAccess(new WorldManager(this, world));
+            if (!this.isSinglePlayer())
+            {
+                world.getWorldInfo().setGameType(getGameType());
+            }
+            net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(new net.minecraftforge.event.world.WorldEvent.Load(world));
+        }
+
+        this.getConfigurationManager().setPlayerManager(new WorldServer[]{ overWorld });
+
+        if (overWorld.getWorldInfo().getDifficulty() == null)
+        {
+            this.setDifficultyForAllWorlds(this.mc.gameSettings.difficulty);
+        }
+
+        // 加载玩家附近的区块
+        this.initialWorldChunkLoad();
+    }
+
+
+类名net.minecraft.server.MinecraftServer
+    protected void initialWorldChunkLoad()
+    {
+        int i = 16;
+        int j = 4;
+        int k = 192;
+        int l = 625;
+        int i1 = 0;
+        this.setUserMessage(&quot;menu.generatingTerrain&quot;);
+        int j1 = 0;
+        logger.info(&quot;Preparing start region for level &quot; + j1);
+        WorldServer worldserver = net.minecraftforge.common.DimensionManager.getWorld(j1);
+        BlockPos blockpos = worldserver.getSpawnPoint();
+        long k1 = getCurrentTimeMillis();
+
+        // MC中区块大小是16*16，所以这里是加载玩家附近25*25个区块
+        for (int l1 = -192; l1 &lt;= 192 &amp;&amp; this.isServerRunning(); l1 += 16)
+        {
+            for (int i2 = -192; i2 &lt;= 192 &amp;&amp; this.isServerRunning(); i2 += 16)
+            {
+                long j2 = getCurrentTimeMillis();
+
+                if (j2 - k1 &gt; 1000L)
+                {
+                    this.outputPercentRemaining(&quot;Preparing spawn area&quot;, i1 * 100 / 625);
+                    k1 = j2;
+                }
+
+                ++i1;
+                // 加载一个区块，参数是区块坐标（方块坐标/16）
+                worldserver.theChunkProviderServer.loadChunk(blockpos.getX() + l1 &gt;&gt; 4, blockpos.getZ() + i2 &gt;&gt; 4);
+            }
+        }
+
+        this.clearCurrentTask();
+    }
+
+类名net.minecraft.world.gen.ChunkProviderServer
+    /**
+     * loads or generates the chunk at the chunk location specified
+     */
+    public Chunk loadChunk(int p_73158_1_, int p_73158_2_)
+    {
+        return loadChunk(p_73158_1_, p_73158_2_, null);
+    }
+
+    public Chunk loadChunk(int par1, int par2, Runnable runnable)
+    {
+        long k = ChunkCoordIntPair.chunkXZ2Int(par1, par2);
+        this.droppedChunksSet.remove(Long.valueOf(k));
+        Chunk chunk = (Chunk)this.id2ChunkMap.getValueByKey(k);
+        net.minecraft.world.chunk.storage.AnvilChunkLoader loader = null;
+
+        if (this.chunkLoader instanceof net.minecraft.world.chunk.storage.AnvilChunkLoader)
+        {
+            loader = (net.minecraft.world.chunk.storage.AnvilChunkLoader) this.chunkLoader;
+        }
+
+        // We can only use the queue for already generated chunks
+        if (chunk == null &amp;&amp; loader != null &amp;&amp; loader.chunkExists(this.worldObj, par1, par2))
+        {
+            if (runnable != null)
+            {
+                net.minecraftforge.common.chunkio.ChunkIOExecutor.queueChunkLoad(this.worldObj, loader, this, par1, par2, runnable);
+                return null;
+            }
+            else
+            {
+                chunk = net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(this.worldObj, loader, this, par1, par2);
+            }
+        }
+        else if (chunk == null)
+        {
+            // 此时区块还未生成所以会运行到这里
+            chunk = this.originalLoadChunk(par1, par2);
+        }
+
+        // If we didn&#39;t load the chunk async and have a callback run it now
+        if (runnable != null)
+        {
+            runnable.run();
+        }
+
+        return chunk;
+    }
+
+    public Chunk originalLoadChunk(int p_73158_1_, int p_73158_2_)
+    {
+        long i = ChunkCoordIntPair.chunkXZ2Int(p_73158_1_, p_73158_2_);
+        this.droppedChunksSet.remove(Long.valueOf(i));
+        Chunk chunk = (Chunk)this.id2ChunkMap.getValueByKey(i);
+
+        if (chunk == null)
+        {
+            boolean added = loadingChunks.add(i);
+            if (!added)
+            {
+                net.minecraftforge.fml.common.FMLLog.bigWarning(&quot;There is an attempt to load a chunk (%d,%d) in di    &gt;mension %d that is already being loaded. This will cause weird chunk breakages.&quot;, p_73158_1_, p_73158_2_, worldObj.provider.getDimensionId());
+            }
+            chunk = net.minecraftforge.common.ForgeChunkManager.fetchDormantChunk(i, this.worldObj);
+
+            if (chunk == null)
+            chunk = this.loadChunkFromFile(p_73158_1_, p_73158_2_);
+
+            if (chunk == null)
+            {
+                if (this.serverChunkGenerator == null)
+                {
+                    chunk = this.dummyChunk;
+                }
+                else
+                {
+                    try
+                    {
+                        // 如果区块不存在，这个函数会生成区块
+                        chunk = this.serverChunkGenerator.provideChunk(p_73158_1_, p_73158_2_);
+                    }
+                    catch (Throwable throwable)
+                    {
+                        CrashReport crashreport = CrashReport.makeCrashReport(throwable, &quot;Exception generating new chunk&quot;);
+                        CrashReportCategory crashreportcategory = crashreport.makeCategory(&quot;Chunk to be generated&quot;);
+                        crashreportcategory.addCrashSection(&quot;Location&quot;, String.format(&quot;%d,%d&quot;, new Object[] {Integer.valueOf(p_73158_1_), Integer.valueOf(p_73158_2_)}));
+                        crashreportcategory.addCrashSection(&quot;Position hash&quot;, Long.valueOf(i));
+                        crashreportcategory.addCrashSection(&quot;Generator&quot;, this.serverChunkGenerator.makeString());
+                        throw new ReportedException(crashreport);
+                    }
+                }
+            }
+
+            this.id2ChunkMap.add(i, chunk);
+            this.loadedChunks.add(chunk);
+            loadingChunks.remove(i);
+            chunk.onChunkLoad();
+            chunk.populateChunk(this, this, p_73158_1_, p_73158_2_);
+        }
+
+        return chunk;
+    }</code></pre>
+						<p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/61915888" >CSDN博客</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="content_border_foot"></div>
+        </div>
+    </div>
+    <style>
+        /*背景图片*/
+
+        body {
+            background: url(img/bg1.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</body>
+
+</html>

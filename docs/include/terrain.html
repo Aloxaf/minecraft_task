@@ -1,9 +1,5 @@
-# **生成基本地形**
-
-MC不是直接生成一个高度图，而是生成一个三维的“密度数组”，不知道为什么这样做。我猜是为了生成石窟这种地形，但是这样也有可能生成浮空岛
-
-```java
- // 生成只有石头、水、空气的基本地形
+<h1 id="%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2"><a href="#%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2" class="anchor"></a>基本地形</h1><h2 id="%3Cstrong%3E%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2%3C%2Fstrong%3E" class="anchor"></a><strong>生成基本地形</strong></h2><p>MC不是直接生成一个高度图，而是生成一个三维的“密度数组”，不知道为什么这样做。我猜是为了生成石窟这种地形，但是这样也有可能生成浮空岛</p>
+<pre><code class="language-java"> // 生成只有石头、水、空气的基本地形
     public void setBlocksInChunk(int xChunk, int zChunk, ChunkPrimer chunkprimer)
     {
         // 生成10*10的生物群系数组
@@ -13,19 +9,19 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
         this.func_147423_a(xChunk * 4, 0, zChunk * 4);
 
         // xyzHigh作为field_147434_q索引，要和xyzLow组合才是方块坐标
-        for (int xHigh = 0; xHigh < 4; ++xHigh)
+        for (int xHigh = 0; xHigh &lt; 4; ++xHigh)
         {
             int xIndex   =  xHigh      * 5;
             int xIndex_1 = (xHigh + 1) * 5;
 
-            for (int zHigh = 0; zHigh < 4; ++zHigh)
+            for (int zHigh = 0; zHigh &lt; 4; ++zHigh)
             {
                 int xzIndex =     (xIndex   + zHigh)     * 33;
                 int xz_1Index =   (xIndex   + zHigh + 1) * 33;
                 int x_1zIndex =   (xIndex_1 + zHigh)     * 33;
                 int x_1z_1Index = (xIndex_1 + zHigh + 1) * 33;
 
-                for (int yHigh = 0; yHigh < 32; ++yHigh)
+                for (int yHigh = 0; yHigh &lt; 32; ++yHigh)
                 {
                     // 这些线性插值后得到的density3才是每个方块的密度
                     double density     =  this.field_147434_q[xzIndex     + yHigh];
@@ -38,26 +34,26 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
                     double densityX1Step   = (this.field_147434_q[x_1zIndex   + yHigh + 1] - densityX1) / 8;
                     double densityX1Z1Step = (this.field_147434_q[x_1z_1Index + yHigh + 1] - densityX1Z1) / 8;
 
-                    for (int yLow = 0; yLow < 8; ++yLow)
+                    for (int yLow = 0; yLow &lt; 8; ++yLow)
                     {
                         double density2   = density;
                         double density2Z1 = densityZ1;
                         double density2Step   = (densityX1 - density) / 4;
                         double density2Z1Step = (densityX1Z1 - densityZ1) / 4;
 
-                        for (int xLow = 0; xLow < 4; ++xLow)
+                        for (int xLow = 0; xLow &lt; 4; ++xLow)
                         {
                             double density3 = density2;
                             double density3Step = (density2Z1 - density2) / 4;
 
-                            for (int zLow = 0; zLow < 4; ++zLow)
+                            for (int zLow = 0; zLow &lt; 4; ++zLow)
                             {
-                                if (density3 > 0.0D) // 密度>0认为是固体
+                                if (density3 &gt; 0.0D) // 密度&gt;0认为是固体
                                 {
                                     // 设置为石头
                                     chunkprimer.setBlockState(xHigh * 4 + xLow, yHigh * 8 + yLow, zHigh * 4 + zLow, Blocks.stone.getDefaultState());
                                 }
-                                else if (yHigh * 8 + yLow < this.settings.seaLevel) // 密度<0且在海平面以下认为是液体
+                                else if (yHigh * 8 + yLow &lt; this.settings.seaLevel) // 密度&lt;0且在海平面以下认为是液体
                                 {
                                     // 设置为默认液体（水或岩浆）
                                     chunkprimer.setBlockState(xHigh * 4 + xLow, yHigh * 8 + yLow, zHigh * 4 + zLow, this.field_177476_s.getDefaultState());
@@ -79,17 +75,10 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
                 }
             }
         }
-    }
-```
-
-# **生成密度数组**
-
-这部分应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了
-
-应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了
-
-```java
-    // 生成field_147434_q数组（密度数组），areaXZ为区块坐标*4，areaY恒为0
+    }</code></pre>
+<h2 id="%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E" class="anchor"></a><strong>生成密度数组</strong></h2><p>这部分应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了</p>
+<p>应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了</p>
+<pre><code class="language-java">    // 生成field_147434_q数组（密度数组），areaXZ为区块坐标*4，areaY恒为0
     private void func_147423_a(int areaX, int areaY, int areaZ)
     {
         // 生成5*5*1的噪声
@@ -105,9 +94,9 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
         int index = 0;
         int xzIndex = 0;
 
-        for (int x1 = 0; x1 < 5; ++x1)
+        for (int x1 = 0; x1 &lt; 5; ++x1)
         {
-            for (int z1 = 0; z1 < 5; ++z1)
+            for (int z1 = 0; z1 &lt; 5; ++z1)
             {
                 float scale = 0.0F;
                 float groundYOffset = 0.0F;
@@ -117,9 +106,9 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
 
                 // 求scale和groundYOffset的加权平均值
 
-                for (int x2 = 0; x2 < 5; ++x2)
+                for (int x2 = 0; x2 &lt; 5; ++x2)
                 {
-                    for (int z2 = 0; z2 < 5; ++z2)
+                    for (int z2 = 0; z2 &lt; 5; ++z2)
                     {
                         BiomeGenBase biome = this.biomesForGeneration[x1 + x2 + (z1 + z2) * 10];
                         float curGroundYOffset = this.settings.biomeDepthOffSet + biome.minHeight * this.settings.biomeDepthWeight; // biomeDepthOffSet=0
@@ -127,7 +116,7 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
                         float curScale = this.settings.biomeScaleOffset + biome.maxHeight * this.settings.biomeScaleWeight; // biomeScaleOffset=0
 
                         // 世界类型是巨型生物群系
-                        if (this.field_177475_o == WorldType.AMPLIFIED && curGroundYOffset > 0.0F)
+                        if (this.field_177475_o == WorldType.AMPLIFIED &amp;&amp; curGroundYOffset &gt; 0.0F)
                         {
                             curGroundYOffset = 1.0F + curGroundYOffset * 2.0F;
                             curScale = 1.0F + curScale * 4.0F;
@@ -136,7 +125,7 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
                         // parabolicField为 10 / √(该点到中心点的距离^2 + 0.2)
                         float weight = this.parabolicField[x2 + z2 * 5] / (curGroundYOffset + 2.0F);
 
-                        if (biome.minHeight > centerBiome.minHeight)
+                        if (biome.minHeight &gt; centerBiome.minHeight)
                         {
                             weight /= 2.0F;
                         }
@@ -156,18 +145,18 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
 
                 double random = this.field_147426_g[xzIndex] / 8000.0D;
 
-                if (random < 0.0D)
+                if (random &lt; 0.0D)
                 {
                     random = -random * 0.3D;
                 }
 
                 random = random * 3.0D - 2.0D;
 
-                if (random < 0.0D)
+                if (random &lt; 0.0D)
                 {
                     random = random / 2.0D;
 
-                    if (random < -1.0D)
+                    if (random &lt; -1.0D)
                     {
                         random = -1.0D;
                     }
@@ -177,7 +166,7 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
                 }
                 else
                 {
-                    if (random > 1.0D)
+                    if (random &gt; 1.0D)
                     {
                         random = 1.0D;
                     }
@@ -194,26 +183,26 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
                 // 这个是大概的地面y坐标，实际上也没有保证不会出现浮空岛...
                 double groundY = (double)this.settings.baseSize * (1.0D + _groundYOffset / 2.0D); // baseSize=8.5，应该代表了平均地表高度68
 
-                for (int y = 0; y < 33; ++y) // 注意这个y*8才是最终的y坐标
+                for (int y = 0; y &lt; 33; ++y) // 注意这个y*8才是最终的y坐标
                 {
                     // result偏移量，这个是负数则趋向固体，是正数则趋向液体和空气
                     double offset = ((double)y - groundY) * (double)this.settings.stretchY * 128.0D / 256.0D / _scale; // scale大概在0.1~0.2这样...
 
-                    if (offset < 0.0D)
+                    if (offset &lt; 0.0D)
                     {
                         offset *= 4.0D;
                     }
 
-                    // 并不保证lowerLimit < upperLimit，不过没有影响
+                    // 并不保证lowerLimit &lt; upperLimit，不过没有影响
                     double lowerLimit = this.field_147428_e[index] / (double)this.settings.lowerLimitScale; // lowerLimitScale=512
                     double upperLimit = this.field_147425_f[index] / (double)this.settings.upperLimitScale; // upperLimitScale=512
                     double t = (this.field_147427_d[index] / 10.0D + 1.0D) / 2.0D;
-                    // 这个函数t < 0则取lowerLimit，t > 1则取upperLimit，否则以t为参数在上下限间线性插值
+                    // 这个函数t &lt; 0则取lowerLimit，t &gt; 1则取upperLimit，否则以t为参数在上下限间线性插值
                     double result = MathHelper.denormalizeClamp(lowerLimit, upperLimit, t) - offset;
 
-                    if (y > 29) // y = 30~32
+                    if (y &gt; 29) // y = 30~32
                     {
-                        // 在原result和-10之间线性插值，这样y > 240的方块就会越来越少，最后全变成空气
+                        // 在原result和-10之间线性插值，这样y &gt; 240的方块就会越来越少，最后全变成空气
                         double t2 = (double)((float)(y - 29) / 3.0F);
                         result = result * (1.0D - t2) + -10.0D * t2;
                     }
@@ -226,67 +215,56 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
             }
         }
     }
-
-```
-
-
-
-# 生成生物群系相应的方块
-
-## GenLayerVoronoiZoom
-
-Voronoi图是用来划分平面的，使得每个区域内的点到它所在区域的种子点的距离比到其它区域种子点的距离近
-
-它的上一层是GenLayerRiverMix，之前用它生成了10*10的生物群系ID，这里就要扩展成16*16的
-
-```java
-
+</code></pre>
+<h2 id="%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97"><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97" class="anchor"></a>生成生物群系相应的方块</h2><h3 id="genlayervoronoizoom"><a href="#genlayervoronoizoom" class="anchor"></a>GenLayerVoronoiZoom</h3><p>Voronoi图是用来划分平面的，使得每个区域内的点到它所在区域的种子点的距离比到其它区域种子点的距离近</p>
+<p>它的上一层是GenLayerRiverMix，之前用它生成了10<em>10的生物群系ID，这里就要扩展成16</em>16的</p>
+<pre><code class="language-java">
     public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight)
     {
         areaX = areaX - 2;
         areaY = areaY - 2;
-        int parentAreaX = areaX >> 2;
-        int parentAreaY = areaY >> 2;
-        int parentWidth = (areaWidth >> 2) + 2;
-        int parentHeight = (areaHeight >> 2) + 2;
+        int parentAreaX = areaX &gt;&gt; 2;
+        int parentAreaY = areaY &gt;&gt; 2;
+        int parentWidth = (areaWidth &gt;&gt; 2) + 2;
+        int parentHeight = (areaHeight &gt;&gt; 2) + 2;
         // parentRes是本层的1/4
         int[] parentRes = this.parent.getInts(parentAreaX, parentAreaY, parentWidth, parentHeight);
-        int tmpWidth = parentWidth - 1 << 2;
-        int tmpHeight = parentHeight - 1 << 2;
+        int tmpWidth = parentWidth - 1 &lt;&lt; 2;
+        int tmpHeight = parentHeight - 1 &lt;&lt; 2;
         // 临时结果
         int[] tmp = IntCache.getIntCache(tmpWidth * tmpHeight);
 
-        for (int parentY = 0; parentY < parentHeight - 1; ++parentY)
+        for (int parentY = 0; parentY &lt; parentHeight - 1; ++parentY)
         {
             // parent当前点的值
             int parentValue   = parentRes[parentY * parentWidth];
             // parent当前点y+1点的值
             int parentValueY1 = parentRes[(parentY + 1) * parentWidth];
 
-            for (int parentX = 0; parentX < parentWidth - 1; ++parentX)
+            for (int parentX = 0; parentX &lt; parentWidth - 1; ++parentX)
             {
                 // 随机取parent的4个点的坐标
-                this.initChunkSeed((parentX + parentAreaX) << 2, (parentY + parentAreaY) << 2);
+                this.initChunkSeed((parentX + parentAreaX) &lt;&lt; 2, (parentY + parentAreaY) &lt;&lt; 2);
                 double vertex1X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
                 double vertex1Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
-                this.initChunkSeed((parentX + parentAreaX + 1) << 2, (parentY + parentAreaY) << 2);
+                this.initChunkSeed((parentX + parentAreaX + 1) &lt;&lt; 2, (parentY + parentAreaY) &lt;&lt; 2);
                 double vertex2X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
                 double vertex2Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
-                this.initChunkSeed((parentX + parentAreaX) << 2, (parentY + parentAreaY + 1) << 2);
+                this.initChunkSeed((parentX + parentAreaX) &lt;&lt; 2, (parentY + parentAreaY + 1) &lt;&lt; 2);
                 double vertex3X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
                 double vertex3Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
-                this.initChunkSeed((parentX + parentAreaX + 1) << 2, (parentY + parentAreaY + 1) << 2);
+                this.initChunkSeed((parentX + parentAreaX + 1) &lt;&lt; 2, (parentY + parentAreaY + 1) &lt;&lt; 2);
                 double vertex4X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
                 double vertex4Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
 
                 int parentValueX1   = parentRes[parentX + 1 +  parentY      * parentWidth] % 256;
                 int parentValueX1Y1 = parentRes[parentX + 1 + (parentY + 1) * parentWidth] % 256;
 
-                for (int yLow = 0; yLow < 4; ++yLow)
+                for (int yLow = 0; yLow &lt; 4; ++yLow)
                 {
-                    int tmpIndex = ((parentY << 2) + yLow) * tmpWidth + (parentX << 2);
+                    int tmpIndex = ((parentY &lt;&lt; 2) + yLow) * tmpWidth + (parentX &lt;&lt; 2);
 
-                    for (int xLow = 0; xLow < 4; ++xLow)
+                    for (int xLow = 0; xLow &lt; 4; ++xLow)
                     {
                         // 当前点到parent各点的距离的平方
                         double dist1 = ((double)yLow - vertex1Y) * ((double)yLow - vertex1Y) + ((double)xLow - vertex1X) * ((double)xLow - vertex1X);
@@ -295,15 +273,15 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
                         double dist4 = ((double)yLow - vertex4Y) * ((double)yLow - vertex4Y) + ((double)xLow - vertex4X) * ((double)xLow - vertex4X);
 
                         // 取最近点的值
-                        if (dist1 < dist2 && dist1 < dist3 && dist1 < dist4)
+                        if (dist1 &lt; dist2 &amp;&amp; dist1 &lt; dist3 &amp;&amp; dist1 &lt; dist4)
                         {
                             tmp[tmpIndex++] = parentValue;
                         }
-                        else if (dist2 < dist1 && dist2 < dist3 && dist2 < dist4)
+                        else if (dist2 &lt; dist1 &amp;&amp; dist2 &lt; dist3 &amp;&amp; dist2 &lt; dist4)
                         {
                             tmp[tmpIndex++] = parentValueX1;
                         }
-                        else if (dist3 < dist1 && dist3 < dist2 && dist3 < dist4)
+                        else if (dist3 &lt; dist1 &amp;&amp; dist3 &lt; dist2 &amp;&amp; dist3 &lt; dist4)
                         {
                             tmp[tmpIndex++] = parentValueY1;
                         }
@@ -323,19 +301,14 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
         int[] result = IntCache.getIntCache(areaWidth * areaHeight);
 
         // tmp和result尺寸可能不同，这里把tmp左上角部分复制到result
-        for (int resultY = 0; resultY < areaHeight; ++resultY)
+        for (int resultY = 0; resultY &lt; areaHeight; ++resultY)
         {
             System.arraycopy(tmp, (resultY + areaY % 2) * tmpWidth + (areaX % 2), result, resultY * areaWidth, areaWidth);
         }
 
         return result;
-    }
-```
-
-# 替换方块
-
-```java
-
+    }</code></pre>
+<h3 id="%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97"><a href="#%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97" class="anchor"></a>替换方块</h3><pre><code class="language-java">
     public void replaceBlocksForBiome(int chunkX, int chunkZ, ChunkPrimer chunkprimer, BiomeGenBase[] biomes)
     {
         net.minecraftforge.event.terraingen.ChunkProviderEvent.ReplaceBiomeBlocks event = new net.minecraftforge.event.terraingen.ChunkProviderEvent.ReplaceBiomeBlocks(this, chunkX, chunkZ, chunkprimer, this.worldObj);
@@ -346,21 +319,17 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
         // 生成16*16的噪声
         this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double)(chunkX * 16), (double)(chunkZ * 16), 16, 16, coordinateScale * 2.0D, coordinateScale * 2.0D, 1.0D);
 
-        for (int x = 0; x < 16; ++x)
+        for (int x = 0; x &lt; 16; ++x)
         {
-            for (int z = 0; z < 16; ++z)
+            for (int z = 0; z &lt; 16; ++z)
             {
                 BiomeGenBase biomegenbase = biomes[z + x * 16];
                 biomegenbase.genTerrainBlocks(this.worldObj, this.rand, chunkprimer, chunkX * 16 + x, chunkZ * 16 + z, this.stoneNoise[z + x * 16]);
             }
         }
-    }
-```
-
-类名`net.minecraft.world.biome.BiomeGenBase`
-
-```java
-
+    }</code></pre>
+<p>类名<code>net.minecraft.world.biome.BiomeGenBase</code></p>
+<pre><code class="language-java">
     public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noise)
     {
         this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, x, z, noise);
@@ -379,11 +348,11 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
         int zLow = z % 16;
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
 
-        for (int y = 255; y >= 0; --y)
+        for (int y = 255; y &gt;= 0; --y)
         {
-            if (y <= rand.nextInt(5))
+            if (y &lt;= rand.nextInt(5))
             {
-                // y <= 5随机替换为基岩
+                // y &lt;= 5随机替换为基岩
                 chunkPrimerIn.setBlockState(zLow, y, xLow, Blocks.bedrock.getDefaultState());
             }
             else
@@ -400,22 +369,22 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
                     {
                         // 到这里y应该在石头与空气和水的分界面
 
-                        if (fillerCount <= 0) // 不需要填充
+                        if (fillerCount &lt;= 0) // 不需要填充
                         {
                             topBlock = null;
                             fillerBlock = Blocks.stone.getDefaultState();
                         }
-                        else if (y >= seaLevel - 4 && y <= seaLevel + 1) // 需要填充，且在海平面附近
+                        else if (y &gt;= seaLevel - 4 &amp;&amp; y &lt;= seaLevel + 1) // 需要填充，且在海平面附近
                         {
                             topBlock = this.topBlock;
                             fillerBlock = this.fillerBlock;
                         } // 其他情况说明在海底，topBlock、fillerBlock不变
 
                         // 在海平面以下，且不需要填充
-                        if (y < seaLevel && (topBlock == null || topBlock.getBlock().getMaterial() == Material.air))
+                        if (y &lt; seaLevel &amp;&amp; (topBlock == null || topBlock.getBlock().getMaterial() == Material.air))
                         {
                             // 根据温度顶部替换为冰或水
-                            if (this.getFloatTemperature(pos.set(x, y, z)) < 0.15F)
+                            if (this.getFloatTemperature(pos.set(x, y, z)) &lt; 0.15F)
                             {
                                 topBlock = Blocks.ice.getDefaultState();
                             }
@@ -428,12 +397,12 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
                         // 开始填充顶部
                         rest = fillerCount;
 
-                        if (y >= seaLevel - 1) // 海平面以上
+                        if (y &gt;= seaLevel - 1) // 海平面以上
                         {
                             // 顶部替换为topBlock
                             chunkPrimerIn.setBlockState(zLow, y, xLow, topBlock);
                         }
-                        else if (y < seaLevel - 7 - fillerCount) // 海底
+                        else if (y &lt; seaLevel - 7 - fillerCount) // 海底
                         {
                             topBlock = null;
                             // 接下来使用石头填充
@@ -447,14 +416,14 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
                             chunkPrimerIn.setBlockState(zLow, y, xLow, fillerBlock);
                         }
                     }
-                    else if (rest > 0) // 正在填充
+                    else if (rest &gt; 0) // 正在填充
                     {
                         --rest;
                         // 替换为fillerBlock
                         chunkPrimerIn.setBlockState(zLow, y, xLow, fillerBlock);
 
                         // 如果之前填充了沙子则下面还要填充沙岩
-                        if (rest == 0 && fillerBlock.getBlock() == Blocks.sand)
+                        if (rest == 0 &amp;&amp; fillerBlock.getBlock() == Blocks.sand)
                         {
                             rest = rand.nextInt(4) + Math.max(0, y - 63);
                             fillerBlock = fillerBlock.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState();
@@ -463,8 +432,4 @@ Voronoi图是用来划分平面的，使得每个区域内的点到它所在区�
                 }
             }
         }
-    }
-```
-
-
-
+    }</code></pre>
