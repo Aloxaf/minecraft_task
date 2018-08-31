@@ -1,15 +1,21 @@
 /* 侧边栏 */
+
 .sidebar {
     float: left;
-    background-color: white;
+    /*侧边栏半透明*/
+    background-color: #fff;
+    /*侧边栏半透明*/
+    opacity: 0.5;
     position: fixed;
 }
 
 /* 内容框 */
+
 .content_wrapper {
     padding-left: 50px;
     padding-right: 50px;
 }
+
 .content {
     margin: -20px 84px -10px 84px;
     background-color: #FBF2DB;

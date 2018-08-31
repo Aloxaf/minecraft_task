@@ -1,4 +1,4 @@
-﻿# Minecraft中的世界生成
+# Minecraft中的世界生成
 
 ## 世界设置
 

@@ -14,7 +14,8 @@
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/flexslider/2.7.0/jquery.flexslider.min.js"></script>
     <script src="./js/common.js"></script>
-    <link href="./css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/article.css">
 </head>
 
 <body>
@@ -42,7 +43,16 @@
                     </ul>
                 </li>
                 <li id="strategy"><a href="strategy.html">游戏攻略</a></li>
-                <li id="about"><a href="about.html">关于我们</a></li>
+                <li id="about" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        关于我们
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="video.html">小组视频</a></li>
+                        <li><a href="about.html">我们的话</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -50,6 +60,35 @@
         $('#introduce').addClass('active')
     </script>
 </nav>
+    <div class="content_wrapper">
+        <div class="sidebar">
+            <ol>
+<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li><ol>
+<li><a href="#%E6%B5%8B%E8%AF%951">测试1</a></li><li><a href="#%E6%B5%8B%E8%AF%952">测试2</a></li>
+</ol>
+</ol>
+        </div>
+        <div class="content_border">
+            <div class="content_border_top"></div>
+            <div class="content_border_left">
+                <div class="content_border_right">
+                    <div class="content">
+                        <h1 id="%E4%BB%8B%E7%BB%8D"><a href="#%E4%BB%8B%E7%BB%8D" class="anchor"></a>介绍</h1><h2 id="%E6%B5%8B%E8%AF%951"><a href="#%E6%B5%8B%E8%AF%951" class="anchor"></a>测试1</h2><h2 id="%E6%B5%8B%E8%AF%952"><a href="#%E6%B5%8B%E8%AF%952" class="anchor"></a>测试2</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="content_border_foot"></div>
+        </div>
+    </div>
+    <style>
+        /*背景图片*/
+
+        body {
+            background: url(img/bg1.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
 </body>
 
 </html>

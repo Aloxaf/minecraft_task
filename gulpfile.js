@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 
 let gulp = require('gulp'),
+    gutil = require('gulp-util'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
     markdown = require('gulp-markdown'),
@@ -32,6 +33,7 @@ renderer.heading = (text, level) => {
 };
 
 // 生成 table of content
+// md 只能有一个一级标题
 function toc() {
     function print_toc(l, html) {
         for (let i of l) {
@@ -43,8 +45,16 @@ function toc() {
     }
 
     return through.obj((file, enc, cb) => {
-        html = '<ol>\n' + print_toc(toc_list, '') + '\n</ol>';
+        html = '<ol>\n' + print_toc([toc_list.shift()], '') + '\n</ol>';
         file.contents = Buffer.from(html);
+        return cb(null, file);
+    });
+}
+
+// 输出正在处理的文件名
+function mylog() {
+    return through.obj((file, enc, cb) => {
+        gutil.log('Handing', gutil.colors.magenta(file.relative));
         return cb(null, file);
     });
 }
@@ -55,7 +65,8 @@ gulp.task('clean', () => {
         'docs/css/*',
         'docs/img/*',
         'docs/include/*',
-        'docs/js/*'
+        'docs/js/*',
+        'docs/video'
     ]);
 });
 
@@ -65,6 +76,7 @@ gulp.task('clean', () => {
 // 以供 @@include
 gulp.task('markdown', () => {
     return gulp.src('src/md/**/*')
+        .pipe(mylog())
         .pipe(markdown({
             renderer: renderer
         }))
@@ -84,6 +96,7 @@ gulp.task('markdown', () => {
 // 处理 html 的 @@include
 gulp.task('html', ['markdown'], () => {
     return gulp.src('src/**/*.html')
+        .pipe(mylog())
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'
@@ -94,23 +107,32 @@ gulp.task('html', ['markdown'], () => {
 // 图片, 啥都没做
 gulp.task('images', () => {
     return gulp.src('src/img/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/img'));
 });
 
 // js, 啥都没做
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/js'));
 });
 
 // css, 啥都没做
 gulp.task('styles', () => {
     return gulp.src('src/css/**/*')
+        .pipe(mylog())
         .pipe(gulp.dest('docs/css'));
 });
 
+gulp.task('video', () => {
+    return gulp.src('src/video/**/*')
+        .pipe(mylog())
+        .pipe(gulp.dest('docs/video'));
+});
+
 gulp.task('default', ['clean'], () => {
-    gulp.start('scripts', 'images', 'styles', 'html');
+    gulp.start('scripts', 'images', 'styles', 'html', 'video');
 });
 
 // 监控文件变化
@@ -120,4 +142,5 @@ gulp.task('watch', () => {
     gulp.watch('./src/css/*', ['styles']);
     gulp.watch('./src/js/*', ['scripts']);
     gulp.watch('./src/img/*', ['images']);
+    gulp.watch('./src/video/*', ['video']);
 });
