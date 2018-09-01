@@ -1,4 +1,4 @@
-/* 侧边栏 */
+﻿/* 侧边栏 */
 
 .sidebar {
     float: left;
@@ -30,6 +30,7 @@
     margin-right: auto;
     margin-left: auto;
     overflow: hidden;
+    
 }
 
 .content_border_top {
