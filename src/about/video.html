@@ -8,9 +8,14 @@
 <body>
     <!-- 导航栏 -->
     @@include("include/nav.html", {"active": "about"})
-    <video width="680" height="512" controls="controls" poster="./img/slide1.jpg" preload style="position:absolute; left:290px; top:69px; ">
-        <source src="./video/Badcamp_introduce.mp4" type="video/mp4" />
-    </video>
+
+    <div class="video_wrapper">
+        <div class="video">
+            <video width="680" height="512" controls="controls" poster="./img/slide1.jpg" preload>
+                <source src="./video/Badcamp_introduce.mp4" type="video/mp4" />
+            </video>
+        </div>
+    </div>
 </body>
 
 </html>
