@@ -55,3 +55,31 @@
     background: url(../img/bg_border_foot.png) center center no-repeat;
     background-size: 1130px 59px;
 }
+
+/*表格边框*/
+table.bovertable {
+    font-family: verdana, arial, sans-serif;
+    font-size: 11px;
+    color:#333333;
+    border-width: 1px;
+    border-collapse: collapse;
+}
+
+table.hovertable th{
+    background-color: #c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+
+table.hovertable tr {
+    background-color: #d4e3e5;
+}
+
+table.hovertable td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
