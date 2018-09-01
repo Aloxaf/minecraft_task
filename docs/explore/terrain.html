@@ -2,18 +2,19 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <base href="..">
+<meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>深入探索 - 基本地形</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/common.js"></script>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/article.css">
+<script src="./js/common.js"></script>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/article.css">
 </head>
 
 <body>
@@ -22,38 +23,38 @@
     <div class="container-fluid">
         <!-- 图标 -->
         <div class="navbar-header">
-            <a href="/index.html">
-                <img src="/img/logo.png" class="logo" alt="首页">
+            <a href="./index.html">
+                <img src="./img/logo.png" class="logo" alt="首页">
             </a>
         </div>
         <!-- 导航目录 -->
         <div>
             <ul class="nav navbar-nav">
-                <li id="index"><a href="/index.html">首页</a></li>
-                <li id="introduce"><a href="/introduce.html">游戏简介</a></li>
+                <li id="index"><a href="./index.html">首页</a></li>
+                <li id="introduce"><a href="./introduce.html">游戏简介</a></li>
                 <li id="explore" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         深入探索
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/explore/world.html">世界生成</a></li>
-						<li><a href="/explore/ecosystem.html">生物群系</a></li>
-						<li><a href="/explore/noise.html">噪声函数</a></li>
-						<li><a href="/explore/terrain.html">基本地形</a></li>
-						<li><a href="/explore/cave.html">洞穴</a></li>
-						<li><a href="/explore/explode.html">爆炸算法</a></li>
+                        <li><a href="./explore/world.html">世界生成</a></li>
+						<li><a href="./explore/ecosystem.html">生物群系</a></li>
+						<li><a href="./explore/noise.html">噪声函数</a></li>
+						<li><a href="./explore/terrain.html">基本地形</a></li>
+						<li><a href="./explore/cave.html">洞穴</a></li>
+						<li><a href="./explore/explode.html">爆炸算法</a></li>
                     </ul>
                 </li>
-                <li id="strategy"><a href="/strategy.html">游戏攻略</a></li>
+                <li id="strategy"><a href="./strategy.html">游戏攻略</a></li>
                 <li id="about" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         关于我们
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/about/video.html">小组视频</a></li>
-                        <li><a href="/about/about.html">我们的话</a></li>
+                        <li><a href="./about/video.html">小组视频</a></li>
+                        <li><a href="./about/about.html">我们的话</a></li>
                     </ul>
                 </li>
             </ul>
@@ -65,81 +66,72 @@
 </nav>
 
     <div class="content_wrapper">
-        <div class="sidebar">
-            <ol>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2">基本地形</a></li><ol>
-<li><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2%3C%2Fstrong%3E"><strong>生成基本地形</strong></a></li><li><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E"><strong>生成密度数组</strong></a></li><li><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97">生成生物群系相应的方块</a></li><ol>
-<li><a href="#genlayervoronoizoom">GenLayerVoronoiZoom</a></li><li><a href="#%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97">替换方块</a></li>
-</ol>
-</ol>
-</ol>
-        </div>
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
                     <div class="content">
                         <h1 id="%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2"><a href="#%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2" class="anchor"></a>基本地形</h1><h2 id="%3Cstrong%3E%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2%3C%2Fstrong%3E" class="anchor"></a><strong>生成基本地形</strong></h2><p>MC不是直接生成一个高度图，而是生成一个三维的“密度数组”，不知道为什么这样做。我猜是为了生成石窟这种地形，但是这样也有可能生成浮空岛</p>
-<pre><code class="language-java"> // 生成只有石头、水、空气的基本地形
-    public void setBlocksInChunk(int xChunk, int zChunk, ChunkPrimer chunkprimer)
-    {
-        // 生成10*10的生物群系数组
-        this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, xChunk * 4 - 2, zChunk * 4 - 2, 10, 10);
-        // 生成field_147434_q这个数组，我认为它代表密度
-        // 尺寸5*5*33，索引高位是x，中位是z，低位是y
-        this.func_147423_a(xChunk * 4, 0, zChunk * 4);
+<pre><code class="hljs java"> <span class="hljs-comment">// 生成只有石头、水、空气的基本地形</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBlocksInChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> xChunk, <span class="hljs-keyword">int</span> zChunk, ChunkPrimer chunkprimer)</span>
+    </span>{
+        <span class="hljs-comment">// 生成10*10的生物群系数组</span>
+        <span class="hljs-keyword">this</span>.biomesForGeneration = <span class="hljs-keyword">this</span>.worldObj.getWorldChunkManager().getBiomesForGeneration(<span class="hljs-keyword">this</span>.biomesForGeneration, xChunk * <span class="hljs-number">4</span> - <span class="hljs-number">2</span>, zChunk * <span class="hljs-number">4</span> - <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
+        <span class="hljs-comment">// 生成field_147434_q这个数组，我认为它代表密度</span>
+        <span class="hljs-comment">// 尺寸5*5*33，索引高位是x，中位是z，低位是y</span>
+        <span class="hljs-keyword">this</span>.func_147423_a(xChunk * <span class="hljs-number">4</span>, <span class="hljs-number">0</span>, zChunk * <span class="hljs-number">4</span>);
 
-        // xyzHigh作为field_147434_q索引，要和xyzLow组合才是方块坐标
-        for (int xHigh = 0; xHigh &lt; 4; ++xHigh)
+        <span class="hljs-comment">// xyzHigh作为field_147434_q索引，要和xyzLow组合才是方块坐标</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> xHigh = <span class="hljs-number">0</span>; xHigh &lt; <span class="hljs-number">4</span>; ++xHigh)
         {
-            int xIndex   =  xHigh      * 5;
-            int xIndex_1 = (xHigh + 1) * 5;
+            <span class="hljs-keyword">int</span> xIndex   =  xHigh      * <span class="hljs-number">5</span>;
+            <span class="hljs-keyword">int</span> xIndex_1 = (xHigh + <span class="hljs-number">1</span>) * <span class="hljs-number">5</span>;
 
-            for (int zHigh = 0; zHigh &lt; 4; ++zHigh)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> zHigh = <span class="hljs-number">0</span>; zHigh &lt; <span class="hljs-number">4</span>; ++zHigh)
             {
-                int xzIndex =     (xIndex   + zHigh)     * 33;
-                int xz_1Index =   (xIndex   + zHigh + 1) * 33;
-                int x_1zIndex =   (xIndex_1 + zHigh)     * 33;
-                int x_1z_1Index = (xIndex_1 + zHigh + 1) * 33;
+                <span class="hljs-keyword">int</span> xzIndex =     (xIndex   + zHigh)     * <span class="hljs-number">33</span>;
+                <span class="hljs-keyword">int</span> xz_1Index =   (xIndex   + zHigh + <span class="hljs-number">1</span>) * <span class="hljs-number">33</span>;
+                <span class="hljs-keyword">int</span> x_1zIndex =   (xIndex_1 + zHigh)     * <span class="hljs-number">33</span>;
+                <span class="hljs-keyword">int</span> x_1z_1Index = (xIndex_1 + zHigh + <span class="hljs-number">1</span>) * <span class="hljs-number">33</span>;
 
-                for (int yHigh = 0; yHigh &lt; 32; ++yHigh)
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> yHigh = <span class="hljs-number">0</span>; yHigh &lt; <span class="hljs-number">32</span>; ++yHigh)
                 {
-                    // 这些线性插值后得到的density3才是每个方块的密度
-                    double density     =  this.field_147434_q[xzIndex     + yHigh];
-                    double densityZ1   =  this.field_147434_q[xz_1Index   + yHigh];
-                    double densityX1   =  this.field_147434_q[x_1zIndex   + yHigh];
-                    double densityX1Z1 =  this.field_147434_q[x_1z_1Index + yHigh];
-                    // 步长，后同
-                    double densityStep     = (this.field_147434_q[xzIndex     + yHigh + 1] - density) / 8;
-                    double densityZ1Step   = (this.field_147434_q[xz_1Index   + yHigh + 1] - densityZ1) / 8;
-                    double densityX1Step   = (this.field_147434_q[x_1zIndex   + yHigh + 1] - densityX1) / 8;
-                    double densityX1Z1Step = (this.field_147434_q[x_1z_1Index + yHigh + 1] - densityX1Z1) / 8;
+                    <span class="hljs-comment">// 这些线性插值后得到的density3才是每个方块的密度</span>
+                    <span class="hljs-keyword">double</span> density     =  <span class="hljs-keyword">this</span>.field_147434_q[xzIndex     + yHigh];
+                    <span class="hljs-keyword">double</span> densityZ1   =  <span class="hljs-keyword">this</span>.field_147434_q[xz_1Index   + yHigh];
+                    <span class="hljs-keyword">double</span> densityX1   =  <span class="hljs-keyword">this</span>.field_147434_q[x_1zIndex   + yHigh];
+                    <span class="hljs-keyword">double</span> densityX1Z1 =  <span class="hljs-keyword">this</span>.field_147434_q[x_1z_1Index + yHigh];
+                    <span class="hljs-comment">// 步长，后同</span>
+                    <span class="hljs-keyword">double</span> densityStep     = (<span class="hljs-keyword">this</span>.field_147434_q[xzIndex     + yHigh + <span class="hljs-number">1</span>] - density) / <span class="hljs-number">8</span>;
+                    <span class="hljs-keyword">double</span> densityZ1Step   = (<span class="hljs-keyword">this</span>.field_147434_q[xz_1Index   + yHigh + <span class="hljs-number">1</span>] - densityZ1) / <span class="hljs-number">8</span>;
+                    <span class="hljs-keyword">double</span> densityX1Step   = (<span class="hljs-keyword">this</span>.field_147434_q[x_1zIndex   + yHigh + <span class="hljs-number">1</span>] - densityX1) / <span class="hljs-number">8</span>;
+                    <span class="hljs-keyword">double</span> densityX1Z1Step = (<span class="hljs-keyword">this</span>.field_147434_q[x_1z_1Index + yHigh + <span class="hljs-number">1</span>] - densityX1Z1) / <span class="hljs-number">8</span>;
 
-                    for (int yLow = 0; yLow &lt; 8; ++yLow)
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> yLow = <span class="hljs-number">0</span>; yLow &lt; <span class="hljs-number">8</span>; ++yLow)
                     {
-                        double density2   = density;
-                        double density2Z1 = densityZ1;
-                        double density2Step   = (densityX1 - density) / 4;
-                        double density2Z1Step = (densityX1Z1 - densityZ1) / 4;
+                        <span class="hljs-keyword">double</span> density2   = density;
+                        <span class="hljs-keyword">double</span> density2Z1 = densityZ1;
+                        <span class="hljs-keyword">double</span> density2Step   = (densityX1 - density) / <span class="hljs-number">4</span>;
+                        <span class="hljs-keyword">double</span> density2Z1Step = (densityX1Z1 - densityZ1) / <span class="hljs-number">4</span>;
 
-                        for (int xLow = 0; xLow &lt; 4; ++xLow)
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> xLow = <span class="hljs-number">0</span>; xLow &lt; <span class="hljs-number">4</span>; ++xLow)
                         {
-                            double density3 = density2;
-                            double density3Step = (density2Z1 - density2) / 4;
+                            <span class="hljs-keyword">double</span> density3 = density2;
+                            <span class="hljs-keyword">double</span> density3Step = (density2Z1 - density2) / <span class="hljs-number">4</span>;
 
-                            for (int zLow = 0; zLow &lt; 4; ++zLow)
+                            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> zLow = <span class="hljs-number">0</span>; zLow &lt; <span class="hljs-number">4</span>; ++zLow)
                             {
-                                if (density3 &gt; 0.0D) // 密度&gt;0认为是固体
+                                <span class="hljs-keyword">if</span> (density3 &gt; <span class="hljs-number">0.0</span>D) <span class="hljs-comment">// 密度&gt;0认为是固体</span>
                                 {
-                                    // 设置为石头
-                                    chunkprimer.setBlockState(xHigh * 4 + xLow, yHigh * 8 + yLow, zHigh * 4 + zLow, Blocks.stone.getDefaultState());
+                                    <span class="hljs-comment">// 设置为石头</span>
+                                    chunkprimer.setBlockState(xHigh * <span class="hljs-number">4</span> + xLow, yHigh * <span class="hljs-number">8</span> + yLow, zHigh * <span class="hljs-number">4</span> + zLow, Blocks.stone.getDefaultState());
                                 }
-                                else if (yHigh * 8 + yLow &lt; this.settings.seaLevel) // 密度&lt;0且在海平面以下认为是液体
+                                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (yHigh * <span class="hljs-number">8</span> + yLow &lt; <span class="hljs-keyword">this</span>.settings.seaLevel) <span class="hljs-comment">// 密度&lt;0且在海平面以下认为是液体</span>
                                 {
-                                    // 设置为默认液体（水或岩浆）
-                                    chunkprimer.setBlockState(xHigh * 4 + xLow, yHigh * 8 + yLow, zHigh * 4 + zLow, this.field_177476_s.getDefaultState());
+                                    <span class="hljs-comment">// 设置为默认液体（水或岩浆）</span>
+                                    chunkprimer.setBlockState(xHigh * <span class="hljs-number">4</span> + xLow, yHigh * <span class="hljs-number">8</span> + yLow, zHigh * <span class="hljs-number">4</span> + zLow, <span class="hljs-keyword">this</span>.field_177476_s.getDefaultState());
                                 }
-                                    // 否则是空气
+                                    <span class="hljs-comment">// 否则是空气</span>
 
                                 density3 += density3Step;
                             }
@@ -156,59 +148,58 @@
                 }
             }
         }
-    }</code></pre>
-<h2 id="%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E" class="anchor"></a><strong>生成密度数组</strong></h2><p>这部分应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了</p>
+    }</code></pre><h2 id="%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E" class="anchor"></a><strong>生成密度数组</strong></h2><p>这部分应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了</p>
 <p>应该是最重要的，然而我还是没完全看懂，这里把自己的理解写出来了</p>
-<pre><code class="language-java">    // 生成field_147434_q数组（密度数组），areaXZ为区块坐标*4，areaY恒为0
-    private void func_147423_a(int areaX, int areaY, int areaZ)
-    {
-        // 生成5*5*1的噪声
-        this.field_147426_g = this.noiseGen6.generateNoiseOctaves(this.field_147426_g, areaX, areaZ, 5, 5, (double)this.settings.depthNoiseScaleX, (double)this.settings.depthNoiseScaleZ, (double)this.settings.depthNoiseScaleExponent);
+<pre><code class="hljs java">    <span class="hljs-comment">// 生成field_147434_q数组（密度数组），areaXZ为区块坐标*4，areaY恒为0</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func_147423_a</span><span class="hljs-params">(<span class="hljs-keyword">int</span> areaX, <span class="hljs-keyword">int</span> areaY, <span class="hljs-keyword">int</span> areaZ)</span>
+    </span>{
+        <span class="hljs-comment">// 生成5*5*1的噪声</span>
+        <span class="hljs-keyword">this</span>.field_147426_g = <span class="hljs-keyword">this</span>.noiseGen6.generateNoiseOctaves(<span class="hljs-keyword">this</span>.field_147426_g, areaX, areaZ, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.depthNoiseScaleX, (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.depthNoiseScaleZ, (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.depthNoiseScaleExponent);
 
-        float coordinateScale = this.settings.coordinateScale;
-        float heightScale = this.settings.heightScale;
-        // 生成3个5*5*33的噪声
-        this.field_147427_d = this.field_147429_l.generateNoiseOctaves(this.field_147427_d, areaX, areaY, areaZ, 5, 33, 5, (double)(coordinateScale / this.settings.mainNoiseScaleX), (double)(heightScale / this.settings.mainNoiseScaleY), (double)(coordinateScale / this.settings.mainNoiseScaleZ));
-        this.field_147428_e = this.field_147431_j.generateNoiseOctaves(this.field_147428_e, areaX, areaY, areaZ, 5, 33, 5, (double)coordinateScale, (double)heightScale, (double)coordinateScale);
-        this.field_147425_f = this.field_147432_k.generateNoiseOctaves(this.field_147425_f, areaX, areaY, areaZ, 5, 33, 5, (double)coordinateScale, (double)heightScale, (double)coordinateScale);
+        <span class="hljs-keyword">float</span> coordinateScale = <span class="hljs-keyword">this</span>.settings.coordinateScale;
+        <span class="hljs-keyword">float</span> heightScale = <span class="hljs-keyword">this</span>.settings.heightScale;
+        <span class="hljs-comment">// 生成3个5*5*33的噪声</span>
+        <span class="hljs-keyword">this</span>.field_147427_d = <span class="hljs-keyword">this</span>.field_147429_l.generateNoiseOctaves(<span class="hljs-keyword">this</span>.field_147427_d, areaX, areaY, areaZ, <span class="hljs-number">5</span>, <span class="hljs-number">33</span>, <span class="hljs-number">5</span>, (<span class="hljs-keyword">double</span>)(coordinateScale / <span class="hljs-keyword">this</span>.settings.mainNoiseScaleX), (<span class="hljs-keyword">double</span>)(heightScale / <span class="hljs-keyword">this</span>.settings.mainNoiseScaleY), (<span class="hljs-keyword">double</span>)(coordinateScale / <span class="hljs-keyword">this</span>.settings.mainNoiseScaleZ));
+        <span class="hljs-keyword">this</span>.field_147428_e = <span class="hljs-keyword">this</span>.field_147431_j.generateNoiseOctaves(<span class="hljs-keyword">this</span>.field_147428_e, areaX, areaY, areaZ, <span class="hljs-number">5</span>, <span class="hljs-number">33</span>, <span class="hljs-number">5</span>, (<span class="hljs-keyword">double</span>)coordinateScale, (<span class="hljs-keyword">double</span>)heightScale, (<span class="hljs-keyword">double</span>)coordinateScale);
+        <span class="hljs-keyword">this</span>.field_147425_f = <span class="hljs-keyword">this</span>.field_147432_k.generateNoiseOctaves(<span class="hljs-keyword">this</span>.field_147425_f, areaX, areaY, areaZ, <span class="hljs-number">5</span>, <span class="hljs-number">33</span>, <span class="hljs-number">5</span>, (<span class="hljs-keyword">double</span>)coordinateScale, (<span class="hljs-keyword">double</span>)heightScale, (<span class="hljs-keyword">double</span>)coordinateScale);
 
-        int index = 0;
-        int xzIndex = 0;
+        <span class="hljs-keyword">int</span> index = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> xzIndex = <span class="hljs-number">0</span>;
 
-        for (int x1 = 0; x1 &lt; 5; ++x1)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x1 = <span class="hljs-number">0</span>; x1 &lt; <span class="hljs-number">5</span>; ++x1)
         {
-            for (int z1 = 0; z1 &lt; 5; ++z1)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z1 = <span class="hljs-number">0</span>; z1 &lt; <span class="hljs-number">5</span>; ++z1)
             {
-                float scale = 0.0F;
-                float groundYOffset = 0.0F;
-                float totalWeight = 0.0F;
-                // 中心点生物群系
-                BiomeGenBase centerBiome = this.biomesForGeneration[x1 + 2 + (z1 + 2) * 10];
+                <span class="hljs-keyword">float</span> scale = <span class="hljs-number">0.0F</span>;
+                <span class="hljs-keyword">float</span> groundYOffset = <span class="hljs-number">0.0F</span>;
+                <span class="hljs-keyword">float</span> totalWeight = <span class="hljs-number">0.0F</span>;
+                <span class="hljs-comment">// 中心点生物群系</span>
+                BiomeGenBase centerBiome = <span class="hljs-keyword">this</span>.biomesForGeneration[x1 + <span class="hljs-number">2</span> + (z1 + <span class="hljs-number">2</span>) * <span class="hljs-number">10</span>];
 
-                // 求scale和groundYOffset的加权平均值
+                <span class="hljs-comment">// 求scale和groundYOffset的加权平均值</span>
 
-                for (int x2 = 0; x2 &lt; 5; ++x2)
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x2 = <span class="hljs-number">0</span>; x2 &lt; <span class="hljs-number">5</span>; ++x2)
                 {
-                    for (int z2 = 0; z2 &lt; 5; ++z2)
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z2 = <span class="hljs-number">0</span>; z2 &lt; <span class="hljs-number">5</span>; ++z2)
                     {
-                        BiomeGenBase biome = this.biomesForGeneration[x1 + x2 + (z1 + z2) * 10];
-                        float curGroundYOffset = this.settings.biomeDepthOffSet + biome.minHeight * this.settings.biomeDepthWeight; // biomeDepthOffSet=0
-                        // maxHeight是反混淆错误吧，应该是scale
-                        float curScale = this.settings.biomeScaleOffset + biome.maxHeight * this.settings.biomeScaleWeight; // biomeScaleOffset=0
+                        BiomeGenBase biome = <span class="hljs-keyword">this</span>.biomesForGeneration[x1 + x2 + (z1 + z2) * <span class="hljs-number">10</span>];
+                        <span class="hljs-keyword">float</span> curGroundYOffset = <span class="hljs-keyword">this</span>.settings.biomeDepthOffSet + biome.minHeight * <span class="hljs-keyword">this</span>.settings.biomeDepthWeight; <span class="hljs-comment">// biomeDepthOffSet=0</span>
+                        <span class="hljs-comment">// maxHeight是反混淆错误吧，应该是scale</span>
+                        <span class="hljs-keyword">float</span> curScale = <span class="hljs-keyword">this</span>.settings.biomeScaleOffset + biome.maxHeight * <span class="hljs-keyword">this</span>.settings.biomeScaleWeight; <span class="hljs-comment">// biomeScaleOffset=0</span>
 
-                        // 世界类型是巨型生物群系
-                        if (this.field_177475_o == WorldType.AMPLIFIED &amp;&amp; curGroundYOffset &gt; 0.0F)
+                        <span class="hljs-comment">// 世界类型是巨型生物群系</span>
+                        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.field_177475_o == WorldType.AMPLIFIED &amp;&amp; curGroundYOffset &gt; <span class="hljs-number">0.0F</span>)
                         {
-                            curGroundYOffset = 1.0F + curGroundYOffset * 2.0F;
-                            curScale = 1.0F + curScale * 4.0F;
+                            curGroundYOffset = <span class="hljs-number">1.0F</span> + curGroundYOffset * <span class="hljs-number">2.0F</span>;
+                            curScale = <span class="hljs-number">1.0F</span> + curScale * <span class="hljs-number">4.0F</span>;
                         }
 
-                        // parabolicField为 10 / √(该点到中心点的距离^2 + 0.2)
-                        float weight = this.parabolicField[x2 + z2 * 5] / (curGroundYOffset + 2.0F);
+                        <span class="hljs-comment">// parabolicField为 10 / √(该点到中心点的距离^2 + 0.2)</span>
+                        <span class="hljs-keyword">float</span> weight = <span class="hljs-keyword">this</span>.parabolicField[x2 + z2 * <span class="hljs-number">5</span>] / (curGroundYOffset + <span class="hljs-number">2.0F</span>);
 
-                        if (biome.minHeight &gt; centerBiome.minHeight)
+                        <span class="hljs-keyword">if</span> (biome.minHeight &gt; centerBiome.minHeight)
                         {
-                            weight /= 2.0F;
+                            weight /= <span class="hljs-number">2.0F</span>;
                         }
 
                         scale += curScale * weight;
@@ -219,76 +210,76 @@
 
                 scale = scale / totalWeight;
                 groundYOffset = groundYOffset / totalWeight;
-                scale = scale * 0.9F + 0.1F;
-                groundYOffset = (groundYOffset * 4.0F - 1.0F) / 8.0F;
+                scale = scale * <span class="hljs-number">0.9F</span> + <span class="hljs-number">0.1F</span>;
+                groundYOffset = (groundYOffset * <span class="hljs-number">4.0F</span> - <span class="hljs-number">1.0F</span>) / <span class="hljs-number">8.0F</span>;
 
-                // 这部分大概是取一个-0.36~0.125的随机数，这个随机数决定了起伏的地表
+                <span class="hljs-comment">// 这部分大概是取一个-0.36~0.125的随机数，这个随机数决定了起伏的地表</span>
 
-                double random = this.field_147426_g[xzIndex] / 8000.0D;
+                <span class="hljs-keyword">double</span> random = <span class="hljs-keyword">this</span>.field_147426_g[xzIndex] / <span class="hljs-number">8000.0</span>D;
 
-                if (random &lt; 0.0D)
+                <span class="hljs-keyword">if</span> (random &lt; <span class="hljs-number">0.0</span>D)
                 {
-                    random = -random * 0.3D;
+                    random = -random * <span class="hljs-number">0.3</span>D;
                 }
 
-                random = random * 3.0D - 2.0D;
+                random = random * <span class="hljs-number">3.0</span>D - <span class="hljs-number">2.0</span>D;
 
-                if (random &lt; 0.0D)
+                <span class="hljs-keyword">if</span> (random &lt; <span class="hljs-number">0.0</span>D)
                 {
-                    random = random / 2.0D;
+                    random = random / <span class="hljs-number">2.0</span>D;
 
-                    if (random &lt; -1.0D)
+                    <span class="hljs-keyword">if</span> (random &lt; -<span class="hljs-number">1.0</span>D)
                     {
-                        random = -1.0D;
+                        random = -<span class="hljs-number">1.0</span>D;
                     }
 
-                    random = random / 1.4D;
-                    random = random / 2.0D;
+                    random = random / <span class="hljs-number">1.4</span>D;
+                    random = random / <span class="hljs-number">2.0</span>D;
                 }
-                else
+                <span class="hljs-keyword">else</span>
                 {
-                    if (random &gt; 1.0D)
+                    <span class="hljs-keyword">if</span> (random &gt; <span class="hljs-number">1.0</span>D)
                     {
-                        random = 1.0D;
+                        random = <span class="hljs-number">1.0</span>D;
                     }
 
-                    random = random / 8.0D;
+                    random = random / <span class="hljs-number">8.0</span>D;
                 }
 
-                double _groundYOffset = (double)groundYOffset;
-                double _scale = (double)scale;
-                // groundYOffset有-0.072~0.025的变动量
-                _groundYOffset = _groundYOffset + random * 0.2D;
-                /*_groundYOffset = _groundYOffset * (double)this.settings.baseSize / 8.0D;
-                double groundY = (double)this.settings.baseSize + _groundYOffset * 4.0D;*/
-                // 这个是大概的地面y坐标，实际上也没有保证不会出现浮空岛...
-                double groundY = (double)this.settings.baseSize * (1.0D + _groundYOffset / 2.0D); // baseSize=8.5，应该代表了平均地表高度68
+                <span class="hljs-keyword">double</span> _groundYOffset = (<span class="hljs-keyword">double</span>)groundYOffset;
+                <span class="hljs-keyword">double</span> _scale = (<span class="hljs-keyword">double</span>)scale;
+                <span class="hljs-comment">// groundYOffset有-0.072~0.025的变动量</span>
+                _groundYOffset = _groundYOffset + random * <span class="hljs-number">0.2</span>D;
+                <span class="hljs-comment">/*_groundYOffset = _groundYOffset * (double)this.settings.baseSize / 8.0D;
+                double groundY = (double)this.settings.baseSize + _groundYOffset * 4.0D;*/</span>
+                <span class="hljs-comment">// 这个是大概的地面y坐标，实际上也没有保证不会出现浮空岛...</span>
+                <span class="hljs-keyword">double</span> groundY = (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.baseSize * (<span class="hljs-number">1.0</span>D + _groundYOffset / <span class="hljs-number">2.0</span>D); <span class="hljs-comment">// baseSize=8.5，应该代表了平均地表高度68</span>
 
-                for (int y = 0; y &lt; 33; ++y) // 注意这个y*8才是最终的y坐标
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> y = <span class="hljs-number">0</span>; y &lt; <span class="hljs-number">33</span>; ++y) <span class="hljs-comment">// 注意这个y*8才是最终的y坐标</span>
                 {
-                    // result偏移量，这个是负数则趋向固体，是正数则趋向液体和空气
-                    double offset = ((double)y - groundY) * (double)this.settings.stretchY * 128.0D / 256.0D / _scale; // scale大概在0.1~0.2这样...
+                    <span class="hljs-comment">// result偏移量，这个是负数则趋向固体，是正数则趋向液体和空气</span>
+                    <span class="hljs-keyword">double</span> offset = ((<span class="hljs-keyword">double</span>)y - groundY) * (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.stretchY * <span class="hljs-number">128.0</span>D / <span class="hljs-number">256.0</span>D / _scale; <span class="hljs-comment">// scale大概在0.1~0.2这样...</span>
 
-                    if (offset &lt; 0.0D)
+                    <span class="hljs-keyword">if</span> (offset &lt; <span class="hljs-number">0.0</span>D)
                     {
-                        offset *= 4.0D;
+                        offset *= <span class="hljs-number">4.0</span>D;
                     }
 
-                    // 并不保证lowerLimit &lt; upperLimit，不过没有影响
-                    double lowerLimit = this.field_147428_e[index] / (double)this.settings.lowerLimitScale; // lowerLimitScale=512
-                    double upperLimit = this.field_147425_f[index] / (double)this.settings.upperLimitScale; // upperLimitScale=512
-                    double t = (this.field_147427_d[index] / 10.0D + 1.0D) / 2.0D;
-                    // 这个函数t &lt; 0则取lowerLimit，t &gt; 1则取upperLimit，否则以t为参数在上下限间线性插值
-                    double result = MathHelper.denormalizeClamp(lowerLimit, upperLimit, t) - offset;
+                    <span class="hljs-comment">// 并不保证lowerLimit &lt; upperLimit，不过没有影响</span>
+                    <span class="hljs-keyword">double</span> lowerLimit = <span class="hljs-keyword">this</span>.field_147428_e[index] / (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.lowerLimitScale; <span class="hljs-comment">// lowerLimitScale=512</span>
+                    <span class="hljs-keyword">double</span> upperLimit = <span class="hljs-keyword">this</span>.field_147425_f[index] / (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.settings.upperLimitScale; <span class="hljs-comment">// upperLimitScale=512</span>
+                    <span class="hljs-keyword">double</span> t = (<span class="hljs-keyword">this</span>.field_147427_d[index] / <span class="hljs-number">10.0</span>D + <span class="hljs-number">1.0</span>D) / <span class="hljs-number">2.0</span>D;
+                    <span class="hljs-comment">// 这个函数t &lt; 0则取lowerLimit，t &gt; 1则取upperLimit，否则以t为参数在上下限间线性插值</span>
+                    <span class="hljs-keyword">double</span> result = MathHelper.denormalizeClamp(lowerLimit, upperLimit, t) - offset;
 
-                    if (y &gt; 29) // y = 30~32
+                    <span class="hljs-keyword">if</span> (y &gt; <span class="hljs-number">29</span>) <span class="hljs-comment">// y = 30~32</span>
                     {
-                        // 在原result和-10之间线性插值，这样y &gt; 240的方块就会越来越少，最后全变成空气
-                        double t2 = (double)((float)(y - 29) / 3.0F);
-                        result = result * (1.0D - t2) + -10.0D * t2;
+                        <span class="hljs-comment">// 在原result和-10之间线性插值，这样y &gt; 240的方块就会越来越少，最后全变成空气</span>
+                        <span class="hljs-keyword">double</span> t2 = (<span class="hljs-keyword">double</span>)((<span class="hljs-keyword">float</span>)(y - <span class="hljs-number">29</span>) / <span class="hljs-number">3.0F</span>);
+                        result = result * (<span class="hljs-number">1.0</span>D - t2) + -<span class="hljs-number">10.0</span>D * t2;
                     }
 
-                    this.field_147434_q[index] = result;
+                    <span class="hljs-keyword">this</span>.field_147434_q[index] = result;
                     ++index;
                 }
 
@@ -296,230 +287,235 @@
             }
         }
     }
-</code></pre>
-<h2 id="%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97"><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97" class="anchor"></a>生成生物群系相应的方块</h2><h3 id="genlayervoronoizoom"><a href="#genlayervoronoizoom" class="anchor"></a>GenLayerVoronoiZoom</h3><p>Voronoi图是用来划分平面的，使得每个区域内的点到它所在区域的种子点的距离比到其它区域种子点的距离近</p>
+</code></pre><h2 id="%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97"><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97" class="anchor"></a>生成生物群系相应的方块</h2><h3 id="genlayervoronoizoom"><a href="#genlayervoronoizoom" class="anchor"></a>GenLayerVoronoiZoom</h3><p>Voronoi图是用来划分平面的，使得每个区域内的点到它所在区域的种子点的距离比到其它区域种子点的距离近</p>
 <p>它的上一层是GenLayerRiverMix，之前用它生成了10<em>10的生物群系ID，这里就要扩展成16</em>16的</p>
-<pre><code class="language-java">
-    public int[] getInts(int areaX, int areaY, int areaWidth, int areaHeight)
+<pre><code class="hljs java">
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span>[] getInts(<span class="hljs-keyword">int</span> areaX, <span class="hljs-keyword">int</span> areaY, <span class="hljs-keyword">int</span> areaWidth, <span class="hljs-keyword">int</span> areaHeight)
     {
-        areaX = areaX - 2;
-        areaY = areaY - 2;
-        int parentAreaX = areaX &gt;&gt; 2;
-        int parentAreaY = areaY &gt;&gt; 2;
-        int parentWidth = (areaWidth &gt;&gt; 2) + 2;
-        int parentHeight = (areaHeight &gt;&gt; 2) + 2;
-        // parentRes是本层的1/4
-        int[] parentRes = this.parent.getInts(parentAreaX, parentAreaY, parentWidth, parentHeight);
-        int tmpWidth = parentWidth - 1 &lt;&lt; 2;
-        int tmpHeight = parentHeight - 1 &lt;&lt; 2;
-        // 临时结果
-        int[] tmp = IntCache.getIntCache(tmpWidth * tmpHeight);
+        areaX = areaX - <span class="hljs-number">2</span>;
+        areaY = areaY - <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> parentAreaX = areaX &gt;&gt; <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> parentAreaY = areaY &gt;&gt; <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> parentWidth = (areaWidth &gt;&gt; <span class="hljs-number">2</span>) + <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> parentHeight = (areaHeight &gt;&gt; <span class="hljs-number">2</span>) + <span class="hljs-number">2</span>;
+        <span class="hljs-comment">// parentRes是本层的1/4</span>
+        <span class="hljs-keyword">int</span>[] parentRes = <span class="hljs-keyword">this</span>.parent.getInts(parentAreaX, parentAreaY, parentWidth, parentHeight);
+        <span class="hljs-keyword">int</span> tmpWidth = parentWidth - <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> tmpHeight = parentHeight - <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>;
+        <span class="hljs-comment">// 临时结果</span>
+        <span class="hljs-keyword">int</span>[] tmp = IntCache.getIntCache(tmpWidth * tmpHeight);
 
-        for (int parentY = 0; parentY &lt; parentHeight - 1; ++parentY)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> parentY = <span class="hljs-number">0</span>; parentY &lt; parentHeight - <span class="hljs-number">1</span>; ++parentY)
         {
-            // parent当前点的值
-            int parentValue   = parentRes[parentY * parentWidth];
-            // parent当前点y+1点的值
-            int parentValueY1 = parentRes[(parentY + 1) * parentWidth];
+            <span class="hljs-comment">// parent当前点的值</span>
+            <span class="hljs-keyword">int</span> parentValue   = parentRes[parentY * parentWidth];
+            <span class="hljs-comment">// parent当前点y+1点的值</span>
+            <span class="hljs-keyword">int</span> parentValueY1 = parentRes[(parentY + <span class="hljs-number">1</span>) * parentWidth];
 
-            for (int parentX = 0; parentX &lt; parentWidth - 1; ++parentX)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> parentX = <span class="hljs-number">0</span>; parentX &lt; parentWidth - <span class="hljs-number">1</span>; ++parentX)
             {
-                // 随机取parent的4个点的坐标
-                this.initChunkSeed((parentX + parentAreaX) &lt;&lt; 2, (parentY + parentAreaY) &lt;&lt; 2);
-                double vertex1X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
-                double vertex1Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
-                this.initChunkSeed((parentX + parentAreaX + 1) &lt;&lt; 2, (parentY + parentAreaY) &lt;&lt; 2);
-                double vertex2X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
-                double vertex2Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
-                this.initChunkSeed((parentX + parentAreaX) &lt;&lt; 2, (parentY + parentAreaY + 1) &lt;&lt; 2);
-                double vertex3X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D;
-                double vertex3Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
-                this.initChunkSeed((parentX + parentAreaX + 1) &lt;&lt; 2, (parentY + parentAreaY + 1) &lt;&lt; 2);
-                double vertex4X = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
-                double vertex4Y = ((double)this.nextInt(1024) / 1024.0D - 0.5D) * 3.6D + 4.0D;
+                <span class="hljs-comment">// 随机取parent的4个点的坐标</span>
+                <span class="hljs-keyword">this</span>.initChunkSeed((parentX + parentAreaX) &lt;&lt; <span class="hljs-number">2</span>, (parentY + parentAreaY) &lt;&lt; <span class="hljs-number">2</span>);
+                <span class="hljs-keyword">double</span> vertex1X = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D;
+                <span class="hljs-keyword">double</span> vertex1Y = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D;
+                <span class="hljs-keyword">this</span>.initChunkSeed((parentX + parentAreaX + <span class="hljs-number">1</span>) &lt;&lt; <span class="hljs-number">2</span>, (parentY + parentAreaY) &lt;&lt; <span class="hljs-number">2</span>);
+                <span class="hljs-keyword">double</span> vertex2X = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D + <span class="hljs-number">4.0</span>D;
+                <span class="hljs-keyword">double</span> vertex2Y = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D;
+                <span class="hljs-keyword">this</span>.initChunkSeed((parentX + parentAreaX) &lt;&lt; <span class="hljs-number">2</span>, (parentY + parentAreaY + <span class="hljs-number">1</span>) &lt;&lt; <span class="hljs-number">2</span>);
+                <span class="hljs-keyword">double</span> vertex3X = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D;
+                <span class="hljs-keyword">double</span> vertex3Y = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D + <span class="hljs-number">4.0</span>D;
+                <span class="hljs-keyword">this</span>.initChunkSeed((parentX + parentAreaX + <span class="hljs-number">1</span>) &lt;&lt; <span class="hljs-number">2</span>, (parentY + parentAreaY + <span class="hljs-number">1</span>) &lt;&lt; <span class="hljs-number">2</span>);
+                <span class="hljs-keyword">double</span> vertex4X = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D + <span class="hljs-number">4.0</span>D;
+                <span class="hljs-keyword">double</span> vertex4Y = ((<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.nextInt(<span class="hljs-number">1024</span>) / <span class="hljs-number">1024.0</span>D - <span class="hljs-number">0.5</span>D) * <span class="hljs-number">3.6</span>D + <span class="hljs-number">4.0</span>D;
 
-                int parentValueX1   = parentRes[parentX + 1 +  parentY      * parentWidth] % 256;
-                int parentValueX1Y1 = parentRes[parentX + 1 + (parentY + 1) * parentWidth] % 256;
+                <span class="hljs-keyword">int</span> parentValueX1   = parentRes[parentX + <span class="hljs-number">1</span> +  parentY      * parentWidth] % <span class="hljs-number">256</span>;
+                <span class="hljs-keyword">int</span> parentValueX1Y1 = parentRes[parentX + <span class="hljs-number">1</span> + (parentY + <span class="hljs-number">1</span>) * parentWidth] % <span class="hljs-number">256</span>;
 
-                for (int yLow = 0; yLow &lt; 4; ++yLow)
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> yLow = <span class="hljs-number">0</span>; yLow &lt; <span class="hljs-number">4</span>; ++yLow)
                 {
-                    int tmpIndex = ((parentY &lt;&lt; 2) + yLow) * tmpWidth + (parentX &lt;&lt; 2);
+                    <span class="hljs-keyword">int</span> tmpIndex = ((parentY &lt;&lt; <span class="hljs-number">2</span>) + yLow) * tmpWidth + (parentX &lt;&lt; <span class="hljs-number">2</span>);
 
-                    for (int xLow = 0; xLow &lt; 4; ++xLow)
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> xLow = <span class="hljs-number">0</span>; xLow &lt; <span class="hljs-number">4</span>; ++xLow)
                     {
-                        // 当前点到parent各点的距离的平方
-                        double dist1 = ((double)yLow - vertex1Y) * ((double)yLow - vertex1Y) + ((double)xLow - vertex1X) * ((double)xLow - vertex1X);
-                        double dist2 = ((double)yLow - vertex2Y) * ((double)yLow - vertex2Y) + ((double)xLow - vertex2X) * ((double)xLow - vertex2X);
-                        double dist3 = ((double)yLow - vertex3Y) * ((double)yLow - vertex3Y) + ((double)xLow - vertex3X) * ((double)xLow - vertex3X);
-                        double dist4 = ((double)yLow - vertex4Y) * ((double)yLow - vertex4Y) + ((double)xLow - vertex4X) * ((double)xLow - vertex4X);
+                        <span class="hljs-comment">// 当前点到parent各点的距离的平方</span>
+                        <span class="hljs-keyword">double</span> dist1 = ((<span class="hljs-keyword">double</span>)yLow - vertex1Y) * ((<span class="hljs-keyword">double</span>)yLow - vertex1Y) + ((<span class="hljs-keyword">double</span>)xLow - vertex1X) * ((<span class="hljs-keyword">double</span>)xLow - vertex1X);
+                        <span class="hljs-keyword">double</span> dist2 = ((<span class="hljs-keyword">double</span>)yLow - vertex2Y) * ((<span class="hljs-keyword">double</span>)yLow - vertex2Y) + ((<span class="hljs-keyword">double</span>)xLow - vertex2X) * ((<span class="hljs-keyword">double</span>)xLow - vertex2X);
+                        <span class="hljs-keyword">double</span> dist3 = ((<span class="hljs-keyword">double</span>)yLow - vertex3Y) * ((<span class="hljs-keyword">double</span>)yLow - vertex3Y) + ((<span class="hljs-keyword">double</span>)xLow - vertex3X) * ((<span class="hljs-keyword">double</span>)xLow - vertex3X);
+                        <span class="hljs-keyword">double</span> dist4 = ((<span class="hljs-keyword">double</span>)yLow - vertex4Y) * ((<span class="hljs-keyword">double</span>)yLow - vertex4Y) + ((<span class="hljs-keyword">double</span>)xLow - vertex4X) * ((<span class="hljs-keyword">double</span>)xLow - vertex4X);
 
-                        // 取最近点的值
-                        if (dist1 &lt; dist2 &amp;&amp; dist1 &lt; dist3 &amp;&amp; dist1 &lt; dist4)
+                        <span class="hljs-comment">// 取最近点的值</span>
+                        <span class="hljs-keyword">if</span> (dist1 &lt; dist2 &amp;&amp; dist1 &lt; dist3 &amp;&amp; dist1 &lt; dist4)
                         {
                             tmp[tmpIndex++] = parentValue;
                         }
-                        else if (dist2 &lt; dist1 &amp;&amp; dist2 &lt; dist3 &amp;&amp; dist2 &lt; dist4)
+                        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dist2 &lt; dist1 &amp;&amp; dist2 &lt; dist3 &amp;&amp; dist2 &lt; dist4)
                         {
                             tmp[tmpIndex++] = parentValueX1;
                         }
-                        else if (dist3 &lt; dist1 &amp;&amp; dist3 &lt; dist2 &amp;&amp; dist3 &lt; dist4)
+                        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dist3 &lt; dist1 &amp;&amp; dist3 &lt; dist2 &amp;&amp; dist3 &lt; dist4)
                         {
                             tmp[tmpIndex++] = parentValueY1;
                         }
-                        else
+                        <span class="hljs-keyword">else</span>
                         {
                             tmp[tmpIndex++] = parentValueX1Y1;
                         }
                     }
                 }
 
-                // parent当前点移动x+1
+                <span class="hljs-comment">// parent当前点移动x+1</span>
                 parentValue = parentValueX1;
                 parentValueY1 = parentValueX1Y1;
             }
         }
 
-        int[] result = IntCache.getIntCache(areaWidth * areaHeight);
+        <span class="hljs-keyword">int</span>[] result = IntCache.getIntCache(areaWidth * areaHeight);
 
-        // tmp和result尺寸可能不同，这里把tmp左上角部分复制到result
-        for (int resultY = 0; resultY &lt; areaHeight; ++resultY)
+        <span class="hljs-comment">// tmp和result尺寸可能不同，这里把tmp左上角部分复制到result</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> resultY = <span class="hljs-number">0</span>; resultY &lt; areaHeight; ++resultY)
         {
-            System.arraycopy(tmp, (resultY + areaY % 2) * tmpWidth + (areaX % 2), result, resultY * areaWidth, areaWidth);
+            System.arraycopy(tmp, (resultY + areaY % <span class="hljs-number">2</span>) * tmpWidth + (areaX % <span class="hljs-number">2</span>), result, resultY * areaWidth, areaWidth);
         }
 
-        return result;
-    }</code></pre>
-<h3 id="%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97"><a href="#%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97" class="anchor"></a>替换方块</h3><pre><code class="language-java">
-    public void replaceBlocksForBiome(int chunkX, int chunkZ, ChunkPrimer chunkprimer, BiomeGenBase[] biomes)
-    {
-        net.minecraftforge.event.terraingen.ChunkProviderEvent.ReplaceBiomeBlocks event = new net.minecraftforge.event.terraingen.ChunkProviderEvent.ReplaceBiomeBlocks(this, chunkX, chunkZ, chunkprimer, this.worldObj);
+        <span class="hljs-keyword">return</span> result;
+    }</code></pre><h3 id="%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97"><a href="#%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97" class="anchor"></a>替换方块</h3><pre><code class="hljs java">
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">replaceBlocksForBiome</span><span class="hljs-params">(<span class="hljs-keyword">int</span> chunkX, <span class="hljs-keyword">int</span> chunkZ, ChunkPrimer chunkprimer, BiomeGenBase[] biomes)</span>
+    </span>{
+        net.minecraftforge.event.terraingen.ChunkProviderEvent.ReplaceBiomeBlocks event = <span class="hljs-keyword">new</span> net.minecraftforge.event.terraingen.ChunkProviderEvent.ReplaceBiomeBlocks(<span class="hljs-keyword">this</span>, chunkX, chunkZ, chunkprimer, <span class="hljs-keyword">this</span>.worldObj);
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event);
-        if (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) return;
+        <span class="hljs-keyword">if</span> (event.getResult() == net.minecraftforge.fml.common.eventhandler.Event.Result.DENY) <span class="hljs-keyword">return</span>;
 
-        double coordinateScale = 0.03125D;
-        // 生成16*16的噪声
-        this.stoneNoise = this.field_147430_m.func_151599_a(this.stoneNoise, (double)(chunkX * 16), (double)(chunkZ * 16), 16, 16, coordinateScale * 2.0D, coordinateScale * 2.0D, 1.0D);
+        <span class="hljs-keyword">double</span> coordinateScale = <span class="hljs-number">0.03125</span>D;
+        <span class="hljs-comment">// 生成16*16的噪声</span>
+        <span class="hljs-keyword">this</span>.stoneNoise = <span class="hljs-keyword">this</span>.field_147430_m.func_151599_a(<span class="hljs-keyword">this</span>.stoneNoise, (<span class="hljs-keyword">double</span>)(chunkX * <span class="hljs-number">16</span>), (<span class="hljs-keyword">double</span>)(chunkZ * <span class="hljs-number">16</span>), <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, coordinateScale * <span class="hljs-number">2.0</span>D, coordinateScale * <span class="hljs-number">2.0</span>D, <span class="hljs-number">1.0</span>D);
 
-        for (int x = 0; x &lt; 16; ++x)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>; x &lt; <span class="hljs-number">16</span>; ++x)
         {
-            for (int z = 0; z &lt; 16; ++z)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z = <span class="hljs-number">0</span>; z &lt; <span class="hljs-number">16</span>; ++z)
             {
-                BiomeGenBase biomegenbase = biomes[z + x * 16];
-                biomegenbase.genTerrainBlocks(this.worldObj, this.rand, chunkprimer, chunkX * 16 + x, chunkZ * 16 + z, this.stoneNoise[z + x * 16]);
+                BiomeGenBase biomegenbase = biomes[z + x * <span class="hljs-number">16</span>];
+                biomegenbase.genTerrainBlocks(<span class="hljs-keyword">this</span>.worldObj, <span class="hljs-keyword">this</span>.rand, chunkprimer, chunkX * <span class="hljs-number">16</span> + x, chunkZ * <span class="hljs-number">16</span> + z, <span class="hljs-keyword">this</span>.stoneNoise[z + x * <span class="hljs-number">16</span>]);
             }
         }
-    }</code></pre>
-<p>类名<code>net.minecraft.world.biome.BiomeGenBase</code></p>
-<pre><code class="language-java">
-    public void genTerrainBlocks(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noise)
-    {
-        this.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, x, z, noise);
+    }</code></pre><p>类名<code>net.minecraft.world.biome.BiomeGenBase</code></p>
+<pre><code class="hljs java">
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">genTerrainBlocks</span><span class="hljs-params">(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">double</span> noise)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.generateBiomeTerrain(worldIn, rand, chunkPrimerIn, x, z, noise);
     }
 
-    public final void generateBiomeTerrain(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, int x, int z, double noise)
-    {
-        int seaLevel = worldIn.getSeaLevel();
-        IBlockState topBlock = this.topBlock; // 最顶部的方块，比如草方块
-        IBlockState fillerBlock = this.fillerBlock; // 顶部以下用来填充的方块，比如泥土
-        // 还需要填充几个方块
-        int rest = -1;
-        // 需要填充的方块数
-        int fillerCount = (int)(noise / 3.0D + 3.0D + rand.nextDouble() * 0.25D);
-        int xLow = x % 16;
-        int zLow = z % 16;
-        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">generateBiomeTerrain</span><span class="hljs-params">(World worldIn, Random rand, ChunkPrimer chunkPrimerIn, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">double</span> noise)</span>
+    </span>{
+        <span class="hljs-keyword">int</span> seaLevel = worldIn.getSeaLevel();
+        IBlockState topBlock = <span class="hljs-keyword">this</span>.topBlock; <span class="hljs-comment">// 最顶部的方块，比如草方块</span>
+        IBlockState fillerBlock = <span class="hljs-keyword">this</span>.fillerBlock; <span class="hljs-comment">// 顶部以下用来填充的方块，比如泥土</span>
+        <span class="hljs-comment">// 还需要填充几个方块</span>
+        <span class="hljs-keyword">int</span> rest = -<span class="hljs-number">1</span>;
+        <span class="hljs-comment">// 需要填充的方块数</span>
+        <span class="hljs-keyword">int</span> fillerCount = (<span class="hljs-keyword">int</span>)(noise / <span class="hljs-number">3.0</span>D + <span class="hljs-number">3.0</span>D + rand.nextDouble() * <span class="hljs-number">0.25</span>D);
+        <span class="hljs-keyword">int</span> xLow = x % <span class="hljs-number">16</span>;
+        <span class="hljs-keyword">int</span> zLow = z % <span class="hljs-number">16</span>;
+        BlockPos.MutableBlockPos pos = <span class="hljs-keyword">new</span> BlockPos.MutableBlockPos();
 
-        for (int y = 255; y &gt;= 0; --y)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> y = <span class="hljs-number">255</span>; y &gt;= <span class="hljs-number">0</span>; --y)
         {
-            if (y &lt;= rand.nextInt(5))
+            <span class="hljs-keyword">if</span> (y &lt;= rand.nextInt(<span class="hljs-number">5</span>))
             {
-                // y &lt;= 5随机替换为基岩
+                <span class="hljs-comment">// y &lt;= 5随机替换为基岩</span>
                 chunkPrimerIn.setBlockState(zLow, y, xLow, Blocks.bedrock.getDefaultState());
             }
-            else
+            <span class="hljs-keyword">else</span>
             {
                 IBlockState curBlock = chunkPrimerIn.getBlockState(zLow, y, xLow);
 
-                if (curBlock.getBlock().getMaterial() == Material.air) // 还在空气层，不需要填充
+                <span class="hljs-keyword">if</span> (curBlock.getBlock().getMaterial() == Material.air) <span class="hljs-comment">// 还在空气层，不需要填充</span>
                 {
-                    rest = -1;
+                    rest = -<span class="hljs-number">1</span>;
                 }
-                else if (curBlock.getBlock() == Blocks.stone) // 石头层
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (curBlock.getBlock() == Blocks.stone) <span class="hljs-comment">// 石头层</span>
                 {
-                    if (rest == -1) // 还没开始填充
+                    <span class="hljs-keyword">if</span> (rest == -<span class="hljs-number">1</span>) <span class="hljs-comment">// 还没开始填充</span>
                     {
-                        // 到这里y应该在石头与空气和水的分界面
+                        <span class="hljs-comment">// 到这里y应该在石头与空气和水的分界面</span>
 
-                        if (fillerCount &lt;= 0) // 不需要填充
+                        <span class="hljs-keyword">if</span> (fillerCount &lt;= <span class="hljs-number">0</span>) <span class="hljs-comment">// 不需要填充</span>
                         {
-                            topBlock = null;
+                            topBlock = <span class="hljs-keyword">null</span>;
                             fillerBlock = Blocks.stone.getDefaultState();
                         }
-                        else if (y &gt;= seaLevel - 4 &amp;&amp; y &lt;= seaLevel + 1) // 需要填充，且在海平面附近
+                        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (y &gt;= seaLevel - <span class="hljs-number">4</span> &amp;&amp; y &lt;= seaLevel + <span class="hljs-number">1</span>) <span class="hljs-comment">// 需要填充，且在海平面附近</span>
                         {
-                            topBlock = this.topBlock;
-                            fillerBlock = this.fillerBlock;
-                        } // 其他情况说明在海底，topBlock、fillerBlock不变
+                            topBlock = <span class="hljs-keyword">this</span>.topBlock;
+                            fillerBlock = <span class="hljs-keyword">this</span>.fillerBlock;
+                        } <span class="hljs-comment">// 其他情况说明在海底，topBlock、fillerBlock不变</span>
 
-                        // 在海平面以下，且不需要填充
-                        if (y &lt; seaLevel &amp;&amp; (topBlock == null || topBlock.getBlock().getMaterial() == Material.air))
+                        <span class="hljs-comment">// 在海平面以下，且不需要填充</span>
+                        <span class="hljs-keyword">if</span> (y &lt; seaLevel &amp;&amp; (topBlock == <span class="hljs-keyword">null</span> || topBlock.getBlock().getMaterial() == Material.air))
                         {
-                            // 根据温度顶部替换为冰或水
-                            if (this.getFloatTemperature(pos.set(x, y, z)) &lt; 0.15F)
+                            <span class="hljs-comment">// 根据温度顶部替换为冰或水</span>
+                            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.getFloatTemperature(pos.set(x, y, z)) &lt; <span class="hljs-number">0.15F</span>)
                             {
                                 topBlock = Blocks.ice.getDefaultState();
                             }
-                            else
+                            <span class="hljs-keyword">else</span>
                             {
                                 topBlock = Blocks.water.getDefaultState();
                             }
                         }
 
-                        // 开始填充顶部
+                        <span class="hljs-comment">// 开始填充顶部</span>
                         rest = fillerCount;
 
-                        if (y &gt;= seaLevel - 1) // 海平面以上
+                        <span class="hljs-keyword">if</span> (y &gt;= seaLevel - <span class="hljs-number">1</span>) <span class="hljs-comment">// 海平面以上</span>
                         {
-                            // 顶部替换为topBlock
+                            <span class="hljs-comment">// 顶部替换为topBlock</span>
                             chunkPrimerIn.setBlockState(zLow, y, xLow, topBlock);
                         }
-                        else if (y &lt; seaLevel - 7 - fillerCount) // 海底
+                        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (y &lt; seaLevel - <span class="hljs-number">7</span> - fillerCount) <span class="hljs-comment">// 海底</span>
                         {
-                            topBlock = null;
-                            // 接下来使用石头填充
+                            topBlock = <span class="hljs-keyword">null</span>;
+                            <span class="hljs-comment">// 接下来使用石头填充</span>
                             fillerBlock = Blocks.stone.getDefaultState();
-                            // 顶部替换为砂砾
+                            <span class="hljs-comment">// 顶部替换为砂砾</span>
                             chunkPrimerIn.setBlockState(zLow, y, xLow, Blocks.gravel.getDefaultState());
                         }
-                        else // 海平面以下但不是太深的地方
+                        <span class="hljs-keyword">else</span> <span class="hljs-comment">// 海平面以下但不是太深的地方</span>
                         {
-                            // 没有顶部了，直接替换为fillerBlock
+                            <span class="hljs-comment">// 没有顶部了，直接替换为fillerBlock</span>
                             chunkPrimerIn.setBlockState(zLow, y, xLow, fillerBlock);
                         }
                     }
-                    else if (rest &gt; 0) // 正在填充
+                    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (rest &gt; <span class="hljs-number">0</span>) <span class="hljs-comment">// 正在填充</span>
                     {
                         --rest;
-                        // 替换为fillerBlock
+                        <span class="hljs-comment">// 替换为fillerBlock</span>
                         chunkPrimerIn.setBlockState(zLow, y, xLow, fillerBlock);
 
-                        // 如果之前填充了沙子则下面还要填充沙岩
-                        if (rest == 0 &amp;&amp; fillerBlock.getBlock() == Blocks.sand)
+                        <span class="hljs-comment">// 如果之前填充了沙子则下面还要填充沙岩</span>
+                        <span class="hljs-keyword">if</span> (rest == <span class="hljs-number">0</span> &amp;&amp; fillerBlock.getBlock() == Blocks.sand)
                         {
-                            rest = rand.nextInt(4) + Math.max(0, y - 63);
+                            rest = rand.nextInt(<span class="hljs-number">4</span>) + Math.max(<span class="hljs-number">0</span>, y - <span class="hljs-number">63</span>);
                             fillerBlock = fillerBlock.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState();
                         }
-                    } // rest = 0说明填充完毕
+                    } <span class="hljs-comment">// rest = 0说明填充完毕</span>
                 }
             }
         }
     }</code></pre>
-
                         <p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/65437654">CSDN博客</a></p>
                     </div>
                 </div>
             </div>
             <div class="content_border_foot"></div>
+        </div>
+        <div class="sidebar">
+            <ol>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2">基本地形</a></li><ol>
+<li><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%BD%A2%3C%2Fstrong%3E"><strong>生成基本地形</strong></a></li><li><a href="#%3Cstrong%3E%E7%94%9F%E6%88%90%E5%AF%86%E5%BA%A6%E6%95%B0%E7%BB%84%3C%2Fstrong%3E"><strong>生成密度数组</strong></a></li><li><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E5%9D%97">生成生物群系相应的方块</a></li><ol>
+<li><a href="#genlayervoronoizoom">GenLayerVoronoiZoom</a></li><li><a href="#%E6%9B%BF%E6%8D%A2%E6%96%B9%E5%9D%97">替换方块</a></li>
+</ol>
+</ol>
+</ol>
         </div>
     </div>
 </body>

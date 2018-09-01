@@ -2,27 +2,27 @@
 <html>
 
 <head>
-    @@include("src/include/article_head.html", {"title": "深入探索 - 洞穴"})
+    @@include("include/article_head.html", {"title": "深入探索 - 洞穴", "root": ".."})
 </head>
 
 <body>
-    @@include("src/include/nav.html", {"active": "explore"})
+    @@include("include/nav.html", {"active": "explore"})
 
     <div class="content_wrapper">
-        <div class="sidebar">
-            @@include('docs/include/explore/cave_nav.html')
-        </div>
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
                     <div class="content">
-                        @@include('docs/include/explore/cave.html')
+                        @@include(markdown("md/explore/cave.md"))
                         <p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/67638314">CSDN博客</a></p>
                     </div>
                 </div>
             </div>
             <div class="content_border_foot"></div>
+        </div>
+        <div class="sidebar">
+            @@include(sidebar("md/explore/cave.md"))
         </div>
     </div>
 </body>

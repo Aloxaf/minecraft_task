@@ -4,60 +4,15 @@
 
 ## 如何参与开发
 
-### 准备工作
-
-#### 安装必要软件
-
-[Node.js 10.9.0 x64](https://nodejs.org/dist/v10.9.0/node-v10.9.0-x64.msi)
-
-[Git 2.18.0 x64](https://github.com/git-for-windows/git/releases/download/v2.18.0.windows.1/Git-2.18.0-64-bit.exe)
-
-#### 拉取项目
-
-`git clone git@github.com:Vertical923/minecraft_task.git`
-
-#### npm 换源
-
-在 cmd 中执行  
-`npm config set registry http://npmreg.mirrors.ustc.edu.cn`
-
-#### 安装依赖
-
-在 minecraft_task 文件夹中打开 cmd/git bash,
-依次执行以下命令
-
-```bash
-npm install gulp browser-sync -g
-npm install
-```
-
-### 开发
-
-在 minecraft_task 文件夹中打开 cmd/git bash 窗口, 并执行 `gulp`  
-
-这将会打开一个网页, 当作出修改时, 该网页会自动刷新
-
-注: **不要关闭这个窗口**
-
-然后可以在 src 目录中修改代码
-
-<div style="font-size:150%">
-
-### 注意事项
- 
-- **在 src 目录中修改代码!**  
-- **在 src 目录中修改代码!**  
-- **在 src 目录中修改代码!**
-
-- **不要直接往 master 分支 commit, 需要合并分支请发起 pull request**
-
-</div>
+[开发指南](https://github.com/Aloxaf/minecraft_task/blob/master/开发指南.md)
 
 ## 开发日志
 
 ### 2018.9.1
 
 - 优化开发流程
+- 使用 base 标签解决路径问题
+- 代码语法高亮
 
 ### 2018.8.31
 

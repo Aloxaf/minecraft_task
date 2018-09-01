@@ -6,27 +6,27 @@
   "directories": {
     "doc": "docs"
   },
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.24.7",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-file-include": "^2.0.1",
-    "gulp-rename": "^1.4.0",
+    "hash.js": "^1.1.5",
+    "highlight.js": "^9.12.0",
     "marked": "^0.5.0"
-  },
-  "devDependencies": {
-    "browser-sync": "^2.24.7"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vertical923/minecraft_task.git"
+    "url": "git+https://github.com/Aloxaf/minecraft_task.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Vertical923/minecraft_task/issues"
+    "url": "https://github.com/Aloxaf/minecraft_task/issues"
   },
-  "homepage": "https://github.com/Vertical923/minecraft_task#readme"
+  "homepage": "https://github.com/Aloxaf/minecraft_task#readme"
 }

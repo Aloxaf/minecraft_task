@@ -5,68 +5,70 @@ let gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
+    hash = require('hash.js'),
+    highlightjs = require('highlight.js'),
     marked = require('marked'),
-    rename = require('gulp-rename'),
     through = require('through2');
 
 let renderer = new marked.Renderer();
 let toc_list = {}, last = {}; // toc_list: toc 列表, key 为文件名
 
+
 // markdown 处理, 因为 gulp 处理文件的时候好像是并行的
 // 必须想办法标识每个 toc 所属的文件
-function markdown() {
-    return through.obj((file, enc, cb) => {
-        basename = file.relative.split('.')[0];
-        
-        toc_list[basename] = [];
-        last[basename] = [];
+function markdown(md) {
+    basename = hash.sha256().update(md).digest('hex'); // 取文件的 hash 作为标识
+    toc_list[basename] = [];
+    last[basename] = [];
 
-        // 自定义 renderer 以适配 toc
-        renderer.heading = (text, level) => {
-            let slug = encodeURIComponent(text.toLowerCase());
-            let headline = {
-                level: level,
-                slug: slug,
-                title: text
-            };
-            
-            if (last[basename][level - 1]) {
-                if (last[basename][level - 1].children === undefined) 
-                    last[basename][level - 1].children = [];
-                last[basename][level - 1].children.push(headline);
-            } else {
-                toc_list[basename].push(headline);
-            }
-            last[basename][level] = headline;
-            
-            return `<h${level} id="${slug}"><a href="#${slug}" class="anchor"></a>${text}</h${level}>`;
+    // 自定义 renderer 以适配 toc
+    renderer.heading = (text, level) => {
+        let slug = encodeURIComponent(text.toLowerCase());
+        let headline = {
+            level: level,
+            slug: slug,
+            title: text
         };
-        // console.log(file);
-        html = marked(file.contents.toString(), {renderer: renderer});
-        file.contents = Buffer.from(html);
+        
+        if (last[basename][level - 1]) {
+            if (last[basename][level - 1].children === undefined) 
+                last[basename][level - 1].children = [];
+            last[basename][level - 1].children.push(headline);
+        } else {
+            toc_list[basename].push(headline);
+        }
+        last[basename][level] = headline;
+        
+        return `<h${level} id="${slug}"><a href="#${slug}" class="anchor"></a>${text}</h${level}>`;
+    };
 
-        return cb(null, file);
-    });
+    // https://shuheikagawa.com/blog/2015/09/21/using-highlight-js-with-marked/
+    renderer.code = (code, language) => {
+        const validLang = !!(language && highlightjs.getLanguage(language));
+        // Highlight only if the language is valid.
+        const highlighted = validLang ? highlightjs.highlight(language, code).value : code;
+        // Render the highlighted code with `hljs` class.
+        return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;      
+    };
+
+    // console.log(file);
+    return marked(md, {renderer: renderer});
 }
 
 // 生成 table of content
-function toc() {
-    function print_toc(l, html) {
+function sidebar(md) {
+    basename = hash.sha256().update(md).digest('hex');
+
+    function tree_to_html(l, html) {
         for (let i of l) {
             html += `<li><a href="#${i.slug}">${i.title}</a></li>`;
             if (i.children) 
-                html += '<ol>\n' + print_toc(i.children, '') + '\n</ol>';
+                html += '<ol>\n' + tree_to_html(i.children, '') + '\n</ol>';
         }
         return html;
     }
 
-    return through.obj((file, enc, cb) => {
-        basename = file.relative.split('.')[0];
-        // console.log(basename, toc_list);
-        html = '<ol>\n' + print_toc(toc_list[basename], '') + '\n</ol>';
-        file.contents = Buffer.from(html);
-        return cb(null, file);
-    });
+    return  '<ol>\n' + tree_to_html(toc_list[basename], '') + '\n</ol>';
 }
 
 // 输出正在处理的文件名
@@ -78,46 +80,20 @@ function mylog() {
 }
 
 gulp.task('clean', () => {
-    return del([
-        'docs/*.html',
-        'docs/css/*',
-        'docs/img/*',
-        'docs/include/*',
-        'docs/js/*',
-        'docs/video/*'
-    ]);
-});
-
-// 渲染 markdown
-// 将 ./src/md/*.md 处理为 ./docs/include/*.html
-// 将 导航栏 保存为 *_nav.html
-// 以供 @@include
-gulp.task('markdown', () => {
-    return gulp.src('src/md/**/*.md')
-        .pipe(mylog())
-        .pipe(markdown({
-            renderer: renderer
-        }))
-        .pipe(rename( opt => {
-            opt.extname = '.html';
-            return opt;
-        }))
-        .pipe(gulp.dest('docs/include'))
-        .pipe(toc())
-        .pipe(rename( opt => {
-            opt.basename += '_nav';
-            return opt;
-        }))
-        .pipe(gulp.dest('docs/include'));
+    return del(['docs/**/*', '!docs/CNAME']);
 });
 
 // 处理 html 的 @@include
-gulp.task('html', ['markdown'], () => {
-    return gulp.src('src/**/*.html')
+gulp.task('html', () => {
+    return gulp.src(['src/**/*.html', '!src/include/*.html'])
         .pipe(mylog())
         .pipe(fileinclude({
             prefix: '@@',
-            basepath: '.'
+            basepath: 'src',
+            filters: {
+                sidebar: sidebar,
+                markdown: markdown
+            }
         }))
         .pipe(gulp.dest('docs'));
 });
@@ -147,6 +123,10 @@ gulp.task('video', () => {
     return gulp.src('src/video/**/*')
         .pipe(mylog())
         .pipe(gulp.dest('docs/video'));
+});
+
+gulp.task('all', ['clean'], () => {
+    gulp.start('scripts', 'images', 'styles', 'html', 'video');
 });
 
 gulp.task('default', ['clean'], () => {

@@ -2,32 +2,32 @@
 <html>
 
 <head>
-    @@include("src/include/article_head.html", {"title": "游戏简介"})
+    @@include("include/article_head.html", {"title": "游戏简介", "root": "."})
 </head>
 
 <body>
-    @@include("src/include/nav.html", {"active": "introduce"})
+    @@include("include/nav.html", {"active": "introduce"})
     <div class="content_wrapper">
-        <div class="sidebar">
-            @@include('docs/include/introduce_nav.html')
-        </div>
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
                     <div class="content">
-                        @@include('docs/include/introduce.html')
+                        @@include(markdown("md/introduce.md"))
                     </div>
                 </div>
             </div>
             <div class="content_border_foot"></div>
+        </div>
+        <div class="sidebar">
+            @@include(sidebar("md/introduce.md"))
         </div>
     </div>
     <style>
         /*背景图片*/
 
         body {
-            background: url(img/bg1.jpg);
+            background: url(./img/bg1.jpg);
             background-size: cover;
             background-attachment: fixed;
         }

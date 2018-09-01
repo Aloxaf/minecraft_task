@@ -2,58 +2,59 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
+    <base href="..">
+<meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <title>深入探索 - 爆炸算法</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" href="/img/favicon.png" type="image/x-icon" />
+<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/common.js"></script>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/article.css">
+<script src="./js/common.js"></script>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/article.css">
 </head>
 
 <body>
-        <!-- 导航栏 -->
+    <!-- 导航栏 -->
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
         <!-- 图标 -->
         <div class="navbar-header">
-            <a href="/index.html">
-                <img src="/img/logo.png" class="logo" alt="首页">
+            <a href="./index.html">
+                <img src="./img/logo.png" class="logo" alt="首页">
             </a>
         </div>
         <!-- 导航目录 -->
         <div>
             <ul class="nav navbar-nav">
-                <li id="index"><a href="/index.html">首页</a></li>
-                <li id="introduce"><a href="/introduce.html">游戏简介</a></li>
+                <li id="index"><a href="./index.html">首页</a></li>
+                <li id="introduce"><a href="./introduce.html">游戏简介</a></li>
                 <li id="explore" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         深入探索
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/explore/world.html">世界生成</a></li>
-						<li><a href="/explore/ecosystem.html">生物群系</a></li>
-						<li><a href="/explore/noise.html">噪声函数</a></li>
-						<li><a href="/explore/terrain.html">基本地形</a></li>
-						<li><a href="/explore/cave.html">洞穴</a></li>
-						<li><a href="/explore/explode.html">爆炸算法</a></li>
+                        <li><a href="./explore/world.html">世界生成</a></li>
+						<li><a href="./explore/ecosystem.html">生物群系</a></li>
+						<li><a href="./explore/noise.html">噪声函数</a></li>
+						<li><a href="./explore/terrain.html">基本地形</a></li>
+						<li><a href="./explore/cave.html">洞穴</a></li>
+						<li><a href="./explore/explode.html">爆炸算法</a></li>
                     </ul>
                 </li>
-                <li id="strategy"><a href="/strategy.html">游戏攻略</a></li>
+                <li id="strategy"><a href="./strategy.html">游戏攻略</a></li>
                 <li id="about" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         关于我们
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/about/video.html">小组视频</a></li>
-                        <li><a href="/about/about.html">我们的话</a></li>
+                        <li><a href="./about/video.html">小组视频</a></li>
+                        <li><a href="./about/about.html">我们的话</a></li>
                     </ul>
                 </li>
             </ul>
@@ -63,51 +64,46 @@
         $('#explore').addClass('active')
     </script>
 </nav>
-		
-		<div class="content_wrapper">
-        <div class="sidebar">
-            <ol>
-<li><a href="#minecraft%E7%9A%84%E7%88%86%E7%82%B8%E7%AE%97%E6%B3%95">Minecraft的爆炸算法</a></li>
-</ol>
-        </div>
+
+    <div class="content_wrapper">
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
                     <div class="content">
-                        <h1 id="minecraft%E7%9A%84%E7%88%86%E7%82%B8%E7%AE%97%E6%B3%95"><a href="#minecraft%E7%9A%84%E7%88%86%E7%82%B8%E7%AE%97%E6%B3%95" class="anchor"></a>Minecraft的爆炸算法</h1><p>MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范围比较大；在地面爆炸破坏范围小但是破坏深度较深
+                        <p>﻿# Minecraft的爆炸算法
+MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范围比较大；在地面爆炸破坏范围小但是破坏深度较深
 不科学的地方是它的爆炸范围是正方体，只不过一般范围小到看不出是正方体。至于为什么MOD里的核弹爆炸范围是球体，那是别人重新实现了爆炸函数把范围改掉了…类名net.minecraft.world.World</p>
-<pre><code class="language-java">
+<pre><code class="hljs java">
 类名net.minecraft.world.World
 
-    /**
+    <span class="hljs-comment">/**
      * Creates an explosion. Args: entity, x, y, z, strength
-     */
-    public Explosion createExplosion(Entity entityIn, double x, double y, double z, float strength, boolean isSmoking)
-    {
-        return this.newExplosion(entityIn, x, y, z, strength, false, isSmoking);
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Explosion <span class="hljs-title">createExplosion</span><span class="hljs-params">(Entity entityIn, <span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y, <span class="hljs-keyword">double</span> z, <span class="hljs-keyword">float</span> strength, <span class="hljs-keyword">boolean</span> isSmoking)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.newExplosion(entityIn, x, y, z, strength, <span class="hljs-keyword">false</span>, isSmoking);
     }
 
-    /**
+    <span class="hljs-comment">/**
      * returns a new explosion. Does initiation (at time of writing Explosion is not finished)
-     */
-    // isFlaming影响是否着火，isSmoking影响是否生成粒子和破坏方块
-    public Explosion newExplosion(Entity entityIn, double x, double y, double z, float strength, boolean isFlaming, boolean isSmoking)
-    {
-        Explosion explosion = new Explosion(this, entityIn, x, y, z, strength, isFlaming, isSmoking);
-        if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(this, explosion)) return explosion;
-        // 第一阶段，计算被破坏的方块，伤害实体
+     */</span>
+    <span class="hljs-comment">// isFlaming影响是否着火，isSmoking影响是否生成粒子和破坏方块</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Explosion <span class="hljs-title">newExplosion</span><span class="hljs-params">(Entity entityIn, <span class="hljs-keyword">double</span> x, <span class="hljs-keyword">double</span> y, <span class="hljs-keyword">double</span> z, <span class="hljs-keyword">float</span> strength, <span class="hljs-keyword">boolean</span> isFlaming, <span class="hljs-keyword">boolean</span> isSmoking)</span>
+    </span>{
+        Explosion explosion = <span class="hljs-keyword">new</span> Explosion(<span class="hljs-keyword">this</span>, entityIn, x, y, z, strength, isFlaming, isSmoking);
+        <span class="hljs-keyword">if</span> (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(<span class="hljs-keyword">this</span>, explosion)) <span class="hljs-keyword">return</span> explosion;
+        <span class="hljs-comment">// 第一阶段，计算被破坏的方块，伤害实体</span>
         explosion.doExplosionA();
-        // 第二阶段，破坏方块，生成粒子效果和掉落物
-        explosion.doExplosionB(true);
-        return explosion;
-    }</code></pre>
-<pre><code>类名net.minecraft.world.Explosion
+        <span class="hljs-comment">// 第二阶段，破坏方块，生成粒子效果和掉落物</span>
+        explosion.doExplosionB(<span class="hljs-keyword">true</span>);
+        <span class="hljs-keyword">return</span> explosion;
+    }</code></pre><pre><code class="hljs undefined">类名net.minecraft.world.Explosion
     public Explosion(World worldIn, Entity p_i45754_2_, double p_i45754_3_, double p_i45754_5_, double p_i45754_7_, float size, boolean p_i45754_10_, boolean p_i45754_11_)
     {
         this.explosionRNG = new Random();
-        this.affectedBlockPositions = Lists.&lt;BlockPos&gt;newArrayList();
-        this.playerKnockbackMap = Maps.&lt;EntityPlayer, Vec3&gt;newHashMap();
+        this.affectedBlockPositions = Lists.<BlockPos>newArrayList();
+        this.playerKnockbackMap = Maps.<EntityPlayer, Vec3>newHashMap();
         this.worldObj = worldIn;
         this.exploder = p_i45754_2_;
         // 就是上面的strength
@@ -125,15 +121,15 @@
      */
     public void doExplosionA()
     {
-        Set&lt;BlockPos&gt; blocksToDestroy = Sets.&lt;BlockPos&gt;newHashSet();
+        Set<BlockPos> blocksToDestroy = Sets.<BlockPos>newHashSet();
 
         // 遍历16*16*16正方体边界上各点，从中心向边界连线，计算是否破坏连线上的方块
         // 由于这里正方体尺寸写死了，如果爆炸范围太大边界就会有些方块没有遍历到
-        for (int x = 0; x &lt; 16; ++x)
+        for (int x = 0; x < 16; ++x)
         {
-            for (int y = 0; y &lt; 16; ++y)
+            for (int y = 0; y < 16; ++y)
             {
-                for (int z = 0; z &lt; 16; ++z)
+                for (int z = 0; z < 16; ++z)
                 {
                     // 在边界
                     if (x == 0 || x == 15 || y == 0 || y == 15 || z == 0 || z == 15)
@@ -154,7 +150,7 @@
                         double blockY = this.explosionY;
                         double blockZ = this.explosionZ;
 
-                        for (; strength &gt; 0.0F; strength -= 0.22500001F)
+                        for (; strength > 0.0F; strength -= 0.22500001F)
                         {
                             BlockPos blockPos = new BlockPos(blockX, blockY, blockZ);
                             IBlockState block = this.worldObj.getBlockState(blockPos);
@@ -167,7 +163,7 @@
                             }
 
                             // 把这个方块加入准备破坏的方块
-                            if (strength &gt; 0.0F &amp;&amp; (this.exploder == null || this.exploder.verifyExplosion(this, this.worldObj, blockPos, block, strength)))
+                            if (strength > 0.0F && (this.exploder == null || this.exploder.verifyExplosion(this, this.worldObj, blockPos, block, strength)))
                             {
                                 blocksToDestroy.add(blockPos);
                             }
@@ -194,12 +190,12 @@
         int maxY = MathHelper.floor_double(this.explosionY + (double)explosionSize + 1.0D);
         int minZ = MathHelper.floor_double(this.explosionZ - (double)explosionSize - 1.0D);
         int maxZ = MathHelper.floor_double(this.explosionZ + (double)explosionSize + 1.0D);
-        List&lt;Entity&gt; entityList = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB((double)minX, (double)minY, (double)minZ, (double)maxX, (double)maxY, (double)maxZ));
+        List<Entity> entityList = this.worldObj.getEntitiesWithinAABBExcludingEntity(this.exploder, new AxisAlignedBB((double)minX, (double)minY, (double)minZ, (double)maxX, (double)maxY, (double)maxZ));
         net.minecraftforge.event.ForgeEventFactory.onExplosionDetonate(this.worldObj, this, entityList, explosionSize);
 
         Vec3 vec3 = new Vec3(this.explosionX, this.explosionY, this.explosionZ);
 
-        for (int i = 0; i &lt; entityList.size(); ++i)
+        for (int i = 0; i < entityList.size(); ++i)
         {
             Entity entity = (Entity)entityList.get(i);
 
@@ -209,7 +205,7 @@
                 // 用来判断是否在爆炸范围内的距离
                 double _dist = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / (double)explosionSize;
 
-                if (_dist &lt;= 1.0D)
+                if (_dist <= 1.0D)
                 {
                     // 用来计算击退方向的距离
                     double xDist = entity.posX - this.explosionX;
@@ -236,7 +232,7 @@
                         entity.motionZ += zDist * motionScale;
 
                         // 记录玩家击退
-                        if (entity instanceof EntityPlayer &amp;&amp; !((EntityPlayer)entity).capabilities.disableDamage)
+                        if (entity instanceof EntityPlayer && !((EntityPlayer)entity).capabilities.disableDamage)
                         {
                             this.playerKnockbackMap.put((EntityPlayer)entity, new Vec3(xDist * strength, yDist * strength, zDist * strength));
                         }
@@ -252,10 +248,10 @@
     public void doExplosionB(boolean spawnParticles)
     {
         // 播放爆炸音效
-        this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, &quot;random.explode&quot;, 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
+        this.worldObj.playSoundEffect(this.explosionX, this.explosionY, this.explosionZ, "random.explode", 4.0F, (1.0F + (this.worldObj.rand.nextFloat() - this.worldObj.rand.nextFloat()) * 0.2F) * 0.7F);
 
         // 生成大爆炸粒子效果
-        if (this.explosionSize &gt;= 2.0F &amp;&amp; this.isSmoking)
+        if (this.explosionSize >= 2.0F && this.isSmoking)
         {
             this.worldObj.spawnParticle(EnumParticleTypes.EXPLOSION_HUGE, this.explosionX, this.explosionY, this.explosionZ, 1.0D, 0.0D, 0.0D, new int[0]);
         }
@@ -317,8 +313,8 @@
             for (BlockPos blockpos1 : this.affectedBlockPositions)
             {
                 if (   this.worldObj.getBlockState(blockpos1).getBlock().getMaterial() == Material.air
-                    &amp;&amp; this.worldObj.getBlockState(blockpos1.down()).getBlock().isFullBlock()
-                    &amp;&amp; this.explosionRNG.nextInt(3) == 0)
+                    && this.worldObj.getBlockState(blockpos1.down()).getBlock().isFullBlock()
+                    && this.explosionRNG.nextInt(3) == 0)
                 {
                     this.worldObj.setBlockState(blockpos1, Blocks.fire.getDefaultState());
                 }
@@ -338,17 +334,17 @@
         double xOffset = (1.0D - Math.floor(1.0D / xStep) * xStep) / 2.0D;
         double zOffset = (1.0D - Math.floor(1.0D / zStep) * zStep) / 2.0D;
 
-        if (xStep &gt;= 0.0D &amp;&amp; yStep &gt;= 0.0D &amp;&amp; zStep &gt;= 0.0D)
+        if (xStep >= 0.0D && yStep >= 0.0D && zStep >= 0.0D)
         {
             int noBlockLines = 0;
             int totalLines = 0;
 
             // xt、yt、zt为插值参数
-            for (float xt = 0.0F; xt &lt;= 1.0F; xt = (float)((double)xt + xStep))
+            for (float xt = 0.0F; xt <= 1.0F; xt = (float)((double)xt + xStep))
             {
-                for (float yt = 0.0F; yt &lt;= 1.0F; yt = (float)((double)yt + yStep))
+                for (float yt = 0.0F; yt <= 1.0F; yt = (float)((double)yt + yStep))
                 {
-                    for (float zt = 0.0F; zt &lt;= 1.0F; zt = (float)((double)zt + zStep))
+                    for (float zt = 0.0F; zt <= 1.0F; zt = (float)((double)zt + zStep))
                     {
                         double x = bb.minX + (bb.maxX - bb.minX) * (double)xt;
                         double y = bb.minY + (bb.maxY - bb.minY) * (double)yt;
@@ -372,11 +368,16 @@
             return 0.0F;
         }
     }</code></pre>
-						<p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/68943594">CSDN博客</a></p>
+                        <p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/68943594">CSDN博客</a></p>
                     </div>
                 </div>
             </div>
             <div class="content_border_foot"></div>
+        </div>
+        <div class="sidebar">
+            <ol>
+
+</ol>
         </div>
     </div>
 </body>
