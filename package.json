@@ -21,12 +21,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Vertical923/minecraft_task.git"
+    "url": "git+https://github.com/Aloxaf/minecraft_task.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Vertical923/minecraft_task/issues"
+    "url": "https://github.com/Aloxaf/minecraft_task/issues"
   },
-  "homepage": "https://github.com/Vertical923/minecraft_task#readme"
+  "homepage": "https://github.com/Aloxaf/minecraft_task#readme"
 }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    @@include("include/article_head.html", {"title": "游戏攻略"})
+    @@include("include/article_head.html", {"title": "游戏攻略", "root": "."})
 </head>
 
 <body>
@@ -28,7 +28,7 @@
         /*背景图片*/
 
         body {
-            background: url(img/bg2.jpg);
+            background: url(./img/bg2.jpg);
             background-size: cover;
             background-attachment: fixed;
         }
