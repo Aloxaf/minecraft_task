@@ -2,26 +2,26 @@
 <html>
 
 <head>
-    @@include("src/include/article_head.html", {"title": "游戏攻略"})
+    @@include("include/article_head.html", {"title": "游戏攻略"})
 </head>
 
 <body>
-    @@include("src/include/nav.html", {"active": "strategy"})
+    @@include("include/nav.html", {"active": "strategy"})
 
     <div class="content_wrapper">
-        <div class="sidebar">
-            @@include('docs/include/strategy_nav.html')
-        </div>
         <div class="content_border">
             <div class="content_border_top"></div>
             <div class="content_border_left">
                 <div class="content_border_right">
                     <div class="content">
-                        @@include('docs/include/strategy.html')
+                        @@include(markdown("md/strategy.md"))
                     </div>
                 </div>
             </div>
             <div class="content_border_foot"></div>
+        </div>
+        <div class="sidebar">
+            @@include(sidebar("md/strategy.md"))
         </div>
     </div>
     <style>
