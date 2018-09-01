@@ -18,7 +18,7 @@
 
 .navbar, .dropdown-menu {
   margin: 0px;
-  background-color: #85681bea;
+  background-color: white;
   border: none;
 }
 
@@ -39,19 +39,16 @@
   margin-top: 45px;
 }
 
-.dropdown-menu>li>a {
-  color: #ffffff;
-}
-
 .navbar-default .navbar-nav>.active>a {
   margin-top: 40px;
   padding: 12px 20px 5px 20px;
 }
 
-/* .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>.active>a {
-  color: #ffffff;
-  background-color: #fa7508;
-} */
+.dropdown-menu>li>a {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: black;
+}
 
 /* 首页幻灯片 */
 
