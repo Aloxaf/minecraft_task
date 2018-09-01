@@ -6,6 +6,7 @@ let gulp = require('gulp'),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
     hash = require('hash.js'),
+    highlightjs = require('highlight.js'),
     marked = require('marked'),
     through = require('through2');
 
@@ -40,6 +41,16 @@ function markdown(md) {
         
         return `<h${level} id="${slug}"><a href="#${slug}" class="anchor"></a>${text}</h${level}>`;
     };
+
+    // https://shuheikagawa.com/blog/2015/09/21/using-highlight-js-with-marked/
+    renderer.code = (code, language) => {
+        const validLang = !!(language && highlightjs.getLanguage(language));
+        // Highlight only if the language is valid.
+        const highlighted = validLang ? highlightjs.highlight(language, code).value : code;
+        // Render the highlighted code with `hljs` class.
+        return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;      
+    };
+
     // console.log(file);
     return marked(md, {renderer: renderer});
 }

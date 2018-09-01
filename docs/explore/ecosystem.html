@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="./js/common.js"></script>
@@ -73,146 +73,144 @@
                     <div class="content">
                         <p>﻿</p>
 <h1 id="%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B"><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B" class="anchor"></a>生成生物群系总流程</h1><p>接着上篇文章我们看到这个函数</p>
-<pre><code class="language-java">
+<pre><code class="hljs java">
 类名net.minecraft.world.gen.ChunkProviderGenerate
-    /**
-     * Will return back a chunk, if it doesn&#39;t exist and its not a MP client it will generates all the blocks for the
+    <span class="hljs-comment">/**
+     * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
-     */
-    public Chunk provideChunk(int x, int z)
-    {
-        // 根据区块坐标设置随机种子
-        this.rand.setSeed((long)x * 341873128712L + (long)z * 132897987541L);
-        // 这个是生成区块时临时储存方块数据的对象，后面会转为Chunk对象
-        ChunkPrimer chunkprimer = new ChunkPrimer();
-        // 生成基本地形（没有洞穴等建筑）
-        this.setBlocksInChunk(x, z, chunkprimer);
-        // ...
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Chunk <span class="hljs-title">provideChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z)</span>
+    </span>{
+        <span class="hljs-comment">// 根据区块坐标设置随机种子</span>
+        <span class="hljs-keyword">this</span>.rand.setSeed((<span class="hljs-keyword">long</span>)x * <span class="hljs-number">341873128712L</span> + (<span class="hljs-keyword">long</span>)z * <span class="hljs-number">132897987541L</span>);
+        <span class="hljs-comment">// 这个是生成区块时临时储存方块数据的对象，后面会转为Chunk对象</span>
+        ChunkPrimer chunkprimer = <span class="hljs-keyword">new</span> ChunkPrimer();
+        <span class="hljs-comment">// 生成基本地形（没有洞穴等建筑）</span>
+        <span class="hljs-keyword">this</span>.setBlocksInChunk(x, z, chunkprimer);
+        <span class="hljs-comment">// ...</span>
     }
 
-    public void setBlocksInChunk(int x, int z, ChunkPrimer chunkprimer)
-    {
-        // 决定生物群系，这里把区块坐标*4-2了，而且结果是10*10的
-        this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
-        // ...
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setBlocksInChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z, ChunkPrimer chunkprimer)</span>
+    </span>{
+        <span class="hljs-comment">// 决定生物群系，这里把区块坐标*4-2了，而且结果是10*10的</span>
+        <span class="hljs-keyword">this</span>.biomesForGeneration = <span class="hljs-keyword">this</span>.worldObj.getWorldChunkManager().getBiomesForGeneration(<span class="hljs-keyword">this</span>.biomesForGeneration, x * <span class="hljs-number">4</span> - <span class="hljs-number">2</span>, z * <span class="hljs-number">4</span> - <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
+        <span class="hljs-comment">// ...</span>
     }
 类名net.minecraft.world.biome.WorldChunkManager
-    /**
+    <span class="hljs-comment">/**
      * Returns an array of biomes for the location input.
-     */
-    public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] result, int x, int z, int width, int height)
+     */</span>
+    <span class="hljs-keyword">public</span> BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] result, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)
     {
         IntCache.resetIntCache();
 
-        if (result == null || result.length &lt; width * height)
+        <span class="hljs-keyword">if</span> (result == <span class="hljs-keyword">null</span> || result.length &lt; width * height)
         {
-            result = new BiomeGenBase[width * height];
+            result = <span class="hljs-keyword">new</span> BiomeGenBase[width * height];
         }
 
-        // 生成生物群系ID
-        int[] biomeId = this.genBiomes.getInts(x, z, width, height);
+        <span class="hljs-comment">// 生成生物群系ID</span>
+        <span class="hljs-keyword">int</span>[] biomeId = <span class="hljs-keyword">this</span>.genBiomes.getInts(x, z, width, height);
 
-        try
+        <span class="hljs-keyword">try</span>
         {
-            for (int i = 0; i &lt; width * height; ++i)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; width * height; ++i)
             {
-                // 把生物群系ID转成BiomeGenBase对象
+                <span class="hljs-comment">// 把生物群系ID转成BiomeGenBase对象</span>
                 result[i] = BiomeGenBase.getBiomeFromBiomeList(biomeId[i], BiomeGenBase.field_180279_ad);
             }
 
-            return result;
+            <span class="hljs-keyword">return</span> result;
         }
-        catch (Throwable throwable)
+        <span class="hljs-keyword">catch</span> (Throwable throwable)
         {
-            // ...
+            <span class="hljs-comment">// ...</span>
         }
     }
 
-    public WorldChunkManager(long seed, WorldType p_i45744_3_, String p_i45744_4_)
-    {
-        this();
-        this.field_180301_f = p_i45744_4_;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WorldChunkManager</span><span class="hljs-params">(<span class="hljs-keyword">long</span> seed, WorldType p_i45744_3_, String p_i45744_4_)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>();
+        <span class="hljs-keyword">this</span>.field_180301_f = p_i45744_4_;
         GenLayer[] agenlayer = GenLayer.initializeAllBiomeGenerators(seed, p_i45744_3_, p_i45744_4_);
         agenlayer = getModdedBiomeGenerators(p_i45744_3_, seed, agenlayer);
-        // 这里初始化了genBiomes
-        this.genBiomes = agenlayer[0];
-        this.biomeIndexLayer = agenlayer[1];
-    }</code></pre>
-<p>接下来就非常复杂了，net.minecraft.world.gen.layer这个包里有很多GenLayer，每层都会用上一层的输出生成这一层的输出<br><img src="/img/算法1.png" alt="Alt text" title="文件1"><br><img src="/img/算法2.png" alt="Alt text" title="文件2"><br>它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的  </p>
-<pre><code class="language-java">类名net.minecraft.world.gen.layer.GenLayer
-    public static GenLayer[] initializeAllBiomeGenerators(long worldSeed, WorldType worldType, String settings)
+        <span class="hljs-comment">// 这里初始化了genBiomes</span>
+        <span class="hljs-keyword">this</span>.genBiomes = agenlayer[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">this</span>.biomeIndexLayer = agenlayer[<span class="hljs-number">1</span>];
+    }</code></pre><p>接下来就非常复杂了，net.minecraft.world.gen.layer这个包里有很多GenLayer，每层都会用上一层的输出生成这一层的输出<br><img src="/img/算法1.png" alt="Alt text" title="文件1"><br><img src="/img/算法2.png" alt="Alt text" title="文件2"><br>它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的  </p>
+<pre><code class="hljs java">类名net.minecraft.world.gen.layer.GenLayer
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GenLayer[] initializeAllBiomeGenerators(<span class="hljs-keyword">long</span> worldSeed, WorldType worldType, String settings)
     {
-        GenLayer genlayer = new GenLayerIsland(1L);
-        genlayer = new GenLayerFuzzyZoom(2000L, genlayer);
-        GenLayerAddIsland genlayeraddisland = new GenLayerAddIsland(1L, genlayer);
-        GenLayerZoom genlayerzoom = new GenLayerZoom(2001L, genlayeraddisland);
-        GenLayerAddIsland genlayeraddisland1 = new GenLayerAddIsland(2L, genlayerzoom);
-        genlayeraddisland1 = new GenLayerAddIsland(50L, genlayeraddisland1);
-        genlayeraddisland1 = new GenLayerAddIsland(70L, genlayeraddisland1);
-        GenLayerRemoveTooMuchOcean genlayerremovetoomuchocean = new GenLayerRemoveTooMuchOcean(2L, genlayeraddisland1);
-        GenLayerAddSnow genlayeraddsnow = new GenLayerAddSnow(2L, genlayerremovetoomuchocean);
-        GenLayerAddIsland genlayeraddisland2 = new GenLayerAddIsland(3L, genlayeraddsnow);
-        GenLayerEdge genlayeredge = new GenLayerEdge(2L, genlayeraddisland2, GenLayerEdge.Mode.COOL_WARM);
-        genlayeredge = new GenLayerEdge(2L, genlayeredge, GenLayerEdge.Mode.HEAT_ICE);
-        genlayeredge = new GenLayerEdge(3L, genlayeredge, GenLayerEdge.Mode.SPECIAL);
-        GenLayerZoom genlayerzoom1 = new GenLayerZoom(2002L, genlayeredge);
-        genlayerzoom1 = new GenLayerZoom(2003L, genlayerzoom1);
-        GenLayerAddIsland genlayeraddisland3 = new GenLayerAddIsland(4L, genlayerzoom1);
-        GenLayerAddMushroomIsland genlayeraddmushroomisland = new GenLayerAddMushroomIsland(5L, genlayeraddisland3);
-        GenLayerDeepOcean genlayerdeepocean = new GenLayerDeepOcean(4L, genlayeraddmushroomisland);
-        GenLayer genlayer4 = GenLayerZoom.magnify(1000L, genlayerdeepocean, 0);
-        ChunkProviderSettings chunkprovidersettings = null;
-        int biomeSize = 4;
-        int riverSize = biomeSize;
+        GenLayer genlayer = <span class="hljs-keyword">new</span> GenLayerIsland(<span class="hljs-number">1L</span>);
+        genlayer = <span class="hljs-keyword">new</span> GenLayerFuzzyZoom(<span class="hljs-number">2000L</span>, genlayer);
+        GenLayerAddIsland genlayeraddisland = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">1L</span>, genlayer);
+        GenLayerZoom genlayerzoom = <span class="hljs-keyword">new</span> GenLayerZoom(<span class="hljs-number">2001L</span>, genlayeraddisland);
+        GenLayerAddIsland genlayeraddisland1 = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">2L</span>, genlayerzoom);
+        genlayeraddisland1 = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">50L</span>, genlayeraddisland1);
+        genlayeraddisland1 = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">70L</span>, genlayeraddisland1);
+        GenLayerRemoveTooMuchOcean genlayerremovetoomuchocean = <span class="hljs-keyword">new</span> GenLayerRemoveTooMuchOcean(<span class="hljs-number">2L</span>, genlayeraddisland1);
+        GenLayerAddSnow genlayeraddsnow = <span class="hljs-keyword">new</span> GenLayerAddSnow(<span class="hljs-number">2L</span>, genlayerremovetoomuchocean);
+        GenLayerAddIsland genlayeraddisland2 = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">3L</span>, genlayeraddsnow);
+        GenLayerEdge genlayeredge = <span class="hljs-keyword">new</span> GenLayerEdge(<span class="hljs-number">2L</span>, genlayeraddisland2, GenLayerEdge.Mode.COOL_WARM);
+        genlayeredge = <span class="hljs-keyword">new</span> GenLayerEdge(<span class="hljs-number">2L</span>, genlayeredge, GenLayerEdge.Mode.HEAT_ICE);
+        genlayeredge = <span class="hljs-keyword">new</span> GenLayerEdge(<span class="hljs-number">3L</span>, genlayeredge, GenLayerEdge.Mode.SPECIAL);
+        GenLayerZoom genlayerzoom1 = <span class="hljs-keyword">new</span> GenLayerZoom(<span class="hljs-number">2002L</span>, genlayeredge);
+        genlayerzoom1 = <span class="hljs-keyword">new</span> GenLayerZoom(<span class="hljs-number">2003L</span>, genlayerzoom1);
+        GenLayerAddIsland genlayeraddisland3 = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">4L</span>, genlayerzoom1);
+        GenLayerAddMushroomIsland genlayeraddmushroomisland = <span class="hljs-keyword">new</span> GenLayerAddMushroomIsland(<span class="hljs-number">5L</span>, genlayeraddisland3);
+        GenLayerDeepOcean genlayerdeepocean = <span class="hljs-keyword">new</span> GenLayerDeepOcean(<span class="hljs-number">4L</span>, genlayeraddmushroomisland);
+        GenLayer genlayer4 = GenLayerZoom.magnify(<span class="hljs-number">1000L</span>, genlayerdeepocean, <span class="hljs-number">0</span>);
+        ChunkProviderSettings chunkprovidersettings = <span class="hljs-keyword">null</span>;
+        <span class="hljs-keyword">int</span> biomeSize = <span class="hljs-number">4</span>;
+        <span class="hljs-keyword">int</span> riverSize = biomeSize;
 
-        if (worldType == WorldType.CUSTOMIZED &amp;&amp; settings.length() &gt; 0)
+        <span class="hljs-keyword">if</span> (worldType == WorldType.CUSTOMIZED &amp;&amp; settings.length() &gt; <span class="hljs-number">0</span>)
         {
             chunkprovidersettings = ChunkProviderSettings.Factory.jsonToFactory(settings).func_177864_b();
             biomeSize = chunkprovidersettings.biomeSize;
             riverSize = chunkprovidersettings.riverSize;
         }
 
-        if (worldType == WorldType.LARGE_BIOMES)
+        <span class="hljs-keyword">if</span> (worldType == WorldType.LARGE_BIOMES)
         {
-            biomeSize = 6;
+            biomeSize = <span class="hljs-number">6</span>;
         }
 
         biomeSize = getModdedBiomeSize(worldType, biomeSize);
 
-        GenLayer lvt_8_1_ = GenLayerZoom.magnify(1000L, genlayer4, 0);
-        GenLayerRiverInit genlayerriverinit = new GenLayerRiverInit(100L, lvt_8_1_);
-        GenLayer lvt_10_1_ = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
+        GenLayer lvt_8_1_ = GenLayerZoom.magnify(<span class="hljs-number">1000L</span>, genlayer4, <span class="hljs-number">0</span>);
+        GenLayerRiverInit genlayerriverinit = <span class="hljs-keyword">new</span> GenLayerRiverInit(<span class="hljs-number">100L</span>, lvt_8_1_);
+        GenLayer lvt_10_1_ = GenLayerZoom.magnify(<span class="hljs-number">1000L</span>, genlayerriverinit, <span class="hljs-number">2</span>);
         GenLayer genlayerbiomeedge = worldType.getBiomeLayer(worldSeed, genlayer4, settings);
-        GenLayer genlayerhills = new GenLayerHills(1000L, genlayerbiomeedge, lvt_10_1_);
-        GenLayer genlayer5 = GenLayerZoom.magnify(1000L, genlayerriverinit, 2);
-        genlayer5 = GenLayerZoom.magnify(1000L, genlayer5, riverSize);
-        GenLayerRiver genlayerriver = new GenLayerRiver(1L, genlayer5);
-        GenLayerSmooth genlayersmooth = new GenLayerSmooth(1000L, genlayerriver);
-        genlayerhills = new GenLayerRareBiome(1001L, genlayerhills);
+        GenLayer genlayerhills = <span class="hljs-keyword">new</span> GenLayerHills(<span class="hljs-number">1000L</span>, genlayerbiomeedge, lvt_10_1_);
+        GenLayer genlayer5 = GenLayerZoom.magnify(<span class="hljs-number">1000L</span>, genlayerriverinit, <span class="hljs-number">2</span>);
+        genlayer5 = GenLayerZoom.magnify(<span class="hljs-number">1000L</span>, genlayer5, riverSize);
+        GenLayerRiver genlayerriver = <span class="hljs-keyword">new</span> GenLayerRiver(<span class="hljs-number">1L</span>, genlayer5);
+        GenLayerSmooth genlayersmooth = <span class="hljs-keyword">new</span> GenLayerSmooth(<span class="hljs-number">1000L</span>, genlayerriver);
+        genlayerhills = <span class="hljs-keyword">new</span> GenLayerRareBiome(<span class="hljs-number">1001L</span>, genlayerhills);
 
-        for (int i = 0; i &lt; biomeSize; ++i)
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; biomeSize; ++i)
         {
-            genlayerhills = new GenLayerZoom((long)(1000 + i), genlayerhills);
+            genlayerhills = <span class="hljs-keyword">new</span> GenLayerZoom((<span class="hljs-keyword">long</span>)(<span class="hljs-number">1000</span> + i), genlayerhills);
 
-            if (i == 0)
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">0</span>)
             {
-                genlayerhills = new GenLayerAddIsland(3L, genlayerhills);
+                genlayerhills = <span class="hljs-keyword">new</span> GenLayerAddIsland(<span class="hljs-number">3L</span>, genlayerhills);
             }
 
-            if (i == 1 || biomeSize == 1)
+            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span> || biomeSize == <span class="hljs-number">1</span>)
             {
-                genlayerhills = new GenLayerShore(1000L, genlayerhills);
+                genlayerhills = <span class="hljs-keyword">new</span> GenLayerShore(<span class="hljs-number">1000L</span>, genlayerhills);
             }
         }
 
-        GenLayerSmooth genlayersmooth1 = new GenLayerSmooth(1000L, genlayerhills);
-        GenLayerRiverMix genlayerrivermix = new GenLayerRiverMix(100L, genlayersmooth1, genlayersmooth);
-        GenLayer genlayer3 = new GenLayerVoronoiZoom(10L, genlayerrivermix);
+        GenLayerSmooth genlayersmooth1 = <span class="hljs-keyword">new</span> GenLayerSmooth(<span class="hljs-number">1000L</span>, genlayerhills);
+        GenLayerRiverMix genlayerrivermix = <span class="hljs-keyword">new</span> GenLayerRiverMix(<span class="hljs-number">100L</span>, genlayersmooth1, genlayersmooth);
+        GenLayer genlayer3 = <span class="hljs-keyword">new</span> GenLayerVoronoiZoom(<span class="hljs-number">10L</span>, genlayerrivermix);
         genlayerrivermix.initWorldGenSeed(worldSeed);
         genlayer3.initWorldGenSeed(worldSeed);
-        return new GenLayer[] {genlayerrivermix, genlayer3, genlayerrivermix};
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GenLayer[] {genlayerrivermix, genlayer3, genlayerrivermix};
     }</code></pre>
-
                         <p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/63797164">CSDN博客</a></p>
                     </div>
                 </div>
