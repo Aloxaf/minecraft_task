@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="..">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>深入探索 - 噪声函数</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/article.js"></script>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/article.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- 图标 -->
+        <div class="navbar-header">
+            <a href="./index.html">
+                <img src="./img/logo.png" class="logo" alt="首页">
+            </a>
+        </div>
+        <!-- 导航目录 -->
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="index"><a href="./index.html">首页</a></li>
+                <li id="introduce" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        游戏介绍
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./introduce/bcground.html" >游戏背景</a></li>
+                        <li><a href="./introduce/experience.html" >游戏历程</a></li>
+                        <li><a href="./introduce/major.html" >NPC</a></li>
+                        <li><a href="./introduce/map.html" >场景地图</a></li>
+                        <li><a href="./introduce/honor.html" >历史荣耀</a></li>
+                        <li><a href="./introduce/system.html" >特色系统</a></li>
+                        <li><a href="./introduce/congigure.html" >系统配置</a></li>
+                    </ul>
+                </li>
+                <li id="explore" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        深入探索
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./explore/world.html">世界生成</a></li>
+						<li><a href="./explore/ecosystem.html">生物群系</a></li>
+						<li><a href="./explore/noise.html">噪声函数</a></li>
+						<li><a href="./explore/terrain.html">基本地形</a></li>
+						<li><a href="./explore/cave.html">洞穴</a></li>
+						<li><a href="./explore/explode.html">爆炸算法</a></li>
+                    </ul>
+                </li>
+                <li id="strategy"><a href="./strategy.html">游戏攻略</a></li>
+                <li id="about" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        关于我们
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./about/video.html">小组视频</a></li>
+                        <li><a href="./about/about.html">我们的话</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $('#explore').addClass('active')
+    </script>
+</nav>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar">
+                <ul>
+<li><a href="#%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E">1. <strong>各种NoiseGenerator</strong></a></li><ul>
+<li><a href="#noisegeneratorimproved">1.1. NoiseGeneratorImproved</a></li>
+</ul>
+</ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="content_border">
+                <div class="content_border_top">
+                    <div class="content_border_lefttop"></div>
+                    <div class="content_border_centertop"></div>
+                    <div class="content_border_righttop"></div>
+                </div>
+                <div class="content_border_left">
+                    <div class="content_border_right">
+                        <div class="content">
+                            <p>接下来的地形生成代码会接触到噪声函数，所以本篇内容就先逆向MC的噪声函数吧</p>
+<p>噪声函数就是比较好看的随机数，如果用纯随机数（白噪声）不适合生成地形，但是噪声函数就很适合</p>
+<h1 id="%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E" class="anchor"></a><strong>各种NoiseGenerator</strong></h1><p>在包net.minecraft.world.gen里可以看到几个噪声生成器，它们的命名比较乱所以不要看类名来推断算法（本来柏林噪声的命名就经常被混淆），其实MC里只有Perlin噪声和Simplex噪声</p>
+<h2 id="noisegeneratorimproved"><a href="#noisegeneratorimproved" class="anchor"></a>NoiseGeneratorImproved</h2><p>用来生成一个柏林噪声</p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NoiseGeneratorImproved</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">NoiseGenerator</span>
+</span>{
+    <span class="hljs-comment">// 0~255的随机排列</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span>[] permutations;
+    <span class="hljs-comment">// 坐标偏移量</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> xCoord;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> yCoord;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> zCoord;
+    <span class="hljs-comment">// 三维梯度向量，去掉y维度后和二维的一样</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span>[] field_152381_e = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[] {<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D, <span class="hljs-number">1.0</span>D,  <span class="hljs-number">0.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">0.0</span>D};
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span>[] field_152382_f = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[] {<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D, <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D};
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span>[] field_152383_g = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[] {<span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D, <span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">0.0</span>D,  <span class="hljs-number">1.0</span>D,  <span class="hljs-number">0.0</span>D, -<span class="hljs-number">1.0</span>D};
+    <span class="hljs-comment">// 二维梯度向量</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span>[] field_152384_h = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[] {<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D, <span class="hljs-number">1.0</span>D,  <span class="hljs-number">0.0</span>D, -<span class="hljs-number">1.0</span>D,  <span class="hljs-number">0.0</span>D};
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span>[] field_152385_i = <span class="hljs-keyword">new</span> <span class="hljs-keyword">double</span>[] {<span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D,  <span class="hljs-number">0.0</span>D, <span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">1.0</span>D,  <span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, -<span class="hljs-number">1.0</span>D, <span class="hljs-number">0.0</span>D,  <span class="hljs-number">1.0</span>D,  <span class="hljs-number">0.0</span>D, -<span class="hljs-number">1.0</span>D};
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">NoiseGeneratorImproved</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">this</span>(<span class="hljs-keyword">new</span> Random());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">NoiseGeneratorImproved</span><span class="hljs-params">(Random rand)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.permutations = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">512</span>];
+        <span class="hljs-keyword">this</span>.xCoord = rand.nextDouble() * <span class="hljs-number">256.0</span>D;
+        <span class="hljs-keyword">this</span>.yCoord = rand.nextDouble() * <span class="hljs-number">256.0</span>D;
+        <span class="hljs-keyword">this</span>.zCoord = rand.nextDouble() * <span class="hljs-number">256.0</span>D;
+
+        <span class="hljs-comment">// 生成0~255的随机排列</span>
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; ++i)
+        {
+            <span class="hljs-keyword">this</span>.permutations[i] = i;
+        }
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">256</span>; ++i)
+        {
+            <span class="hljs-comment">// 从i~255中选j</span>
+            <span class="hljs-keyword">int</span> j = rand.nextInt(<span class="hljs-number">256</span> - i) + i;
+            <span class="hljs-comment">// 把i和j交换</span>
+            <span class="hljs-keyword">int</span> t = <span class="hljs-keyword">this</span>.permutations[i];
+            <span class="hljs-keyword">this</span>.permutations[i] = <span class="hljs-keyword">this</span>.permutations[j];
+            <span class="hljs-keyword">this</span>.permutations[j] = t;
+            <span class="hljs-comment">// 形成一个周期</span>
+            <span class="hljs-keyword">this</span>.permutations[i + <span class="hljs-number">256</span>] = <span class="hljs-keyword">this</span>.permutations[i];
+        }
+    }
+
+    <span class="hljs-comment">// 在a与b间线性插值</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> <span class="hljs-title">lerp</span><span class="hljs-params">(<span class="hljs-keyword">double</span> t, <span class="hljs-keyword">double</span> a, <span class="hljs-keyword">double</span> b)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> a + t * (b - a);
+    }
+
+    <span class="hljs-comment">// 返回与二维梯度向量点乘的结果，参数：梯度向量索引, 向量（其实就是权重）</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> <span class="hljs-title">func_76309_a</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index, <span class="hljs-keyword">double</span> xWeight, <span class="hljs-keyword">double</span> zWeight)</span>
+    </span>{
+        <span class="hljs-keyword">int</span> i = index % <span class="hljs-number">16</span>;
+        <span class="hljs-keyword">return</span>   field_152384_h[i] * xWeight
+               + field_152385_i[i] * zWeight;
+    }
+
+    <span class="hljs-comment">/**
+     * pars: noiseArray , xOffset , yOffset , zOffset , xSize , ySize , zSize , xScale, yScale , zScale , noiseScale.
+     * noiseArray should be xSize*ySize*zSize in size
+     */</span>
+    <span class="hljs-comment">// 这个noiseScale和振幅成反比...</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">populateNoiseArray</span><span class="hljs-params">(<span class="hljs-keyword">double</span>[] result, <span class="hljs-keyword">double</span> xOffset, <span class="hljs-keyword">double</span> yOffset, <span class="hljs-keyword">double</span> zOffset, <span class="hljs-keyword">int</span> xSize, <span class="hljs-keyword">int</span> ySize, <span class="hljs-keyword">int</span> zSize, <span class="hljs-keyword">double</span> xScale, <span class="hljs-keyword">double</span> yScale, <span class="hljs-keyword">double</span> zScale, <span class="hljs-keyword">double</span> noiseScale)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (ySize == <span class="hljs-number">1</span>) <span class="hljs-comment">// 二维</span>
+        {
+            <span class="hljs-keyword">int</span> resultIndex = <span class="hljs-number">0</span>;
+            <span class="hljs-comment">// 结果缩放系数，和noiseScale成反比</span>
+            <span class="hljs-keyword">double</span> noiseRatio = <span class="hljs-number">1.0</span>D / noiseScale;
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> _x = <span class="hljs-number">0</span>; _x &lt; xSize; ++_x)
+            {
+                <span class="hljs-comment">// 经过偏移和缩放的x</span>
+                <span class="hljs-keyword">double</span> x = xOffset + (<span class="hljs-keyword">double</span>)_x * xScale + <span class="hljs-keyword">this</span>.xCoord;
+                <span class="hljs-comment">// 不大于x的最大整数</span>
+                <span class="hljs-keyword">int</span> xFloor = (<span class="hljs-keyword">int</span>)x;
+                <span class="hljs-keyword">if</span> (x &lt; (<span class="hljs-keyword">double</span>)xFloor)
+                {
+                    --xFloor;
+                }
+
+                <span class="hljs-keyword">int</span> xIndex = xFloor % <span class="hljs-number">256</span>;
+                <span class="hljs-comment">// 此时x为晶格内的坐标[0, 1)</span>
+                x = x - (<span class="hljs-keyword">double</span>)xFloor;
+                <span class="hljs-comment">// 缓和曲线s(t) = 6t^5 - 15t^4 + 10t^3</span>
+                <span class="hljs-keyword">double</span> sx = x * x * x * (x * (x * <span class="hljs-number">6.0</span>D - <span class="hljs-number">15.0</span>D) + <span class="hljs-number">10.0</span>D);
+
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> _z = <span class="hljs-number">0</span>; _z &lt; zSize; ++_z)
+                {
+                    <span class="hljs-comment">// 经过偏移和缩放的z</span>
+                    <span class="hljs-keyword">double</span> z = zOffset + (<span class="hljs-keyword">double</span>)_z * zScale + <span class="hljs-keyword">this</span>.zCoord;
+                    <span class="hljs-comment">// 不大于z的最大整数</span>
+                    <span class="hljs-keyword">int</span> zFloor = (<span class="hljs-keyword">int</span>)z;
+                    <span class="hljs-keyword">if</span> (z &lt; (<span class="hljs-keyword">double</span>)zFloor)
+                    {
+                        --zFloor;
+                    }
+
+                    <span class="hljs-keyword">int</span> zIndex = zFloor % <span class="hljs-number">256</span>;
+                    <span class="hljs-comment">// 此时z为晶格内的坐标[0, 1)</span>
+                    z = z - (<span class="hljs-keyword">double</span>)zFloor;
+                    <span class="hljs-comment">// 缓和曲线s(t) = 6t^5 - 15t^4 + 10t^3</span>
+                    <span class="hljs-keyword">double</span> sz = z * z * z * (z * (z * <span class="hljs-number">6.0</span>D - <span class="hljs-number">15.0</span>D) + <span class="hljs-number">10.0</span>D);
+
+                    <span class="hljs-comment">// 取梯度向量G=G[(i+P[j])mod n]</span>
+                    <span class="hljs-comment">// 左上角梯度向量索引</span>
+                    <span class="hljs-keyword">int</span> vecIndex1 = <span class="hljs-keyword">this</span>.permutations[<span class="hljs-keyword">this</span>.permutations[xIndex]] + zIndex;
+                    <span class="hljs-comment">// 右上角梯度向量索引</span>
+                    <span class="hljs-keyword">int</span> vecIndex2 = <span class="hljs-keyword">this</span>.permutations[<span class="hljs-keyword">this</span>.permutations[xIndex + <span class="hljs-number">1</span>]] + zIndex;
+
+                    <span class="hljs-comment">// x方向上点乘（加权），结果用缓和曲线插值</span>
+                    <span class="hljs-keyword">double</span> xRes1 = <span class="hljs-keyword">this</span>.lerp(sx,
+                                             <span class="hljs-keyword">this</span>.func_76309_a(<span class="hljs-keyword">this</span>.permutations[vecIndex1],          x ,       z),
+                                             <span class="hljs-keyword">this</span>.grad(        <span class="hljs-keyword">this</span>.permutations[vecIndex2], -(<span class="hljs-number">1.0</span>D - x), <span class="hljs-number">0.0</span>D, z));
+                    <span class="hljs-keyword">double</span> xRes2 = <span class="hljs-keyword">this</span>.lerp(sx,
+                                             <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[vecIndex1 + <span class="hljs-number">1</span>],          x , <span class="hljs-number">0.0</span>D, -(<span class="hljs-number">1.0</span>D - z)),
+                                             <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[vecIndex2 + <span class="hljs-number">1</span>], -(<span class="hljs-number">1.0</span>D - x), <span class="hljs-number">0.0</span>D, -(<span class="hljs-number">1.0</span>D - z)));
+                    <span class="hljs-comment">// 两个x方向的结果在z方向用缓和曲线插值</span>
+                    <span class="hljs-keyword">double</span> res = <span class="hljs-keyword">this</span>.lerp(sz, xRes1, xRes2);
+
+                    result[resultIndex++] += res * noiseRatio;
+                }
+            }
+        }
+        <span class="hljs-keyword">else</span> <span class="hljs-comment">// 三维，参考上面，懒得写注释和反混淆了...</span>
+        {
+            <span class="hljs-keyword">int</span> resultIndex = <span class="hljs-number">0</span>;
+            <span class="hljs-keyword">double</span> noiseRatio = <span class="hljs-number">1.0</span>D / noiseScale;
+            <span class="hljs-keyword">int</span> lastYIndex = -<span class="hljs-number">1</span>;
+
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> _x = <span class="hljs-number">0</span>; _x &lt; xSize; ++_x)
+            {
+                <span class="hljs-keyword">double</span> x = xOffset + (<span class="hljs-keyword">double</span>)_x * xScale + <span class="hljs-keyword">this</span>.xCoord;
+                <span class="hljs-keyword">int</span> xFloor = (<span class="hljs-keyword">int</span>)x;
+
+                <span class="hljs-keyword">if</span> (x &lt; (<span class="hljs-keyword">double</span>)xFloor)
+                {
+                    --xFloor;
+                }
+
+                <span class="hljs-keyword">int</span> xIndex = xFloor % <span class="hljs-number">256</span>;
+                x = x - (<span class="hljs-keyword">double</span>)xFloor;
+                <span class="hljs-keyword">double</span> sx = x * x * x * (x * (x * <span class="hljs-number">6.0</span>D - <span class="hljs-number">15.0</span>D) + <span class="hljs-number">10.0</span>D);
+
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> _z = <span class="hljs-number">0</span>; _z &lt; zSize; ++_z)
+                {
+                    <span class="hljs-keyword">double</span> z = zOffset + (<span class="hljs-keyword">double</span>)_z * zScale + <span class="hljs-keyword">this</span>.zCoord;
+                    <span class="hljs-keyword">int</span> zFloor = (<span class="hljs-keyword">int</span>)z;
+
+                    <span class="hljs-keyword">if</span> (z &lt; (<span class="hljs-keyword">double</span>)zFloor)
+                    {
+                        --zFloor;
+                    }
+
+                    <span class="hljs-keyword">int</span> zIndex = zFloor % <span class="hljs-number">256</span>;
+                    z = z - (<span class="hljs-keyword">double</span>)zFloor;
+                    <span class="hljs-keyword">double</span> sz = z * z * z * (z * (z * <span class="hljs-number">6.0</span>D - <span class="hljs-number">15.0</span>D) + <span class="hljs-number">10.0</span>D);
+
+                    <span class="hljs-keyword">double</span> xRes1, xRes2, xRes3, xRes4;
+
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> _y = <span class="hljs-number">0</span>; _y &lt; ySize; ++_y)
+                    {
+                        <span class="hljs-keyword">double</span> y = yOffset + (<span class="hljs-keyword">double</span>)_y * yScale + <span class="hljs-keyword">this</span>.yCoord;
+                        <span class="hljs-keyword">int</span> yFloor = (<span class="hljs-keyword">int</span>)y;
+
+                        <span class="hljs-keyword">if</span> (y &lt; (<span class="hljs-keyword">double</span>)yFloor)
+                        {
+                            --yFloor;
+                        }
+
+                        <span class="hljs-keyword">int</span> yIndex = yFloor % <span class="hljs-number">256</span>;
+                        y = y - (<span class="hljs-keyword">double</span>)yFloor;
+                        <span class="hljs-keyword">double</span> sy = y * y * y * (y * (y * <span class="hljs-number">6.0</span>D - <span class="hljs-number">15.0</span>D) + <span class="hljs-number">10.0</span>D);
+
+                        <span class="hljs-keyword">if</span> (_y == <span class="hljs-number">0</span> || yIndex != lastYIndex)
+                        {
+                            lastYIndex = yIndex;
+                            <span class="hljs-keyword">int</span> l = <span class="hljs-keyword">this</span>.permutations[xIndex] + yIndex;
+                            <span class="hljs-keyword">int</span> i1 = <span class="hljs-keyword">this</span>.permutations[l] + zIndex;
+                            <span class="hljs-keyword">int</span> j1 = <span class="hljs-keyword">this</span>.permutations[l + <span class="hljs-number">1</span>] + zIndex;
+                            <span class="hljs-keyword">int</span> k1 = <span class="hljs-keyword">this</span>.permutations[xIndex + <span class="hljs-number">1</span>] + yIndex;
+                            <span class="hljs-keyword">int</span> l1 = <span class="hljs-keyword">this</span>.permutations[k1] + zIndex;
+                            <span class="hljs-keyword">int</span> i2 = <span class="hljs-keyword">this</span>.permutations[k1 + <span class="hljs-number">1</span>] + zIndex;
+                            xRes1 = <span class="hljs-keyword">this</span>.lerp(sx, <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[i1], x, y, z), <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[l1], x - <span class="hljs-number">1.0</span>D, y, z));
+                            xRes2 = <span class="hljs-keyword">this</span>.lerp(sx, <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[j1], x, y - <span class="hljs-number">1.0</span>D, z), <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[i2], x - <span class="hljs-number">1.0</span>D, y - <span class="hljs-number">1.0</span>D, z));
+                            xRes3 = <span class="hljs-keyword">this</span>.lerp(sx, <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[i1 + <span class="hljs-number">1</span>], x, y, z - <span class="hljs-number">1.0</span>D), <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[l1 + <span class="hljs-number">1</span>], x - <span class="hljs-number">1.0</span>D, y, z - <span class="hljs-number">1.0</span>D));
+                            xRes4 = <span class="hljs-keyword">this</span>.lerp(sx, <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[j1 + <span class="hljs-number">1</span>], x, y - <span class="hljs-number">1.0</span>D, z - <span class="hljs-number">1.0</span>D), <span class="hljs-keyword">this</span>.grad(<span class="hljs-keyword">this</span>.permutations[i2 + <span class="hljs-number">1</span>], x - <span class="hljs-number">1.0</span>D, y - <span class="hljs-number">1.0</span>D, z - <span class="hljs-number">1.0</span>D));
+                        }
+
+                        <span class="hljs-keyword">double</span> yRes1 = <span class="hljs-keyword">this</span>.lerp(sy, xRes1, xRes2);
+                        <span class="hljs-keyword">double</span> yRes2 = <span class="hljs-keyword">this</span>.lerp(sy, xRes3, xRes4);
+                        <span class="hljs-keyword">double</span> res = <span class="hljs-keyword">this</span>.lerp(sz, yRes1, yRes2);
+
+                        result[resultIndex++] += res * noiseRatio;
+                    }
+                }
+            }
+        }
+    }
+}</code></pre><p>以上内容来自: <a href="https://blog.csdn.net/xfgryujk/article/details/64133242">CSDN博客</a></p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="content_border_bottom">
+                    <div class="content_border_leftbottom"></div>
+                    <div class="content_border_centerbottom"></div>
+                    <div class="content_border_rightbottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

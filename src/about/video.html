@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include("include/article_head.html", {"title": "关于我们 - 小组视频", "root": ".."})
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    @@include("include/nav.html", {"active": "about"})
+
+    <div class="video_wrapper">
+        <div class="video">
+            <video width="680" height="512" controls="controls" poster="./img/slide1.jpg" preload>
+                <source src="./video/Badcamp_introduce.mp4" type="video/mp4" />
+            </video>
+        </div>
+    </div>
+
+    <style>
+        /*背景图片*/
+
+        body {
+            background: url(./img/bg2.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</body>
+
+</html>

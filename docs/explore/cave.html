@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base href="..">
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>深入探索 - 洞穴</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/article.js"></script>
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/article.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <!-- 图标 -->
+        <div class="navbar-header">
+            <a href="./index.html">
+                <img src="./img/logo.png" class="logo" alt="首页">
+            </a>
+        </div>
+        <!-- 导航目录 -->
+        <div>
+            <ul class="nav navbar-nav">
+                <li id="index"><a href="./index.html">首页</a></li>
+                <li id="introduce" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        游戏介绍
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./introduce/bcground.html" >游戏背景</a></li>
+                        <li><a href="./introduce/experience.html" >游戏历程</a></li>
+                        <li><a href="./introduce/major.html" >NPC</a></li>
+                        <li><a href="./introduce/map.html" >场景地图</a></li>
+                        <li><a href="./introduce/honor.html" >历史荣耀</a></li>
+                        <li><a href="./introduce/system.html" >特色系统</a></li>
+                        <li><a href="./introduce/congigure.html" >系统配置</a></li>
+                    </ul>
+                </li>
+                <li id="explore" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        深入探索
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./explore/world.html">世界生成</a></li>
+						<li><a href="./explore/ecosystem.html">生物群系</a></li>
+						<li><a href="./explore/noise.html">噪声函数</a></li>
+						<li><a href="./explore/terrain.html">基本地形</a></li>
+						<li><a href="./explore/cave.html">洞穴</a></li>
+						<li><a href="./explore/explode.html">爆炸算法</a></li>
+                    </ul>
+                </li>
+                <li id="strategy"><a href="./strategy.html">游戏攻略</a></li>
+                <li id="about" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        关于我们
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./about/video.html">小组视频</a></li>
+                        <li><a href="./about/about.html">我们的话</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $('#explore').addClass('active')
+    </script>
+</nav>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar">
+                <ul>
+<li><a href="#%E6%B4%9E%E7%A9%B4">1. 洞穴</a></li><ul>
+<li><a href="#%E7%94%9F%E6%88%90%E6%B4%9E%E7%A9%B4">1.1. 生成洞穴</a></li>
+</ul>
+</ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="content_border">
+                <div class="content_border_top">
+                    <div class="content_border_lefttop"></div>
+                    <div class="content_border_centertop"></div>
+                    <div class="content_border_righttop"></div>
+                </div>
+                <div class="content_border_left">
+                    <div class="content_border_right">
+                        <div class="content">
+                            <h1 id="%E6%B4%9E%E7%A9%B4"><a href="#%E6%B4%9E%E7%A9%B4" class="anchor"></a>洞穴</h1><p>有了地形接下来该生成结构和建筑了，由于这部分代码很长，本篇只研究生成洞穴</p>
+<p>完整的provideChunk：</p>
+<pre><code class="hljs java">
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Chunk <span class="hljs-title">provideChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.rand.setSeed((<span class="hljs-keyword">long</span>)x * <span class="hljs-number">341873128712L</span> + (<span class="hljs-keyword">long</span>)z * <span class="hljs-number">132897987541L</span>);
+        ChunkPrimer chunkprimer = <span class="hljs-keyword">new</span> ChunkPrimer();
+        <span class="hljs-comment">// 生成基本地形（没有洞穴等建筑）</span>
+        <span class="hljs-keyword">this</span>.setBlocksInChunk(x, z, chunkprimer);
+        <span class="hljs-comment">// 生成16*16的生物群系数组</span>
+        <span class="hljs-keyword">this</span>.biomesForGeneration = <span class="hljs-keyword">this</span>.worldObj.getWorldChunkManager().loadBlockGeneratorData(<span class="hljs-keyword">this</span>.biomesForGeneration, x * <span class="hljs-number">16</span>, z * <span class="hljs-number">16</span>, <span class="hljs-number">16</span>, <span class="hljs-number">16</span>);
+        <span class="hljs-comment">// 把石头替换成生物群系相应的方块</span>
+        <span class="hljs-keyword">this</span>.replaceBlocksForBiome(x, z, chunkprimer, <span class="hljs-keyword">this</span>.biomesForGeneration);
+
+        <span class="hljs-comment">// 生成洞穴、村庄、要塞等结构和建筑</span>
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useCaves)
+        {
+            <span class="hljs-keyword">this</span>.caveGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useRavines)
+        {
+            <span class="hljs-keyword">this</span>.ravineGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useMineShafts &amp;&amp; <span class="hljs-keyword">this</span>.mapFeaturesEnabled)
+        {
+            <span class="hljs-keyword">this</span>.mineshaftGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useVillages &amp;&amp; <span class="hljs-keyword">this</span>.mapFeaturesEnabled)
+        {
+            <span class="hljs-keyword">this</span>.villageGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useStrongholds &amp;&amp; <span class="hljs-keyword">this</span>.mapFeaturesEnabled)
+        {
+            <span class="hljs-keyword">this</span>.strongholdGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useTemples &amp;&amp; <span class="hljs-keyword">this</span>.mapFeaturesEnabled)
+        {
+            <span class="hljs-keyword">this</span>.scatteredFeatureGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.settings.useMonuments &amp;&amp; <span class="hljs-keyword">this</span>.mapFeaturesEnabled)
+        {
+            <span class="hljs-keyword">this</span>.oceanMonumentGenerator.generate(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>.worldObj, x, z, chunkprimer);
+        }
+
+        <span class="hljs-comment">// 转为Chunk对象</span>
+        Chunk chunk = <span class="hljs-keyword">new</span> Chunk(<span class="hljs-keyword">this</span>.worldObj, chunkprimer, x, z);
+        <span class="hljs-keyword">byte</span>[] abyte = chunk.getBiomeArray();
+
+        <span class="hljs-comment">// 设置生物群系ID</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; abyte.length; ++i)
+        {
+            abyte[i] = (<span class="hljs-keyword">byte</span>)<span class="hljs-keyword">this</span>.biomesForGeneration[i].biomeID;
+        }
+
+        <span class="hljs-comment">// 生成光照图，这里不讨论</span>
+        chunk.generateSkylightMap();
+        <span class="hljs-keyword">return</span> chunk;
+    }</code></pre><h2 id="%E7%94%9F%E6%88%90%E6%B4%9E%E7%A9%B4"><a href="#%E7%94%9F%E6%88%90%E6%B4%9E%E7%A9%B4" class="anchor"></a>生成洞穴</h2><p>类名<code>net.minecraft.world.gen.MapGenBase</code></p>
+<pre><code class="hljs java">
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">generate</span><span class="hljs-params">(IChunkProvider chunkProviderIn, World worldIn, <span class="hljs-keyword">int</span> chunkX, <span class="hljs-keyword">int</span> chunkZ, ChunkPrimer chunkPrimerIn)</span>
+    </span>{
+        <span class="hljs-keyword">int</span> range = <span class="hljs-keyword">this</span>.range;
+        <span class="hljs-keyword">this</span>.worldObj = worldIn;
+        <span class="hljs-keyword">this</span>.rand.setSeed(worldIn.getSeed());
+        <span class="hljs-keyword">long</span> rand1 = <span class="hljs-keyword">this</span>.rand.nextLong();
+        <span class="hljs-keyword">long</span> rand2 = <span class="hljs-keyword">this</span>.rand.nextLong();
+
+        <span class="hljs-comment">// 遍历周围(range*2+1)*(range*2+1)的区块，默认range=8</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = chunkX - range; x &lt;= chunkX + range; ++x)
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z = chunkZ - range; z &lt;= chunkZ + range; ++z)
+            {
+                <span class="hljs-keyword">long</span> j1 = (<span class="hljs-keyword">long</span>)x * rand1;
+                <span class="hljs-keyword">long</span> k1 = (<span class="hljs-keyword">long</span>)z * rand2;
+                <span class="hljs-keyword">this</span>.rand.setSeed(j1 ^ k1 ^ worldIn.getSeed());
+                <span class="hljs-comment">// 这个由子类实现</span>
+                <span class="hljs-keyword">this</span>.recursiveGenerate(worldIn, x, z, chunkX, chunkZ, chunkPrimerIn);
+            }
+        }
+    }</code></pre><p>类名<code>net.minecraft.world.gen.MapGenCaves</code></p>
+<pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MapGenCaves</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MapGenBase</span>
+</span>{
+    <span class="hljs-comment">// 挖洞，默认参数</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func_180703_a</span><span class="hljs-params">(<span class="hljs-keyword">long</span> seed, <span class="hljs-keyword">int</span> centerChunkX, <span class="hljs-keyword">int</span> centerChunkZ, ChunkPrimer chunkPrimer, <span class="hljs-keyword">double</span> seedPointX, <span class="hljs-keyword">double</span> seedPointY, <span class="hljs-keyword">double</span> seedPointZ)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>.func_180702_a(seed, centerChunkX, centerChunkZ, chunkPrimer, seedPointX, seedPointY, seedPointZ, <span class="hljs-number">1.0F</span> + <span class="hljs-keyword">this</span>.rand.nextFloat() * <span class="hljs-number">6.0F</span>, <span class="hljs-number">0.0F</span>, <span class="hljs-number">0.0F</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>D);
+    }
+
+    <span class="hljs-comment">// 挖洞</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">func_180702_a</span><span class="hljs-params">(<span class="hljs-keyword">long</span> seed, <span class="hljs-keyword">int</span> centerChunkX, <span class="hljs-keyword">int</span> centerChunkZ, ChunkPrimer chunkPrimer, <span class="hljs-keyword">double</span> seedPointX, <span class="hljs-keyword">double</span> seedPointY, <span class="hljs-keyword">double</span> seedPointZ, <span class="hljs-keyword">float</span> rangeScale, <span class="hljs-keyword">float</span> yawAngle, <span class="hljs-keyword">float</span> pitchAngle, <span class="hljs-keyword">int</span> smallRange, <span class="hljs-keyword">int</span> bigRange, <span class="hljs-keyword">double</span> heightScale)</span>
+    </span>{
+        <span class="hljs-keyword">double</span> centerBlockX = (<span class="hljs-keyword">double</span>)(centerChunkX * <span class="hljs-number">16</span> + <span class="hljs-number">8</span>);
+        <span class="hljs-keyword">double</span> centerBlockZ = (<span class="hljs-keyword">double</span>)(centerChunkZ * <span class="hljs-number">16</span> + <span class="hljs-number">8</span>);
+        <span class="hljs-keyword">float</span> yawAngleOffset = <span class="hljs-number">0.0F</span>;
+        <span class="hljs-keyword">float</span> pitchAngleOffset = <span class="hljs-number">0.0F</span>;
+        Random random = <span class="hljs-keyword">new</span> Random(seed);
+
+        <span class="hljs-keyword">if</span> (bigRange &lt;= <span class="hljs-number">0</span>)
+        {
+            <span class="hljs-keyword">int</span> tmp = (range - <span class="hljs-number">1</span>) * <span class="hljs-number">16</span>;
+            bigRange = tmp - random.nextInt(tmp / <span class="hljs-number">4</span>);
+        }
+
+        <span class="hljs-keyword">boolean</span> smallRangeIsNull = <span class="hljs-keyword">false</span>;
+
+        <span class="hljs-keyword">if</span> (smallRange == -<span class="hljs-number">1</span>)
+        {
+            smallRange = bigRange / <span class="hljs-number">2</span>;
+            smallRangeIsNull = <span class="hljs-keyword">true</span>;
+        }
+
+        <span class="hljs-comment">// 可能的扩展点</span>
+        <span class="hljs-keyword">int</span> keyPoint = random.nextInt(bigRange / <span class="hljs-number">2</span>) + bigRange / <span class="hljs-number">4</span>;
+
+        <span class="hljs-keyword">boolean</span> flag = random.nextInt(<span class="hljs-number">6</span>) == <span class="hljs-number">0</span>;
+        <span class="hljs-comment">// 循环挖出一条道路</span>
+        <span class="hljs-keyword">for</span> (; smallRange &lt; bigRange; ++smallRange)
+        {
+            <span class="hljs-comment">// 用sin从1到0过渡</span>
+            <span class="hljs-keyword">double</span> xzRange = <span class="hljs-number">1.5</span>D + (<span class="hljs-keyword">double</span>)(MathHelper.sin((<span class="hljs-keyword">float</span>)smallRange * (<span class="hljs-keyword">float</span>)Math.PI / (<span class="hljs-keyword">float</span>)bigRange) * rangeScale);
+            <span class="hljs-keyword">double</span> yRange = xzRange * heightScale;
+            <span class="hljs-comment">// 向yawAngle、pitchAngle方向偏移一个单位</span>
+            <span class="hljs-keyword">float</span> cos = MathHelper.cos(pitchAngle);
+            <span class="hljs-keyword">float</span> sin = MathHelper.sin(pitchAngle);
+            seedPointX += (<span class="hljs-keyword">double</span>)(MathHelper.cos(yawAngle) * cos);
+            seedPointY += (<span class="hljs-keyword">double</span>)sin;
+            seedPointZ += (<span class="hljs-keyword">double</span>)(MathHelper.sin(yawAngle) * cos);
+
+            <span class="hljs-keyword">if</span> (flag) <span class="hljs-comment">// 1/6概率俯仰角衰减较慢</span>
+            {
+                pitchAngle *= <span class="hljs-number">0.92F</span>;
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                pitchAngle *= <span class="hljs-number">0.7F</span>;
+            }
+
+            pitchAngle += pitchAngleOffset * <span class="hljs-number">0.1F</span>;
+            yawAngle   += yawAngleOffset * <span class="hljs-number">0.1F</span>;
+            pitchAngleOffset *= <span class="hljs-number">0.9F</span>;
+            yawAngleOffset   *= <span class="hljs-number">0.75F</span>;
+            pitchAngleOffset += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * <span class="hljs-number">2.0F</span>;
+            yawAngleOffset   += (random.nextFloat() - random.nextFloat()) * random.nextFloat() * <span class="hljs-number">4.0F</span>;
+
+            <span class="hljs-keyword">if</span> (   !smallRangeIsNull
+                &amp;&amp; smallRange == keyPoint
+                &amp;&amp; rangeScale &gt; <span class="hljs-number">1.0F</span>
+                &amp;&amp; bigRange &gt; <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-comment">// 向左右两边扩展</span>
+                <span class="hljs-keyword">this</span>.func_180702_a(random.nextLong(), centerChunkX, centerChunkZ, chunkPrimer, seedPointX, seedPointY, seedPointZ, random.nextFloat() * <span class="hljs-number">0.5F</span> + <span class="hljs-number">0.5F</span>, yawAngle - ((<span class="hljs-keyword">float</span>)Math.PI / <span class="hljs-number">2F</span>), pitchAngle / <span class="hljs-number">3.0F</span>, smallRange, bigRange, <span class="hljs-number">1.0</span>D);
+                <span class="hljs-keyword">this</span>.func_180702_a(random.nextLong(), centerChunkX, centerChunkZ, chunkPrimer, seedPointX, seedPointY, seedPointZ, random.nextFloat() * <span class="hljs-number">0.5F</span> + <span class="hljs-number">0.5F</span>, yawAngle + ((<span class="hljs-keyword">float</span>)Math.PI / <span class="hljs-number">2F</span>), pitchAngle / <span class="hljs-number">3.0F</span>, smallRange, bigRange, <span class="hljs-number">1.0</span>D);
+                <span class="hljs-keyword">return</span>;
+            }
+
+            <span class="hljs-keyword">if</span> (smallRangeIsNull || random.nextInt(<span class="hljs-number">4</span>) != <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-keyword">double</span> _xDist = seedPointX - centerBlockX;
+                <span class="hljs-keyword">double</span> _zDist = seedPointZ - centerBlockZ;
+                <span class="hljs-keyword">double</span> restRange = (<span class="hljs-keyword">double</span>)(bigRange - smallRange);
+                <span class="hljs-keyword">double</span> range = (<span class="hljs-keyword">double</span>)(rangeScale + <span class="hljs-number">2.0F</span> + <span class="hljs-number">16.0F</span>);
+
+                <span class="hljs-keyword">if</span> (_xDist * _xDist + _zDist * _zDist - restRange * restRange &gt; range * range)
+                {
+                    <span class="hljs-keyword">return</span>;
+                }
+
+                <span class="hljs-comment">// 种子点在中心方块附近（不在的话说明不在这个区块内不用管）</span>
+                <span class="hljs-keyword">if</span> (   seedPointX &gt;= centerBlockX - <span class="hljs-number">16.0</span>D - xzRange * <span class="hljs-number">2.0</span>D
+                    &amp;&amp; seedPointZ &gt;= centerBlockZ - <span class="hljs-number">16.0</span>D - xzRange * <span class="hljs-number">2.0</span>D
+                    &amp;&amp; seedPointX &lt;= centerBlockX + <span class="hljs-number">16.0</span>D + xzRange * <span class="hljs-number">2.0</span>D
+                    &amp;&amp; seedPointZ &lt;= centerBlockZ + <span class="hljs-number">16.0</span>D + xzRange * <span class="hljs-number">2.0</span>D)
+                {
+                    <span class="hljs-keyword">int</span> startX = MathHelper.floor_double(seedPointX - xzRange) - centerChunkX * <span class="hljs-number">16</span> - <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">int</span> endX   = MathHelper.floor_double(seedPointX + xzRange) - centerChunkX * <span class="hljs-number">16</span> + <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">int</span> endY   = MathHelper.floor_double(seedPointY - yRange) - <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">int</span> startY = MathHelper.floor_double(seedPointY + yRange) + <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">int</span> startZ = MathHelper.floor_double(seedPointZ - xzRange) - centerChunkZ * <span class="hljs-number">16</span> - <span class="hljs-number">1</span>;
+                    <span class="hljs-keyword">int</span> endZ   = MathHelper.floor_double(seedPointZ + xzRange) - centerChunkZ * <span class="hljs-number">16</span> + <span class="hljs-number">1</span>;
+
+                    <span class="hljs-comment">// 限制坐标范围</span>
+
+                    <span class="hljs-keyword">if</span> (startX &lt; <span class="hljs-number">0</span>)
+                    {
+                        startX = <span class="hljs-number">0</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span> (endX &gt; <span class="hljs-number">16</span>)
+                    {
+                        endX = <span class="hljs-number">16</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span> (endY &lt; <span class="hljs-number">1</span>)
+                    {
+                        endY = <span class="hljs-number">1</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span> (startY &gt; <span class="hljs-number">248</span>)
+                    {
+                        startY = <span class="hljs-number">248</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span> (startZ &lt; <span class="hljs-number">0</span>)
+                    {
+                        startZ = <span class="hljs-number">0</span>;
+                    }
+
+                    <span class="hljs-keyword">if</span> (endZ &gt; <span class="hljs-number">16</span>)
+                    {
+                        endZ = <span class="hljs-number">16</span>;
+                    }
+
+                    <span class="hljs-comment">// 判断是不是海洋，如果在海洋则不生成洞穴</span>
+
+                    <span class="hljs-keyword">boolean</span> isOcean = <span class="hljs-keyword">false</span>;
+
+                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = startX; !isOcean &amp;&amp; x &lt; endX; ++x)
+                    {
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z = startZ; !isOcean &amp;&amp; z &lt; endZ; ++z)
+                        {
+                            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> y = startY + <span class="hljs-number">1</span>; !isOcean &amp;&amp; y &gt;= endY - <span class="hljs-number">1</span>; --y)
+                            {
+                                <span class="hljs-keyword">if</span> (y &gt;= <span class="hljs-number">0</span> &amp;&amp; y &lt; <span class="hljs-number">256</span>)
+                                {
+                                    <span class="hljs-keyword">if</span> (isOceanBlock(chunkPrimer, x, y, z, centerChunkX, centerChunkZ))
+                                    {
+                                        isOcean = <span class="hljs-keyword">true</span>;
+                                    }
+
+                                    <span class="hljs-comment">// 只判断边界</span>
+                                    <span class="hljs-keyword">if</span> (   y != endY - <span class="hljs-number">1</span>
+                                        &amp;&amp; x != startX
+                                        &amp;&amp; x != endX - <span class="hljs-number">1</span>
+                                        &amp;&amp; z != startZ
+                                        &amp;&amp; z != endZ - <span class="hljs-number">1</span>)
+                                    {
+                                        y = endY;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    <span class="hljs-keyword">if</span> (!isOcean)
+                    {
+                        <span class="hljs-comment">// 挖掉一个椭球内的方块</span>
+                        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = startX; x &lt; endX; ++x)
+                        {
+                            <span class="hljs-comment">// （归一化的距离）</span>
+                            <span class="hljs-keyword">double</span> xDist = ((<span class="hljs-keyword">double</span>)(x + centerChunkX * <span class="hljs-number">16</span>) + <span class="hljs-number">0.5</span>D - seedPointX) / xzRange;
+
+                            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> z = startZ; z &lt; endZ; ++z)
+                            {
+                                <span class="hljs-keyword">double</span> zDist = ((<span class="hljs-keyword">double</span>)(z + centerChunkZ * <span class="hljs-number">16</span>) + <span class="hljs-number">0.5</span>D - seedPointZ) / xzRange;
+                                <span class="hljs-keyword">boolean</span> _isTopBlock = <span class="hljs-keyword">false</span>;
+
+                                <span class="hljs-comment">// 平面上平方距离&lt;1</span>
+                                <span class="hljs-keyword">if</span> (xDist * xDist + zDist * zDist &lt; <span class="hljs-number">1.0</span>D)
+                                {
+                                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> y = startY; y &gt; endY; --y)
+                                    {
+                                        <span class="hljs-keyword">double</span> yDist = ((<span class="hljs-keyword">double</span>)(y - <span class="hljs-number">1</span>) + <span class="hljs-number">0.5</span>D - seedPointY) / yRange;
+
+                                        <span class="hljs-comment">// 空间平方距离&lt;1</span>
+                                        <span class="hljs-keyword">if</span> (yDist &gt; -<span class="hljs-number">0.7</span>D &amp;&amp; xDist * xDist + yDist * yDist + zDist * zDist &lt; <span class="hljs-number">1.0</span>D)
+                                        {
+                                            IBlockState curBlock = chunkPrimer.getBlockState(x, y, z);
+                                            IBlockState upBlock = (IBlockState)Objects.firstNonNull(chunkPrimer.getBlockState(x, y + <span class="hljs-number">1</span>, z), Blocks.air.getDefaultState());
+
+                                            <span class="hljs-keyword">if</span> (isTopBlock(chunkPrimer, x, y, z, centerChunkX, centerChunkZ))
+                                            {
+                                                _isTopBlock = <span class="hljs-keyword">true</span>;
+                                            }
+
+                                            <span class="hljs-comment">// 把这个方块替换为空气或岩浆</span>
+                                            digBlock(chunkPrimer, x, y, z, centerChunkX, centerChunkZ, _isTopBlock, curBlock, upBlock);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        <span class="hljs-keyword">if</span> (smallRangeIsNull)
+                        {
+                            <span class="hljs-keyword">break</span>;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    <span class="hljs-comment">// 判断是否可以挖开这个方块</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">func_175793_a</span><span class="hljs-params">(IBlockState curBlock, IBlockState upBlock)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> curBlock.getBlock() == Blocks.stone ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.dirt ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.grass ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.hardened_clay ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.stained_hardened_clay ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.sandstone ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.red_sandstone ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.mycelium ? <span class="hljs-keyword">true</span> :
+               (curBlock.getBlock() == Blocks.snow_layer ? <span class="hljs-keyword">true</span> :
+                   (      curBlock.getBlock() == Blocks.sand
+                       || curBlock.getBlock() == Blocks.gravel)
+                   &amp;&amp; upBlock.getBlock().getMaterial() != Material.water
+               ))))))));
+    }
+
+    <span class="hljs-comment">/**
+     * Recursively called by generate()
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">recursiveGenerate</span><span class="hljs-params">(World worldIn, <span class="hljs-keyword">int</span> chunkX, <span class="hljs-keyword">int</span> chunkZ, <span class="hljs-keyword">int</span> centerChunkX, <span class="hljs-keyword">int</span> centerChunkZ, ChunkPrimer chunkPrimerIn)</span>
+    </span>{
+        <span class="hljs-comment">// 之前根据chunkXZ设置种子了</span>
+
+        <span class="hljs-keyword">int</span> seedPointCount = <span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">15</span>) + <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>);
+
+        <span class="hljs-comment">// 1/7概率不生成洞穴</span>
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">7</span>) != <span class="hljs-number">0</span>)
+        {
+            seedPointCount = <span class="hljs-number">0</span>;
+        }
+
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; seedPointCount; ++i)
+        {
+            <span class="hljs-comment">// 在chunk内y=8~127随机选种子点</span>
+            <span class="hljs-keyword">double</span> seedPointX = (<span class="hljs-keyword">double</span>)(chunkX * <span class="hljs-number">16</span> + <span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">16</span>));
+            <span class="hljs-keyword">double</span> seedPointX = (<span class="hljs-keyword">double</span>)<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">120</span>) + <span class="hljs-number">8</span>);
+            <span class="hljs-keyword">double</span> seedPointZ = (<span class="hljs-keyword">double</span>)(chunkZ * <span class="hljs-number">16</span> + <span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">16</span>));
+            <span class="hljs-keyword">int</span> directionCount = <span class="hljs-number">1</span>;
+
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">4</span>) == <span class="hljs-number">0</span>)
+            {
+                <span class="hljs-comment">// 挖洞，默认参数</span>
+                <span class="hljs-keyword">this</span>.func_180703_a(<span class="hljs-keyword">this</span>.rand.nextLong(), centerChunkX, centerChunkZ, chunkPrimerIn, seedPointX, seedPointX, seedPointZ);
+                directionCount += <span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">4</span>);
+            }
+
+            <span class="hljs-comment">// 向几个方向挖洞</span>
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; directionCount; ++j)
+            {
+                <span class="hljs-keyword">float</span> yawAngle   = <span class="hljs-keyword">this</span>.rand.nextFloat() * (<span class="hljs-keyword">float</span>)Math.PI * <span class="hljs-number">2.0F</span>;
+                <span class="hljs-keyword">float</span> pitchAngle = (<span class="hljs-keyword">this</span>.rand.nextFloat() - <span class="hljs-number">0.5F</span>) * <span class="hljs-number">2.0F</span> / <span class="hljs-number">8.0F</span>;
+                <span class="hljs-keyword">float</span> rangeScale = <span class="hljs-keyword">this</span>.rand.nextFloat() * <span class="hljs-number">2.0F</span> + <span class="hljs-keyword">this</span>.rand.nextFloat();
+
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.rand.nextInt(<span class="hljs-number">10</span>) == <span class="hljs-number">0</span>)
+                {
+                    <span class="hljs-comment">// 扩大到1~3倍</span>
+                    rangeScale *= <span class="hljs-keyword">this</span>.rand.nextFloat() * <span class="hljs-keyword">this</span>.rand.nextFloat() * <span class="hljs-number">3.0F</span> + <span class="hljs-number">1.0F</span>;
+                }
+
+                <span class="hljs-keyword">this</span>.func_180702_a(<span class="hljs-keyword">this</span>.rand.nextLong(), centerChunkX, centerChunkZ, chunkPrimerIn, seedPointX, seedPointX, seedPointZ, rangeScale, yawAngle, pitchAngle, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1.0</span>D);
+            }
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isOceanBlock</span><span class="hljs-params">(ChunkPrimer data, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">int</span> chunkX, <span class="hljs-keyword">int</span> chunkZ)</span>
+    </span>{
+        net.minecraft.block.Block block = data.getBlockState(x, y, z).getBlock();
+        <span class="hljs-keyword">return</span> block== Blocks.flowing_water || block == Blocks.water;
+    }
+
+    <span class="hljs-comment">//Exception biomes to make sure we generate like vanilla</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isExceptionBiome</span><span class="hljs-params">(net.minecraft.world.biome.BiomeGenBase biome)</span>
+    </span>{
+        <span class="hljs-keyword">if</span> (biome == net.minecraft.world.biome.BiomeGenBase.beach) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">if</span> (biome == net.minecraft.world.biome.BiomeGenBase.desert) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;
+    }
+
+    <span class="hljs-comment">//Determine if the block at the specified location is the top block for the biome, we take into account</span>
+    <span class="hljs-comment">//Vanilla bugs to make sure that we generate the map the same way vanilla does.</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isTopBlock</span><span class="hljs-params">(ChunkPrimer data, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">int</span> chunkX, <span class="hljs-keyword">int</span> chunkZ)</span>
+    </span>{
+        net.minecraft.world.biome.BiomeGenBase biome = worldObj.getBiomeGenForCoords(<span class="hljs-keyword">new</span> BlockPos(x + chunkX * <span class="hljs-number">16</span>, <span class="hljs-number">0</span>, z + chunkZ * <span class="hljs-number">16</span>));
+        IBlockState state = data.getBlockState(x, y, z);
+        <span class="hljs-keyword">return</span> (isExceptionBiome(biome) ? state.getBlock() == Blocks.grass : state.getBlock() == biome.topBlock);
+    }
+
+    <span class="hljs-comment">/**
+     * Digs out the current block, default implementation removes stone, filler, and top block
+     * Sets the block to lava if y is less then 10, and air other wise.
+     * If setting to air, it also checks to see if we've broken the surface and if so
+     * tries to make the floor the biome's top block
+     *
+     * <span class="hljs-doctag">@param</span> data Block data array
+     * <span class="hljs-doctag">@param</span> index Pre-calculated index into block data
+     * <span class="hljs-doctag">@param</span> x local X position
+     * <span class="hljs-doctag">@param</span> y local Y position
+     * <span class="hljs-doctag">@param</span> z local Z position
+     * <span class="hljs-doctag">@param</span> chunkX Chunk X position
+     * <span class="hljs-doctag">@param</span> chunkZ Chunk Y position
+     * <span class="hljs-doctag">@param</span> foundTop True if we've encountered the biome's top block. Ideally if we've broken the surface.
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">digBlock</span><span class="hljs-params">(ChunkPrimer data, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">int</span> chunkX, <span class="hljs-keyword">int</span> chunkZ, <span class="hljs-keyword">boolean</span> foundTop, IBlockState state, IBlockState up)</span>
+    </span>{
+        net.minecraft.world.biome.BiomeGenBase biome = worldObj.getBiomeGenForCoords(<span class="hljs-keyword">new</span> BlockPos(x + chunkX * <span class="hljs-number">16</span>, <span class="hljs-number">0</span>, z + chunkZ * <span class="hljs-number">16</span>));
+        IBlockState top = biome.topBlock;
+        IBlockState filler = biome.fillerBlock;
+
+        <span class="hljs-keyword">if</span> (   <span class="hljs-keyword">this</span>.func_175793_a(state, up)
+            || state.getBlock() == top.getBlock()
+            || state.getBlock() == filler.getBlock())
+        {
+            <span class="hljs-keyword">if</span> (y &lt; <span class="hljs-number">10</span>) <span class="hljs-comment">// y&lt;10岩浆多应该是这个造成的</span>
+            {
+                <span class="hljs-comment">// 设置为岩浆</span>
+                data.setBlockState(x, y, z, Blocks.lava.getDefaultState());
+            }
+            <span class="hljs-keyword">else</span>
+            {
+                <span class="hljs-comment">// 设置为空气</span>
+                data.setBlockState(x, y, z, Blocks.air.getDefaultState());
+
+                <span class="hljs-keyword">if</span> (up.getBlock() == Blocks.sand)
+                {
+                    <span class="hljs-comment">// 如果上面的方块是沙子则替换为沙石</span>
+                    data.setBlockState(x, y + <span class="hljs-number">1</span>, z, up.getValue(BlockSand.VARIANT) == BlockSand.EnumType.RED_SAND ? Blocks.red_sandstone.getDefaultState() : Blocks.sandstone.getDefaultState());
+                }
+
+                <span class="hljs-keyword">if</span> (foundTop &amp;&amp; data.getBlockState(x, y - <span class="hljs-number">1</span>, z).getBlock() == filler.getBlock())
+                {
+                    <span class="hljs-comment">// 如果挖开了顶层方块则把下面的方块设置为顶层方块</span>
+                    data.setBlockState(x, y - <span class="hljs-number">1</span>, z, top.getBlock().getDefaultState());
+                }
+            }
+        }
+    }
+}</code></pre><p>以上内容来自: <a href="https://blog.csdn.net/xfgryujk/article/details/67638314">CSDN博客</a></p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="content_border_bottom">
+                    <div class="content_border_leftbottom"></div>
+                    <div class="content_border_centerbottom"></div>
+                    <div class="content_border_rightbottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
