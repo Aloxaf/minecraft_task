@@ -8,23 +8,7 @@
 <body>
     @@include("include/nav.html", {"active": "explore"})
 
-    <div class="content_wrapper">
-        <div class="content_border">
-            <div class="content_border_top"></div>
-            <div class="content_border_left">
-                <div class="content_border_right">
-                    <div class="content">
-                        @@include(markdown('md/explore/noise.md'))
-                        <p>以上内容来自：<a href="https://blog.csdn.net/xfgryujk/article/details/64133242">CSDN博客</a></p>
-                    </div>
-                </div>
-            </div>
-            <div class="content_border_foot"></div>
-        </div>
-        <div class="sidebar">
-            @@include(sidebar('md/explore/noise.md'))
-        </div>
-    </div>
+    @@include("include/article_body.html", {"file": "md/explore/noise.md"})
 </body>
 
 </html>
