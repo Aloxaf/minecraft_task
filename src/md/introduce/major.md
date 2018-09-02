@@ -1,5 +1,5 @@
 <div align="center" >
-<img src="/img/major.gif" width="800" >     
+<img src="./img/major.gif" width="800" >     
 </div>
 
 # NPC介绍
@@ -14,7 +14,7 @@
 
 #### 僵尸
 <div align="right" >
-<img src="/img/僵尸1.png" height="100" width="210" > 
+<img src="./img/僵尸1.png" height="100" width="210" > 
 </div>
 
 生命值 | 20（★★★★★★★★★★）
@@ -29,7 +29,7 @@
 #### 小僵尸
 
 <div align="right" >
-<img src="/img/小僵尸1.png" height="100" width="210" > 
+<img src="./img/小僵尸1.png" height="100" width="210" > 
 </div>
 
 *小僵尸（英文：Baby Zombie）看起来就像是僵尸的缩小版，高度为一格高，跑步速度比普通的僵尸还快，甚至还超越村民的速度。和僵尸一样可以穿盔甲和捡拾地上的物品，因为体型变小，速度变快，攻击难度提高了不少。*
@@ -46,7 +46,7 @@
 ### 骷髅
 
 <div align="right">
-<img src="/img/骷髅1.png" height="100" width="210">
+<img src="./img/骷髅1.png" height="100" width="210">
 </div>
 
 生命值 | 20（★★★★★★★★★★）
@@ -61,8 +61,8 @@
 ### 爬行者
 
 <figure class="half">
-    <img src="/img/paxingzhe1.png" height="100" width="210" > 
-    <img src="/img/paxingzhe2.png" height="100" width="210" > 
+    <img src="./img/paxingzhe1.png" height="100" width="210" > 
+    <img src="./img/paxingzhe2.png" height="100" width="210" > 
 </figure>
 
 
@@ -79,7 +79,7 @@
 ### 蜘蛛
 
 <div align="right">
-<img src="/img/zhizhu.png" hight="100" width="210">
+<img src="./img/zhizhu.png" hight="100" width="210">
 </div>
 
 生命值 | 16（★★★★★★★★）  
@@ -93,7 +93,7 @@
 *僵尸村民（英文：Zombie Villager）外型为一个村民穿着玩家的内衣服装但头部对比度、彩度和色相被经过调整成绿色，并另外将眼睛改成红色。*
 
 <div align="right">
-<img src="/img/zhizhu.png" hight="100" width="210">
+<img src="./img/zhizhu.png" hight="100" width="210">
 </div>
 
 生命值 | 20（★★★★★★★★★★）
@@ -108,8 +108,8 @@
 ### 鸡骑士
 
 <figure class="half">
-    <img src="/img/kaifazhe.PNG" height="100" width="210" > 
-    <img src="/img/jiqishi.png" height="100" width="210" > 
+    <img src="./img/kaifazhe.PNG" height="100" width="210" > 
+    <img src="./img/jiqishi.png" height="100" width="210" > 
 </figure>
 
 生命值 | **小僵尸:**20（★★★★★★★★★★）<br />**鸡:**4（★★）
@@ -123,7 +123,7 @@
 自然生成的史莱姆依体型大型。当大型史莱姆死亡时，会生成两只中型史莱姆，中型史莱姆死亡时，会生成四只小型史莱姆，小型史莱姆死亡时才会掉落史莱姆球。(史莱姆生成时都是朝东方的，即使把史莱姆推向其他方向，也会转回去的。) *
 
 <div align="right">
-<img src="/img/shilaimu.png" hight="100" width="210">
+<img src="./img/shilaimu.png" hight="100" width="210">
 </div>
 
 生命值 | **大:**16(★★★★★★★★)<br />**小:**4(★★)<br />**微小:**1(★)
