@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include("include/article_head.html", {"title": "游戏介绍 - NPC", "root": ".."})
+</head>
+
+<body>
+    @@include("include/nav.html", {"active": "introduce"})
+
+    @@include("include/article_body.html", {"file": "md/introduce/major.md"})
+    <style>
+            /*背景图片*/
+    
+            body {
+                background: url(img/guangtou.jpg);
+                background-size: cover;
+                background-attachment: fixed;
+            }
+        </style>
+</body>
+
+</html>

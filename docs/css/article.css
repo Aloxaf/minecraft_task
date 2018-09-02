@@ -72,3 +72,19 @@
   .content_border .content_border_right {
     background: url(../img/bg_border_right.png) right top repeat-y;
     background-size: 84px 100px; }
+
+.content h1 {
+  text-align: center;
+  background-color: #D2691E; }
+
+.content h2 {
+  text-align: center;
+  background-color: #DEB887; }
+
+.content h3 {
+  text-align: center;
+  background-color: #FFE4C4; }
+
+.content h4 {
+  text-align: center;
+  background-color: #F0FFFF; }
