@@ -1,5 +1,5 @@
 <div align="center" >
-<img src="/img/slide3.jpg" width="800" >     
+<img src="./img/slide3.jpg" width="800" >     
 </div>
 
 # 配置要求
