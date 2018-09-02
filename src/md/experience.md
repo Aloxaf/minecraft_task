@@ -1,23 +1,42 @@
-# 游戏历程
-#### 2011年
-![Alt text](/img/面包面包是钞票.png "Minecraft2011(中文版)")  
-(photo from http://www.iqiyi.com/w_19rts367rt.html)
+<div align="center" >
+<img src="/img/slide1.jpg" height="230" width="990" >  
+</div>
+<h1 align="center" style="background-color:#D2691E">游戏历程</h1>
+<h2 align="center" style="background-color:#DEB887">2011年</h1>
 Minecraft获GT年度评选年度最佳创新奖。
-#### 2016
-![Alt text](/img/mine2016.jpg "Minecraft2016")  
+<div align="right" >
+<img src="/img/面包面包是钞票.PNG" height="100" width="210" > 
+</div>
+(photo from http://www.iqiyi.com/w_19rts367rt.html)
+<h2 align="center" style="background-color:#DEB887">2016年</h1>
+网易宣布正式代理《Minecraft》中国版。
+<div align="right" >
+<img src="/img/minec2016.jpg" height="100" width="210" > 
+</div>
 (photo from https://www.wanyx.com/game/37509.html)
-网易宣布正式代理《Minecraft》中国版。 
-#### 2017年
-##### 3月
-![Alt text](/img/mine2017.jpg "minecraft2017")  
-( photo from baidu)
+ 
+<h2 align="center" style="background-color:#DEB887">2017年</h1>
+<h3 align="center" style="background-color:#FFE4C4">3月</h1>
+
 中国大陆代理商“网易”正式确定Minecraft中文名为《我的世界》。
-##### 4月7日
-![Alt text](/img/红石.jpg "minecraft2017 redstone")  
-网易在水立方举行我的世界中国版发布会，Mojang、微软和网易代表共同启动《我的世界》中的红石装置，将水立方点亮为游戏内的“草方块”。三方一同发出声明，minecraft中国版在游戏内容上与国际版保持一致，持续提供原汁原味的游戏体验。 
-##### 4月10日
-![Alt text](/img/minechina.jpg "minecraftchina")  
+<div align="right" >
+<img src="/img/mine2017.jpg" height="100" width="210" > 
+</div>
 ( photo from baidu)
+
+<h3 align="center" style="background-color:#FFE4C4">4月7日</h1>
+网易在水立方举行我的世界中国版发布会，Mojang、微软和网易代表共同启动《我的世界》中的红石装置，将水立方点亮为游戏内的“草方块”。三方一同发出声明，minecraft中国版在游戏内容上与国际版保持一致，持续提供原汁原味的游戏体验。
+<div align="right" >
+<img src="/img/红石.jpg" height="100" width="210" > 
+</div>
+
+<h3 align="center" style="background-color:#FFE4C4">4月10日</h1>
 minecraft中国版PC端开启第一轮测试，在《我的世界》中国版中，游戏第一次拥有了官方启动器。 
-##### 7月
+<div align="right" >
+<img src="/img/minechina.jpg" height="100" width="210" > 
+</div>
+( photo from baidu)
+
+<h3 align="center" style="background-color:#FFE4C4">7月</h1>
+
 minecraft中国版开启限号不删档测试。  

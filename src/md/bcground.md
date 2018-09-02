@@ -1,7 +1,9 @@
-![Alt text](/img/wdsjxb_bg1.jpg )
-![Alt text](/img/wdsjxb_bg2.jpg "photo from gamedog.cn")
-# 背景介绍
-《minecraft》（《我的世界》）是一款风靡全球的高自由度沙盒游戏，由瑞典Mojang AB和4J Studios开发。
+<div align="center" >
+<img src="/img/wdsjxb_bg1.jpg" height="110" width="990" >  
+<img src="/img/wdsjxb_bg2.jpg" height="110" width="990" >    
+</div>
+<h1 align="center" style="background-color:#D2691E">基本信息</h1>
+<i>《minecraft》（《我的世界》）是一款风靡全球的高自由度沙盒游戏，由瑞典Mojang AB和4J Studios开发。</i>
 
 中文名 | 我的世界
 -- | -- 
@@ -30,9 +32,12 @@
 语    言 | 多国语言 
 官方PC售价 | €19.95/$26.95/£17.95/¥165 
 官方PE售价 | ¥45/$10.9 [1]  
-iOS售价 | ¥45 
+iOS售价 | ¥45  
 
-##背景介绍
+
+
+<h2 align="center" style="background-color:#D2691E">背景信息</h2>
+
 Minecraft着重于让玩家去探索、交互，并且改变一个由一立方米大小的方块动态生成的地图。除了方块以外，环境功能还包括植物、生物与物品。游戏里的一些活动包括采集矿石、与敌对生物战斗、合成新的方块与收集各种在游戏中找到的资源的工具。游戏中的无限制模式让玩家在各种多人游戏服务器或他们的单人模式中进行创造建筑物、作品与艺术创作。其他功能包括逻辑运算与远程动作的红石电路、矿车及轨道,，以及称之为"下界"的神秘世界。最终，可以选择前往一个叫做“末路之地”的维度旅行，并打倒末影龙。
 
 
