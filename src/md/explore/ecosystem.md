@@ -1,11 +1,12 @@
-﻿
+
 # 生成生物群系总流程
 
-接着上篇文章我们看到这个函数
+接着上篇文章我们看到这个函数  
+
+类名net.minecraft.world.gen.ChunkProviderGenerate
 
 ```java
 
-类名net.minecraft.world.gen.ChunkProviderGenerate
     /**
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
@@ -27,7 +28,7 @@
         this.biomesForGeneration = this.worldObj.getWorldChunkManager().getBiomesForGeneration(this.biomesForGeneration, x * 4 - 2, z * 4 - 2, 10, 10);
         // ...
     }
-类名net.minecraft.world.biome.WorldChunkManager
+类名net.minecraft.world.biome.WorldChunkManage
     /**
      * Returns an array of biomes for the location input.
      */
@@ -70,12 +71,63 @@
         this.biomeIndexLayer = agenlayer[1];
     }
 ```
+类名net.minecraft.world.biome.WorldChunkManager
+
+```java
+    /**
+     * Returns an array of biomes for the location input.
+     */
+    public BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] result, int x, int z, int width, int height)
+    {
+        IntCache.resetIntCache();
+
+        if (result == null || result.length < width * height)
+        {
+            result = new BiomeGenBase[width * height];
+        }
+
+        // 生成生物群系ID
+        int[] biomeId = this.genBiomes.getInts(x, z, width, height);
+
+        try
+        {
+            for (int i = 0; i < width * height; ++i)
+            {
+                // 把生物群系ID转成BiomeGenBase对象
+                result[i] = BiomeGenBase.getBiomeFromBiomeList(biomeId[i], BiomeGenBase.field_180279_ad);
+            }
+
+            return result;
+        }
+        catch (Throwable throwable)
+        {
+            // ...
+        }
+    }
+
+    public WorldChunkManager(long seed, WorldType p_i45744_3_, String p_i45744_4_)
+    {
+        this();
+        this.field_180301_f = p_i45744_4_;
+        GenLayer[] agenlayer = GenLayer.initializeAllBiomeGenerators(seed, p_i45744_3_, p_i45744_4_);
+        agenlayer = getModdedBiomeGenerators(p_i45744_3_, seed, agenlayer);
+        // 这里初始化了genBiomes
+        this.genBiomes = agenlayer[0];
+        this.biomeIndexLayer = agenlayer[1];
+    }
+```
+
+
+
 接下来就非常复杂了，net.minecraft.world.gen.layer这个包里有很多GenLayer，每层都会用上一层的输出生成这一层的输出  
 ![Alt text](/img/算法1.png "文件1")  
 ![Alt text](/img/算法2.png "文件2")  
-它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的  
-```java
+它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的    
+
 类名net.minecraft.world.gen.layer.GenLayer
+
+```java
+
     public static GenLayer[] initializeAllBiomeGenerators(long worldSeed, WorldType worldType, String settings)
     {
         GenLayer genlayer = new GenLayerIsland(1L);
@@ -149,3 +201,5 @@
         return new GenLayer[] {genlayerrivermix, genlayer3, genlayerrivermix};
     }
 ```
+
+以上内容来自: [CSDN博客](https://blog.csdn.net/xfgryujk/article/details/63797164)

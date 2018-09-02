@@ -32,7 +32,21 @@
         <div>
             <ul class="nav navbar-nav">
                 <li id="index"><a href="./index.html">首页</a></li>
-                <li id="introduce"><a href="./introduce.html">游戏简介</a></li>
+                <li id="introduce" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        游戏介绍
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./introduce/bcground.html" >游戏背景</a></li>
+                        <li><a href="./introduce/experience.html" >游戏历程</a></li>
+                        <li><a href="./introduce/major.html" >NPC</a></li>
+                        <li><a href="./introduce/map.html" >场景地图</a></li>
+                        <li><a href="./introduce/honor.html" >历史荣耀</a></li>
+                        <li><a href="./introduce/system.html" >特色系统</a></li>
+                        <li><a href="./introduce/congigure.html" >系统配置</a></li>
+                    </ul>
+                </li>
                 <li id="explore" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         深入探索
@@ -66,16 +80,28 @@
     </script>
 </nav>
 
-    <div class="content_wrapper">
-        <div class="content_border">
-            <div class="content_border_top"></div>
-            <div class="content_border_left">
-                <div class="content_border_right">
-                    <div class="content">
-                        <p>﻿</p>
-<h1 id="%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B"><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B" class="anchor"></a>生成生物群系总流程</h1><p>接着上篇文章我们看到这个函数</p>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar">
+                <ul>
+<li><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B">1. 生成生物群系总流程</a></li>
+</ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="content_border">
+                <div class="content_border_top">
+                    <div class="content_border_lefttop"></div>
+                    <div class="content_border_centertop"></div>
+                    <div class="content_border_righttop"></div>
+                </div>
+                <div class="content_border_left">
+                    <div class="content_border_right">
+                        <div class="content">
+                            <h1 id="%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B"><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B" class="anchor"></a>生成生物群系总流程</h1><p>接着上篇文章我们看到这个函数  </p>
+<p>类名net.minecraft.world.gen.ChunkProviderGenerate</p>
 <pre><code class="hljs java">
-类名net.minecraft.world.gen.ChunkProviderGenerate
     <span class="hljs-comment">/**
      * Will return back a chunk, if it doesn't exist and its not a MP client it will generates all the blocks for the
      * specified chunk from the map seed and chunk seed
@@ -97,7 +123,7 @@
         <span class="hljs-keyword">this</span>.biomesForGeneration = <span class="hljs-keyword">this</span>.worldObj.getWorldChunkManager().getBiomesForGeneration(<span class="hljs-keyword">this</span>.biomesForGeneration, x * <span class="hljs-number">4</span> - <span class="hljs-number">2</span>, z * <span class="hljs-number">4</span> - <span class="hljs-number">2</span>, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
         <span class="hljs-comment">// ...</span>
     }
-类名net.minecraft.world.biome.WorldChunkManager
+类名net.minecraft.world.biome.WorldChunkManage
     <span class="hljs-comment">/**
      * Returns an array of biomes for the location input.
      */</span>
@@ -138,8 +164,50 @@
         <span class="hljs-comment">// 这里初始化了genBiomes</span>
         <span class="hljs-keyword">this</span>.genBiomes = agenlayer[<span class="hljs-number">0</span>];
         <span class="hljs-keyword">this</span>.biomeIndexLayer = agenlayer[<span class="hljs-number">1</span>];
-    }</code></pre><p>接下来就非常复杂了，net.minecraft.world.gen.layer这个包里有很多GenLayer，每层都会用上一层的输出生成这一层的输出<br><img src="/img/算法1.png" alt="Alt text" title="文件1"><br><img src="/img/算法2.png" alt="Alt text" title="文件2"><br>它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的  </p>
-<pre><code class="hljs java">类名net.minecraft.world.gen.layer.GenLayer
+    }</code></pre><p>类名net.minecraft.world.biome.WorldChunkManager</p>
+<pre><code class="hljs java">    <span class="hljs-comment">/**
+     * Returns an array of biomes for the location input.
+     */</span>
+    <span class="hljs-keyword">public</span> BiomeGenBase[] getBiomesForGeneration(BiomeGenBase[] result, <span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> z, <span class="hljs-keyword">int</span> width, <span class="hljs-keyword">int</span> height)
+    {
+        IntCache.resetIntCache();
+
+        <span class="hljs-keyword">if</span> (result == <span class="hljs-keyword">null</span> || result.length &lt; width * height)
+        {
+            result = <span class="hljs-keyword">new</span> BiomeGenBase[width * height];
+        }
+
+        <span class="hljs-comment">// 生成生物群系ID</span>
+        <span class="hljs-keyword">int</span>[] biomeId = <span class="hljs-keyword">this</span>.genBiomes.getInts(x, z, width, height);
+
+        <span class="hljs-keyword">try</span>
+        {
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; width * height; ++i)
+            {
+                <span class="hljs-comment">// 把生物群系ID转成BiomeGenBase对象</span>
+                result[i] = BiomeGenBase.getBiomeFromBiomeList(biomeId[i], BiomeGenBase.field_180279_ad);
+            }
+
+            <span class="hljs-keyword">return</span> result;
+        }
+        <span class="hljs-keyword">catch</span> (Throwable throwable)
+        {
+            <span class="hljs-comment">// ...</span>
+        }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">WorldChunkManager</span><span class="hljs-params">(<span class="hljs-keyword">long</span> seed, WorldType p_i45744_3_, String p_i45744_4_)</span>
+    </span>{
+        <span class="hljs-keyword">this</span>();
+        <span class="hljs-keyword">this</span>.field_180301_f = p_i45744_4_;
+        GenLayer[] agenlayer = GenLayer.initializeAllBiomeGenerators(seed, p_i45744_3_, p_i45744_4_);
+        agenlayer = getModdedBiomeGenerators(p_i45744_3_, seed, agenlayer);
+        <span class="hljs-comment">// 这里初始化了genBiomes</span>
+        <span class="hljs-keyword">this</span>.genBiomes = agenlayer[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">this</span>.biomeIndexLayer = agenlayer[<span class="hljs-number">1</span>];
+    }</code></pre><p>接下来就非常复杂了，net.minecraft.world.gen.layer这个包里有很多GenLayer，每层都会用上一层的输出生成这一层的输出<br><img src="/img/算法1.png" alt="Alt text" title="文件1"><br><img src="/img/算法2.png" alt="Alt text" title="文件2"><br>它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的    </p>
+<p>类名net.minecraft.world.gen.layer.GenLayer</p>
+<pre><code class="hljs java">
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> GenLayer[] initializeAllBiomeGenerators(<span class="hljs-keyword">long</span> worldSeed, WorldType worldType, String settings)
     {
         GenLayer genlayer = <span class="hljs-keyword">new</span> GenLayerIsland(<span class="hljs-number">1L</span>);
@@ -211,31 +279,20 @@
         genlayerrivermix.initWorldGenSeed(worldSeed);
         genlayer3.initWorldGenSeed(worldSeed);
         <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GenLayer[] {genlayerrivermix, genlayer3, genlayerrivermix};
-    }</code></pre>
-                        <p>以上内容来自：
-                            <a href="https://blog.csdn.net/xfgryujk/article/details/63797164">CSDN博客</a>
-                        </p>
+    }</code></pre><p>以上内容来自: <a href="https://blog.csdn.net/xfgryujk/article/details/63797164">CSDN博客</a></p>
+
+                        </div>
                     </div>
                 </div>
+                <div class="content_border_bottom">
+                    <div class="content_border_leftbottom"></div>
+                    <div class="content_border_centerbottom"></div>
+                    <div class="content_border_rightbottom"></div>
+                </div>
             </div>
-            <div class="content_border_foot"></div>
-        </div>
-        <div class="sidebar">
-            <ol>
-<li><a href="#%E7%94%9F%E6%88%90%E7%94%9F%E7%89%A9%E7%BE%A4%E7%B3%BB%E6%80%BB%E6%B5%81%E7%A8%8B">生成生物群系总流程</a></li>
-</ol>
         </div>
     </div>
-
-    <style>
-        /*背景图片*/
-
-        body {
-            background: url(./img/bg1.jpg);
-            background-size: cover;
-            background-attachment: fixed;
-        }
-    </style>
+</div>
 </body>
 
 </html>

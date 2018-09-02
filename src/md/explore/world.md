@@ -2,7 +2,7 @@
 
 ## 世界设置
 
-首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码
+首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码  
 类名net.minecraft.client.Minecraft
 
 ```java
@@ -96,8 +96,8 @@
     }
 ```
 ## 启动游戏服务器
-这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等
-类名net.minecraft.client.Minecraft
+这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等  
+类名net.minecraft.client.Minecraft  
 ```
     /**
      * Arguments: World foldername,  World ingame name, WorldSettings
@@ -189,7 +189,7 @@
     }
 ```
 ## 加载世界
-类名net.minecraft.server.integrated.IntegratedServer
+类名net.minecraft.server.integrated.IntegratedServer  
 服务器线程启动后调用这个函数
 ```
     /**
@@ -257,7 +257,12 @@
     }
 
 
+
+```
+
 类名net.minecraft.server.MinecraftServer
+
+```java
     protected void initialWorldChunkLoad()
     {
         int i = 16;
@@ -294,7 +299,12 @@
         this.clearCurrentTask();
     }
 
-类名net.minecraft.world.gen.ChunkProviderServer
+```
+
+类名net.minecraft.world.gen.ChunkProviderServeri
+
+```java
+
     /**
      * loads or generates the chunk at the chunk location specified
      */
@@ -395,4 +405,7 @@
 
         return chunk;
     }
+
 ```
+
+以上内容来自: [CSDN博客](https://blog.csdn.net/xfgryujk/article/details/61915888)

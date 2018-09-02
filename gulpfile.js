@@ -7,6 +7,7 @@ let gulp = require('gulp'),
     fileinclude = require('gulp-file-include'),
     hash = require('hash.js'),
     highlightjs = require('highlight.js'),
+    sass = require('gulp-sass'),
     marked = require('marked'),
     through = require('through2');
 
@@ -18,6 +19,7 @@ let toc_list = {}, last = {}; // toc_list: toc 列表, key 为文件名
 // 必须想办法标识每个 toc 所属的文件
 function markdown(md) {
     basename = hash.sha256().update(md).digest('hex'); // 取文件的 hash 作为标识
+
     toc_list[basename] = [];
     last[basename] = [];
 
@@ -59,16 +61,25 @@ function markdown(md) {
 function sidebar(md) {
     basename = hash.sha256().update(md).digest('hex');
 
+    if (!toc_list[basename])
+        markdown(md);
+
+    let index = [0];
+
     function tree_to_html(l, html) {
         for (let i of l) {
-            html += `<li><a href="#${i.slug}">${i.title}</a></li>`;
-            if (i.children) 
-                html += '<ol>\n' + tree_to_html(i.children, '') + '\n</ol>';
+            index[index.length - 1] += 1;
+            html += `<li><a href="#${i.slug}">${index.join('.')}. ${i.title}</a></li>`;
+            if (i.children) {
+                index.push(0);
+                html += '<ul>\n' + tree_to_html(i.children, '') + '\n</ul>';
+                index.pop();
+            }
         }
         return html;
     }
 
-    return  '<ol>\n' + tree_to_html(toc_list[basename], '') + '\n</ol>';
+    return  '<ul>\n' + tree_to_html(toc_list[basename], '') + '\n</ul>';
 }
 
 // 输出正在处理的文件名
@@ -112,10 +123,11 @@ gulp.task('scripts', () => {
         .pipe(gulp.dest('docs/js'));
 });
 
-// css, 啥都没做
+// 样式文件
 gulp.task('styles', () => {
-    return gulp.src('src/css/**/*')
+    return gulp.src('src/styles/**/*')
         .pipe(mylog())
+        .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('docs/css'));
 });
 
@@ -138,7 +150,7 @@ gulp.task('default', ['clean'], () => {
     gulp.start('scripts', 'images', 'styles', 'html', 'video');
     gulp.watch('./src/**/*.html', ['html']).on('change', browserSync.reload);
     gulp.watch('./src/md/**/*.md', ['html']).on('change', browserSync.reload);
-    gulp.watch('./src/css/*.css', ['styles']).on('change', browserSync.reload);
+    gulp.watch('./src/styles/*', ['styles']).on('change', browserSync.reload);
     gulp.watch('./src/js/*.js', ['scripts']).on('change', browserSync.reload);
     gulp.watch('./src/img/*', ['images']).on('change', browserSync.reload);
     gulp.watch('./src/video/*', ['video']).on('change', browserSync.reload);

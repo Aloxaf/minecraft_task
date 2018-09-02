@@ -2,10 +2,10 @@
 <html>
 
 <head>
-    <base href=".">
+    <base href="..">
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>游戏简介</title>
+<title>游戏介绍 - 特色系统</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +32,21 @@
         <div>
             <ul class="nav navbar-nav">
                 <li id="index"><a href="./index.html">首页</a></li>
-                <li id="introduce"><a href="./introduce.html">游戏简介</a></li>
+                <li id="introduce" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        游戏介绍
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="./introduce/bcground.html" >游戏背景</a></li>
+                        <li><a href="./introduce/experience.html" >游戏历程</a></li>
+                        <li><a href="./introduce/major.html" >NPC</a></li>
+                        <li><a href="./introduce/map.html" >场景地图</a></li>
+                        <li><a href="./introduce/honor.html" >历史荣耀</a></li>
+                        <li><a href="./introduce/system.html" >特色系统</a></li>
+                        <li><a href="./introduce/congigure.html" >系统配置</a></li>
+                    </ul>
+                </li>
                 <li id="explore" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         深入探索
@@ -65,35 +79,48 @@
         $('#introduce').addClass('active')
     </script>
 </nav>
-    <div class="content_wrapper">
-        <div class="content_border">
-            <div class="content_border_top"></div>
-            <div class="content_border_left">
-                <div class="content_border_right">
-                    <div class="content">
-                        <h1 id="%E4%BB%8B%E7%BB%8D"><a href="#%E4%BB%8B%E7%BB%8D" class="anchor"></a>介绍</h1><h2 id="%E6%B5%8B%E8%AF%951"><a href="#%E6%B5%8B%E8%AF%951" class="anchor"></a>测试1</h2><h2 id="%E6%B5%8B%E8%AF%952"><a href="#%E6%B5%8B%E8%AF%952" class="anchor"></a>测试2</h2>
+
+    <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar">
+                <ul>
+
+</ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="content_border">
+                <div class="content_border_top">
+                    <div class="content_border_lefttop"></div>
+                    <div class="content_border_centertop"></div>
+                    <div class="content_border_righttop"></div>
+                </div>
+                <div class="content_border_left">
+                    <div class="content_border_right">
+                        <div class="content">
+                            
+                        </div>
                     </div>
                 </div>
+                <div class="content_border_bottom">
+                    <div class="content_border_leftbottom"></div>
+                    <div class="content_border_centerbottom"></div>
+                    <div class="content_border_rightbottom"></div>
+                </div>
             </div>
-            <div class="content_border_foot"></div>
-        </div>
-        <div class="sidebar">
-            <ol>
-<li><a href="#%E4%BB%8B%E7%BB%8D">介绍</a></li><ol>
-<li><a href="#%E6%B5%8B%E8%AF%951">测试1</a></li><li><a href="#%E6%B5%8B%E8%AF%952">测试2</a></li>
-</ol>
-</ol>
         </div>
     </div>
+</div>
     <style>
-        /*背景图片*/
-
-        body {
-            background: url(./img/bg1.jpg);
-            background-size: cover;
-            background-attachment: fixed;
-        }
-    </style>
+            /*背景图片*/
+    
+            body {
+                background: url(img/guangtou.jpg);
+                background-size: cover;
+                background-attachment: fixed;
+            }
+        </style>
 </body>
 
 </html>
