@@ -1,10 +1,17 @@
-﻿# Minecraft的爆炸算法
+
+
+# Minecraft爆炸算法
+
+
+
 MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范围比较大；在地面爆炸破坏范围小但是破坏深度较深
-不科学的地方是它的爆炸范围是正方体，只不过一般范围小到看不出是正方体。至于为什么MOD里的核弹爆炸范围是球体，那是别人重新实现了爆炸函数把范围改掉了…类名net.minecraft.world.World
+
+不科学的地方是它的爆炸范围是正方体，只不过一般范围小到看不出是正方体。至于为什么MOD里的核弹爆炸范围是球体，那是别人重新实现了爆炸函数把范围改掉了…
+
+类名net.minecraft.world.World
 
 ```java
 
-类名net.minecraft.world.World
 
     /**
      * Creates an explosion. Args: entity, x, y, z, strength
@@ -29,8 +36,10 @@ MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范
         return explosion;
     }
 ```
-```
 类名net.minecraft.world.Explosion
+
+```java
+
     public Explosion(World worldIn, Entity p_i45754_2_, double p_i45754_3_, double p_i45754_5_, double p_i45754_7_, float size, boolean p_i45754_10_, boolean p_i45754_11_)
     {
         this.explosionRNG = new Random();
@@ -253,8 +262,15 @@ MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范
             }
         }
     }
+```
+
+
+
 这个函数用来计算实体暴露给爆炸中心的比例，代表受到爆炸的影响
+
 类名net.minecraft.world.World
+
+```java
     /**
      * Gets the percentage of real blocks within within a bounding box, along a specified vector.
      */
@@ -301,4 +317,6 @@ MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范
         }
     }
 ```
+
+
 
