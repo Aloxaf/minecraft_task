@@ -4,57 +4,36 @@
 
 ## 如何参与开发
 
-### 准备工作
-
-#### 安装必要软件
-
-[Node.js 10.9.0 x64](https://nodejs.org/dist/v10.9.0/node-v10.9.0-x64.msi)
-
-[Git 2.18.0 x64](https://github.com/git-for-windows/git/releases/download/v2.18.0.windows.1/Git-2.18.0-64-bit.exe)
-
-#### 拉取项目
-
-`git clone git@github.com:Vertical923/minecraft_task.git`
-
-#### npm 换源
-
-在 cmd 中执行  
-`npm config set registry http://npmreg.mirrors.ustc.edu.cn`
-
-#### 安装依赖
-
-在 minecraft_task 文件夹中打开 cmd/git bash,
-依次执行以下命令
-
-```bash
-npm install gulp browser-sync -g
-npm install
-```
-
-### 开发
-
-在 minecraft_task 文件夹中打开 cmd/git bash 窗口,  
-并执行 `gulp watch` 以监控文件变化
-
-在 minecraft_task/docs 文件夹中打开 cmd/git bash 窗口,  
-并执行 `browser-sync start -server --files "*"` 以在浏览器中实时预览网页
-
-注: **不要关闭这两个窗口**
-
-然后可以在 src 目录中修改代码
-
-Note: **在 src 目录中修改代码**  
-Note: **在 src 目录中修改代码**  
-Note: **在 src 目录中修改代码**
-
+[开发指南](https://github.com/Aloxaf/minecraft_task/blob/master/开发指南.md)
 
 ## 开发日志
+
+### 2018.9.2
+
+- 学习使用 bootstrap 排版
+- 学习使用 [sass](https://sass-lang.com/) 简化 css 的编写
+- 丰富网站内容
+
+### 2018.9.1
+
+- 优化开发流程
+- 使用 base 标签解决路径问题
+- 代码语法高亮
+- 丰富网站内容
+
+### 2018.8.31
+
+- 加入侧边栏
+- 丰富网站内容
+- 重写侧边栏(toc)生成代码
+- 调整目录结构
 
 ### 2018.8.30
 
 - 美化文本框, 加入边框
-- 使用 gulp 构建代码, 大幅调整结构
-- 将 markdown 的渲染放到了本地进行
+- 使用 [gulp](https://gulpjs.com/) 构建代码, 大幅调整结构
+- 将 markdown 的渲染放到了本地进行, 改用 [marked](https://github.com/markedjs/marked) 库
+- 加入背景图片
 
 ### 2018.8.29
 

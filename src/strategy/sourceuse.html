@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    @@include("include/article_head.html", {"title": "游戏攻略 - 材质包使用教程", "root": ".."})
+</head>
+
+<body>
+    @@include("include/nav.html", {"active": "strategy"})
+
+    @@include("include/article_body.html", {"file": "md/strategy/sourceuse.md"})
+    <style>
+        /*背景图片*/
+        body {
+            background: url(img/bg6.jpeg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        p {
+            text-indent: 2em;
+        }
+    </style>
+</body>
+
+</html>
