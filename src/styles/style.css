@@ -17,7 +17,7 @@
 }
 
 .navbar, .dropdown-menu {
-  margin: 0px;
+  /* margin: 0px; */
   background-color: white;
   border: none;
 }

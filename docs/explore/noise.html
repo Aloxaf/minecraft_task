@@ -66,13 +66,28 @@
     </script>
 </nav>
 
-    <div class="content_wrapper">
-        <div class="content_border">
-            <div class="content_border_top"></div>
-            <div class="content_border_left">
-                <div class="content_border_right">
-                    <div class="content">
-                        <p>接下来的地形生成代码会接触到噪声函数，所以本篇内容就先逆向MC的噪声函数吧</p>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="sidebar">
+                <ul>
+<li><a href="#%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E">1. <strong>各种NoiseGenerator</strong></a></li><ul>
+<li><a href="#noisegeneratorimproved">1.1. NoiseGeneratorImproved</a></li>
+</ul>
+</ul>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <div class="content_border">
+                <div class="content_border_top">
+                    <div class="content_border_lefttop"></div>
+                    <div class="content_border_centertop"></div>
+                    <div class="content_border_righttop"></div>
+                </div>
+                <div class="content_border_left">
+                    <div class="content_border_right">
+                        <div class="content">
+                            <p>接下来的地形生成代码会接触到噪声函数，所以本篇内容就先逆向MC的噪声函数吧</p>
 <p>噪声函数就是比较好看的随机数，如果用纯随机数（白噪声）不适合生成地形，但是噪声函数就很适合</p>
 <h1 id="%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E"><a href="#%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E" class="anchor"></a><strong>各种NoiseGenerator</strong></h1><p>在包net.minecraft.world.gen里可以看到几个噪声生成器，它们的命名比较乱所以不要看类名来推断算法（本来柏林噪声的命名就经常被混淆），其实MC里只有Perlin噪声和Simplex噪声</p>
 <h2 id="noisegeneratorimproved"><a href="#noisegeneratorimproved" class="anchor"></a>NoiseGeneratorImproved</h2><p>用来生成一个柏林噪声</p>
@@ -280,34 +295,20 @@
             }
         }
     }
-}</code></pre><p># </p>
+}</code></pre><p>以上内容来自: <a href="https://blog.csdn.net/xfgryujk/article/details/64133242">CSDN博客</a></p>
 
-                        <p>以上内容来自：
-                            <a href="https://blog.csdn.net/xfgryujk/article/details/64133242">CSDN博客</a>
-                        </p>
+                        </div>
                     </div>
                 </div>
+                <div class="content_border_bottom">
+                    <div class="content_border_leftbottom"></div>
+                    <div class="content_border_centerbottom"></div>
+                    <div class="content_border_rightbottom"></div>
+                </div>
             </div>
-            <div class="content_border_foot"></div>
-        </div>
-        <div class="sidebar">
-            <ol>
-<li><a href="#%3Cstrong%3E%E5%90%84%E7%A7%8Dnoisegenerator%3C%2Fstrong%3E"><strong>各种NoiseGenerator</strong></a></li><ol>
-<li><a href="#noisegeneratorimproved">NoiseGeneratorImproved</a></li>
-</ol>
-</ol>
         </div>
     </div>
-
-    <style>
-        /*背景图片*/
-
-        body {
-            background: url(./img/bg1.jpg);
-            background-size: cover;
-            background-attachment: fixed;
-        }
-    </style>
+</div>
 </body>
 
 </html>

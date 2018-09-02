@@ -8,22 +8,8 @@
 <body>
     @@include("include/nav.html", {"active": "about"})
 
-    <div class="content_wrapper">
-        <div class="content_border">
-            <div class="content_border_top"></div>
-            <div class="content_border_left">
-                <div class="content_border_right">
-                    <div class="content">
-                        @@include(markdown("md/about/about.md"))
-                    </div>
-                </div>
-            </div>
-            <div class="content_border_foot"></div>
-        </div>
-        <div class="sidebar">
-            @@include(sidebar("md/about/about.md"))
-        </div>
-    </div>
+    @@include("include/article_body.html", {"file": "md/about/about.md"})
+
     <style>
         /*背景图片*/
 
