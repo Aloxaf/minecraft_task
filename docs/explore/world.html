@@ -87,8 +87,7 @@
                 <div class="content_border_left">
                     <div class="content_border_right">
                         <div class="content">
-                            <h1 id="minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90"><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90" class="anchor"></a>Minecraft中的世界生成</h1><h2 id="%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE"><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE" class="anchor"></a>世界设置</h2><p>首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码
-类名net.minecraft.client.Minecraft</p>
+                            <h1 id="minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90"><a href="#minecraft%E4%B8%AD%E7%9A%84%E4%B8%96%E7%95%8C%E7%94%9F%E6%88%90" class="anchor"></a>Minecraft中的世界生成</h1><h2 id="%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE"><a href="#%E4%B8%96%E7%95%8C%E8%AE%BE%E7%BD%AE" class="anchor"></a>世界设置</h2><p>首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码<br>类名net.minecraft.client.Minecraft</p>
 <pre><code class="hljs java">    <span class="hljs-comment">/**
      * Arguments: World foldername,  World ingame name, WorldSettings
      */</span>
@@ -176,8 +175,7 @@
         }
         networkmanager.sendPacket(<span class="hljs-keyword">new</span> C00PacketLoginStart(gameProfile));
         <span class="hljs-keyword">this</span>.myNetworkManager = networkmanager;
-    }</code></pre><h2 id="%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8" class="anchor"></a>启动游戏服务器</h2><p>这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等
-类名net.minecraft.client.Minecraft</p>
+    }</code></pre><h2 id="%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8"><a href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E5%99%A8" class="anchor"></a>启动游戏服务器</h2><p>这里补充一些小知识，MC的单人游戏其实是在本进程内建了服务器，服务器才是负责生成世界的，客户端只负责操作输入、渲染等<br>类名net.minecraft.client.Minecraft  </p>
 <pre><code class="hljs undefined">    /**
      * Arguments: World foldername,  World ingame name, WorldSettings
      */
@@ -265,8 +263,7 @@
         }
         networkmanager.sendPacket(new C00PacketLoginStart(gameProfile));
         this.myNetworkManager = networkmanager;
-    }</code></pre><h2 id="%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C"><a href="#%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C" class="anchor"></a>加载世界</h2><p>类名net.minecraft.server.integrated.IntegratedServer
-服务器线程启动后调用这个函数</p>
+    }</code></pre><h2 id="%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C"><a href="#%E5%8A%A0%E8%BD%BD%E4%B8%96%E7%95%8C" class="anchor"></a>加载世界</h2><p>类名net.minecraft.server.integrated.IntegratedServer<br>服务器线程启动后调用这个函数</p>
 <pre><code class="hljs undefined">    /**
      * Initialises the server and starts it.
      */
@@ -332,144 +329,145 @@
     }
 
 
-类名net.minecraft.server.MinecraftServer
-    protected void initialWorldChunkLoad()
-    {
-        int i = 16;
-        int j = 4;
-        int k = 192;
-        int l = 625;
-        int i1 = 0;
-        this.setUserMessage("menu.generatingTerrain");
-        int j1 = 0;
-        logger.info("Preparing start region for level " + j1);
+</code></pre><p>类名net.minecraft.server.MinecraftServer</p>
+<pre><code class="hljs java">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">initialWorldChunkLoad</span><span class="hljs-params">()</span>
+    </span>{
+        <span class="hljs-keyword">int</span> i = <span class="hljs-number">16</span>;
+        <span class="hljs-keyword">int</span> j = <span class="hljs-number">4</span>;
+        <span class="hljs-keyword">int</span> k = <span class="hljs-number">192</span>;
+        <span class="hljs-keyword">int</span> l = <span class="hljs-number">625</span>;
+        <span class="hljs-keyword">int</span> i1 = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.setUserMessage(<span class="hljs-string">"menu.generatingTerrain"</span>);
+        <span class="hljs-keyword">int</span> j1 = <span class="hljs-number">0</span>;
+        logger.info(<span class="hljs-string">"Preparing start region for level "</span> + j1);
         WorldServer worldserver = net.minecraftforge.common.DimensionManager.getWorld(j1);
         BlockPos blockpos = worldserver.getSpawnPoint();
-        long k1 = getCurrentTimeMillis();
+        <span class="hljs-keyword">long</span> k1 = getCurrentTimeMillis();
 
-        // MC中区块大小是16*16，所以这里是加载玩家附近25*25个区块
-        for (int l1 = -192; l1 <= 192 && this.isServerRunning(); l1 += 16)
+        <span class="hljs-comment">// MC中区块大小是16*16，所以这里是加载玩家附近25*25个区块</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l1 = -<span class="hljs-number">192</span>; l1 &lt;= <span class="hljs-number">192</span> &amp;&amp; <span class="hljs-keyword">this</span>.isServerRunning(); l1 += <span class="hljs-number">16</span>)
         {
-            for (int i2 = -192; i2 <= 192 && this.isServerRunning(); i2 += 16)
+            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i2 = -<span class="hljs-number">192</span>; i2 &lt;= <span class="hljs-number">192</span> &amp;&amp; <span class="hljs-keyword">this</span>.isServerRunning(); i2 += <span class="hljs-number">16</span>)
             {
-                long j2 = getCurrentTimeMillis();
+                <span class="hljs-keyword">long</span> j2 = getCurrentTimeMillis();
 
-                if (j2 - k1 > 1000L)
+                <span class="hljs-keyword">if</span> (j2 - k1 &gt; <span class="hljs-number">1000L</span>)
                 {
-                    this.outputPercentRemaining("Preparing spawn area", i1 * 100 / 625);
+                    <span class="hljs-keyword">this</span>.outputPercentRemaining(<span class="hljs-string">"Preparing spawn area"</span>, i1 * <span class="hljs-number">100</span> / <span class="hljs-number">625</span>);
                     k1 = j2;
                 }
 
                 ++i1;
-                // 加载一个区块，参数是区块坐标（方块坐标/16）
-                worldserver.theChunkProviderServer.loadChunk(blockpos.getX() + l1 >> 4, blockpos.getZ() + i2 >> 4);
+                <span class="hljs-comment">// 加载一个区块，参数是区块坐标（方块坐标/16）</span>
+                worldserver.theChunkProviderServer.loadChunk(blockpos.getX() + l1 &gt;&gt; <span class="hljs-number">4</span>, blockpos.getZ() + i2 &gt;&gt; <span class="hljs-number">4</span>);
             }
         }
 
-        this.clearCurrentTask();
+        <span class="hljs-keyword">this</span>.clearCurrentTask();
     }
-
-类名net.minecraft.world.gen.ChunkProviderServer
-    /**
+</code></pre><p>类名net.minecraft.world.gen.ChunkProviderServeri</p>
+<pre><code class="hljs java">
+    <span class="hljs-comment">/**
      * loads or generates the chunk at the chunk location specified
-     */
-    public Chunk loadChunk(int p_73158_1_, int p_73158_2_)
-    {
-        return loadChunk(p_73158_1_, p_73158_2_, null);
+     */</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Chunk <span class="hljs-title">loadChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p_73158_1_, <span class="hljs-keyword">int</span> p_73158_2_)</span>
+    </span>{
+        <span class="hljs-keyword">return</span> loadChunk(p_73158_1_, p_73158_2_, <span class="hljs-keyword">null</span>);
     }
 
-    public Chunk loadChunk(int par1, int par2, Runnable runnable)
-    {
-        long k = ChunkCoordIntPair.chunkXZ2Int(par1, par2);
-        this.droppedChunksSet.remove(Long.valueOf(k));
-        Chunk chunk = (Chunk)this.id2ChunkMap.getValueByKey(k);
-        net.minecraft.world.chunk.storage.AnvilChunkLoader loader = null;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Chunk <span class="hljs-title">loadChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> par1, <span class="hljs-keyword">int</span> par2, Runnable runnable)</span>
+    </span>{
+        <span class="hljs-keyword">long</span> k = ChunkCoordIntPair.chunkXZ2Int(par1, par2);
+        <span class="hljs-keyword">this</span>.droppedChunksSet.remove(Long.valueOf(k));
+        Chunk chunk = (Chunk)<span class="hljs-keyword">this</span>.id2ChunkMap.getValueByKey(k);
+        net.minecraft.world.chunk.storage.AnvilChunkLoader loader = <span class="hljs-keyword">null</span>;
 
-        if (this.chunkLoader instanceof net.minecraft.world.chunk.storage.AnvilChunkLoader)
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.chunkLoader <span class="hljs-keyword">instanceof</span> net.minecraft.world.chunk.storage.AnvilChunkLoader)
         {
-            loader = (net.minecraft.world.chunk.storage.AnvilChunkLoader) this.chunkLoader;
+            loader = (net.minecraft.world.chunk.storage.AnvilChunkLoader) <span class="hljs-keyword">this</span>.chunkLoader;
         }
 
-        // We can only use the queue for already generated chunks
-        if (chunk == null && loader != null && loader.chunkExists(this.worldObj, par1, par2))
+        <span class="hljs-comment">// We can only use the queue for already generated chunks</span>
+        <span class="hljs-keyword">if</span> (chunk == <span class="hljs-keyword">null</span> &amp;&amp; loader != <span class="hljs-keyword">null</span> &amp;&amp; loader.chunkExists(<span class="hljs-keyword">this</span>.worldObj, par1, par2))
         {
-            if (runnable != null)
+            <span class="hljs-keyword">if</span> (runnable != <span class="hljs-keyword">null</span>)
             {
-                net.minecraftforge.common.chunkio.ChunkIOExecutor.queueChunkLoad(this.worldObj, loader, this, par1, par2, runnable);
-                return null;
+                net.minecraftforge.common.chunkio.ChunkIOExecutor.queueChunkLoad(<span class="hljs-keyword">this</span>.worldObj, loader, <span class="hljs-keyword">this</span>, par1, par2, runnable);
+                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;
             }
-            else
+            <span class="hljs-keyword">else</span>
             {
-                chunk = net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(this.worldObj, loader, this, par1, par2);
+                chunk = net.minecraftforge.common.chunkio.ChunkIOExecutor.syncChunkLoad(<span class="hljs-keyword">this</span>.worldObj, loader, <span class="hljs-keyword">this</span>, par1, par2);
             }
         }
-        else if (chunk == null)
+        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (chunk == <span class="hljs-keyword">null</span>)
         {
-            // 此时区块还未生成所以会运行到这里
-            chunk = this.originalLoadChunk(par1, par2);
+            <span class="hljs-comment">// 此时区块还未生成所以会运行到这里</span>
+            chunk = <span class="hljs-keyword">this</span>.originalLoadChunk(par1, par2);
         }
 
-        // If we didn't load the chunk async and have a callback run it now
-        if (runnable != null)
+        <span class="hljs-comment">// If we didn't load the chunk async and have a callback run it now</span>
+        <span class="hljs-keyword">if</span> (runnable != <span class="hljs-keyword">null</span>)
         {
             runnable.run();
         }
 
-        return chunk;
+        <span class="hljs-keyword">return</span> chunk;
     }
 
-    public Chunk originalLoadChunk(int p_73158_1_, int p_73158_2_)
-    {
-        long i = ChunkCoordIntPair.chunkXZ2Int(p_73158_1_, p_73158_2_);
-        this.droppedChunksSet.remove(Long.valueOf(i));
-        Chunk chunk = (Chunk)this.id2ChunkMap.getValueByKey(i);
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Chunk <span class="hljs-title">originalLoadChunk</span><span class="hljs-params">(<span class="hljs-keyword">int</span> p_73158_1_, <span class="hljs-keyword">int</span> p_73158_2_)</span>
+    </span>{
+        <span class="hljs-keyword">long</span> i = ChunkCoordIntPair.chunkXZ2Int(p_73158_1_, p_73158_2_);
+        <span class="hljs-keyword">this</span>.droppedChunksSet.remove(Long.valueOf(i));
+        Chunk chunk = (Chunk)<span class="hljs-keyword">this</span>.id2ChunkMap.getValueByKey(i);
 
-        if (chunk == null)
+        <span class="hljs-keyword">if</span> (chunk == <span class="hljs-keyword">null</span>)
         {
-            boolean added = loadingChunks.add(i);
-            if (!added)
+            <span class="hljs-keyword">boolean</span> added = loadingChunks.add(i);
+            <span class="hljs-keyword">if</span> (!added)
             {
-                net.minecraftforge.fml.common.FMLLog.bigWarning("There is an attempt to load a chunk (%d,%d) in di    >mension %d that is already being loaded. This will cause weird chunk breakages.", p_73158_1_, p_73158_2_, worldObj.provider.getDimensionId());
+                net.minecraftforge.fml.common.FMLLog.bigWarning(<span class="hljs-string">"There is an attempt to load a chunk (%d,%d) in di    &gt;mension %d that is already being loaded. This will cause weird chunk breakages."</span>, p_73158_1_, p_73158_2_, worldObj.provider.getDimensionId());
             }
-            chunk = net.minecraftforge.common.ForgeChunkManager.fetchDormantChunk(i, this.worldObj);
+            chunk = net.minecraftforge.common.ForgeChunkManager.fetchDormantChunk(i, <span class="hljs-keyword">this</span>.worldObj);
 
-            if (chunk == null)
-            chunk = this.loadChunkFromFile(p_73158_1_, p_73158_2_);
+            <span class="hljs-keyword">if</span> (chunk == <span class="hljs-keyword">null</span>)
+            chunk = <span class="hljs-keyword">this</span>.loadChunkFromFile(p_73158_1_, p_73158_2_);
 
-            if (chunk == null)
+            <span class="hljs-keyword">if</span> (chunk == <span class="hljs-keyword">null</span>)
             {
-                if (this.serverChunkGenerator == null)
+                <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.serverChunkGenerator == <span class="hljs-keyword">null</span>)
                 {
-                    chunk = this.dummyChunk;
+                    chunk = <span class="hljs-keyword">this</span>.dummyChunk;
                 }
-                else
+                <span class="hljs-keyword">else</span>
                 {
-                    try
+                    <span class="hljs-keyword">try</span>
                     {
-                        // 如果区块不存在，这个函数会生成区块
-                        chunk = this.serverChunkGenerator.provideChunk(p_73158_1_, p_73158_2_);
+                        <span class="hljs-comment">// 如果区块不存在，这个函数会生成区块</span>
+                        chunk = <span class="hljs-keyword">this</span>.serverChunkGenerator.provideChunk(p_73158_1_, p_73158_2_);
                     }
-                    catch (Throwable throwable)
+                    <span class="hljs-keyword">catch</span> (Throwable throwable)
                     {
-                        CrashReport crashreport = CrashReport.makeCrashReport(throwable, "Exception generating new chunk");
-                        CrashReportCategory crashreportcategory = crashreport.makeCategory("Chunk to be generated");
-                        crashreportcategory.addCrashSection("Location", String.format("%d,%d", new Object[] {Integer.valueOf(p_73158_1_), Integer.valueOf(p_73158_2_)}));
-                        crashreportcategory.addCrashSection("Position hash", Long.valueOf(i));
-                        crashreportcategory.addCrashSection("Generator", this.serverChunkGenerator.makeString());
-                        throw new ReportedException(crashreport);
+                        CrashReport crashreport = CrashReport.makeCrashReport(throwable, <span class="hljs-string">"Exception generating new chunk"</span>);
+                        CrashReportCategory crashreportcategory = crashreport.makeCategory(<span class="hljs-string">"Chunk to be generated"</span>);
+                        crashreportcategory.addCrashSection(<span class="hljs-string">"Location"</span>, String.format(<span class="hljs-string">"%d,%d"</span>, <span class="hljs-keyword">new</span> Object[] {Integer.valueOf(p_73158_1_), Integer.valueOf(p_73158_2_)}));
+                        crashreportcategory.addCrashSection(<span class="hljs-string">"Position hash"</span>, Long.valueOf(i));
+                        crashreportcategory.addCrashSection(<span class="hljs-string">"Generator"</span>, <span class="hljs-keyword">this</span>.serverChunkGenerator.makeString());
+                        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> ReportedException(crashreport);
                     }
                 }
             }
 
-            this.id2ChunkMap.add(i, chunk);
-            this.loadedChunks.add(chunk);
+            <span class="hljs-keyword">this</span>.id2ChunkMap.add(i, chunk);
+            <span class="hljs-keyword">this</span>.loadedChunks.add(chunk);
             loadingChunks.remove(i);
             chunk.onChunkLoad();
-            chunk.populateChunk(this, this, p_73158_1_, p_73158_2_);
+            chunk.populateChunk(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">this</span>, p_73158_1_, p_73158_2_);
         }
 
-        return chunk;
-    }</code></pre><p>以上内容来自: <a href="https://blog.csdn.net/xfgryujk/article/details/61915888">CSDN博客</a></p>
+        <span class="hljs-keyword">return</span> chunk;
+    }
+</code></pre><p>以上内容来自: <a href="https://blog.csdn.net/xfgryujk/article/details/61915888">CSDN博客</a></p>
 
                         </div>
                     </div>
