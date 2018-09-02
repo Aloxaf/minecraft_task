@@ -90,21 +90,48 @@ $content_width: 1000px;
 .content {
   h1 {
     text-align: center;
-    background-color: #D2691E;
+    background-color: #d2691e;
   }
 
   h2 {
     text-align: center;
-    background-color: #DEB887;
+    background-color: #deb887;
   }
 
   h3 {
     text-align: center;
-    background-color: #FFE4C4;
+    background-color: #ffe4c4;
   }
 
   h4 {
     text-align: center;
-    background-color: #F0FFFF;
+    background-color: #f0ffff;
+  }
+}
+
+/* 表格 */
+/* https://www.w3cschool.cn/css/css-sfrk2opy.html */
+table {
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  color: #333333;
+  border-width: 1px;
+  border-color: #666666;
+  border-collapse: collapse;
+
+  th {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #dedede;
+  }
+
+  td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #666666;
+    background-color: #ffffff;
   }
 }

@@ -10,13 +10,9 @@
 中文名 | 我的世界
 -- | -
 原版名称 | Minecraft  
-其他名称 | 麦块、MC、当个创世神(台
-游戏类型 | 沙盒、生存、冒
-游戏平台 | Windows、Linux、OS X
- | Android(Pocket Edition)
- | iOS(Pocket Edition)
- | Windows Phone
- | Fire TV(Pocket Edition)
+其他名称 | 麦块、MC、当个创世神(台)
+游戏类型 | 沙盒、生存、冒险
+游戏平台 | Windows、Linux、OS X <br/> Android(Pocket Edition) <br/> iOS(Pocket Edition) <br/> Windows Phone <br/> Fire TV(Pocket Edition)
 所属系列 | 沙盒游戏
 地区 | 全球
 开发商 | Mojang AB，4J Studios
@@ -31,11 +27,7 @@
 游戏画面 | 3D
 游戏引擎 | The Lightweight Java Game Library(LWJGL)，基于OpenGL
 分    级 | ESRB:10+
-最新版本 | PC：本体1.11 启动器1.6.70g 
- | Fire TV：0.15.3
- | Android：0.15.3
- | iOS：0.15.3
- | WP：0.15.3 
+最新版本 | PC：本体1.11 启动器1.6.70g  <br/> Fire TV：0.15.3 <br/> Android：0.15.3 <br/> iOS：0.15.3 <br/> WP：0.15.3 
 最新预览版本 | 16w21b
 发行阶段 | 正式版
 结局数 | 无结局

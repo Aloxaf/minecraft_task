@@ -13,6 +13,7 @@
 - 学习使用 bootstrap 排版
 - 学习使用 [sass](https://sass-lang.com/) 简化 css 的编写
 - 丰富网站内容
+- 更改表格样式
 
 ### 2018.9.1
 
