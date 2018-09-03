@@ -75,3 +75,18 @@
 .video_wrapper {
   padding-top: 1px;
 }
+
+/*页脚*/
+
+.footer {
+  color: gray;
+  clear: both;
+  text-align: center;
+  position: relative;
+  top: 150px;
+  width: 100%;
+  height: auto;
+  background-color: #3c3c3c;
+  font-size: 10px;
+  padding: 2px 0px;
+}
