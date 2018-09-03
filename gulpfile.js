@@ -18,7 +18,7 @@ let toc_list = {}, last = {}; // toc_list: toc 列表, key 为文件名
 // markdown 处理, 因为 gulp 处理文件的时候好像是并行的
 // 必须想办法标识每个 toc 所属的文件
 function markdown(md) {
-    basename = hash.sha256().update(md).digest('hex'); // 取文件的 hash 作为标识
+    let basename = hash.sha256().update(md).digest('hex'); // 取文件的 hash 作为标识
 
     toc_list[basename] = [];
     last[basename] = [];
@@ -53,20 +53,13 @@ function markdown(md) {
         return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;      
     };
 
-    renderer.image = (href, title, text) => {
-        if (title === null)
-            title = '';
-        console.log(href, title, text);
-        return `<img src="${href}" ${title} alt="${text}">`;
-    };
-
     // console.log(file);
     return marked(md, {renderer: renderer});
 }
 
 // 生成 table of content
 function sidebar(md) {
-    basename = hash.sha256().update(md).digest('hex');
+    let basename = hash.sha256().update(md).digest('hex');
 
     if (!toc_list[basename])
         markdown(md);
