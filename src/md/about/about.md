@@ -39,4 +39,4 @@
 - 角色：辅助
 
 ## 合照
-![photo](/img/all.jpg "Badcamp")
+![photo](./img/all.jpg "Badcamp")
