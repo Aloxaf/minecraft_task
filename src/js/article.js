@@ -7,8 +7,15 @@ $(document).ready(function() {
     });
 
     $(".content img").each((ind, ele) => {
-        if (ele.getAttribute('alt').indexOf('>') == 0) {
+        alt = ele.getAttribute('alt');
+        rowspan = ele.getAttribute('rowspan');
+        if (alt && alt.indexOf('>') == 0) {
             ele.outerHTML = `<div align="right">${ele.outerHTML}</div>`;
         }
+        if (rowspan) {
+            ele.parentElement.setAttribute('rowspan', rowspan);
+        }
     });
+
+    $('td').filter((ind, ele) => ele.innerText == '--').remove();
 });

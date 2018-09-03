@@ -53,6 +53,13 @@ function markdown(md) {
         return `<pre><code class="hljs ${language}">${highlighted}</code></pre>`;      
     };
 
+    renderer.image = (href, title, text) => {
+        if (title === null)
+            title = '';
+        console.log(href, title, text);
+        return `<img src="${href}" ${title} alt="${text}">`;
+    };
+
     // console.log(file);
     return marked(md, {renderer: renderer});
 }
