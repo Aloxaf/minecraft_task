@@ -1,4 +1,4 @@
-![](./img/slide1.jpg)
+![](./img/slide12.jpg)
 
 # 游戏历程
 
