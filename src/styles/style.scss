@@ -50,36 +50,61 @@
   color: black;
 }
 
-.card {
-  box-shadow: 5px 5px 5px 4px gray;
-  border: 50px;
-  border-radius: 10px;
+/* 首页卡片 */
+.card-board {
+  text-align: center;
+
+  .card {
+    padding: 10px 15px 15px 10px;
+    display: inline-block;
+  }
+
+  .card-icon {
+    box-shadow: 5px 5px 5px 4px gray;
+    border: 50px;
+    border-radius: 10px;
+    background: white;
+  }
+
+  /* 鼠标移过自动放大 */
+  img {
+    width: 160px;
+    transition: all 0.4s;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
 }
 
 /* 首页幻灯片 */
-.flexslider {
-  width: 80%;
-  height: 10%;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  border: 0px;
-}
-
 .flexslider_wrapper {
   padding-top: 100px;
-}
 
-.video {
-  width: 700px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  border: 0px;
+  .flexslider {
+    width: 80%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border: 0px;
+
+    .slides img {
+      height: 200px;
+    }
+  }
 }
 
 .video_wrapper {
   padding-top: 1px;
+
+  .video {
+    width: 700px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border: 0px;
+  }
 }
 
 /*页脚*/
