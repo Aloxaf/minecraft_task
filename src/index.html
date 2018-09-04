@@ -2,6 +2,26 @@
 <html>
 
 <head>
+      <style type="text/css">
+            #returntop {
+                  background: url(/img/top.jpg) no-repeat;
+                  /*这里是图标地址*/
+                  bottom: 20px;
+                  right: 20px;
+                  height: 38px;
+                  /* Height of image */
+                  width: 38px;
+                  /* Width of image */
+                  position: fixed;
+                  _position: absolute;
+                  line-height: 30px;
+                  text-align: center;
+                  top: 0px;
+                  left: 0px;
+                  display: none;
+                  cursor: pointer;
+            }
+      </style>
       <base href=".">
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,7 +39,7 @@
 
 <body>
       <!-- 导航栏 -->
-      @@include("include/nav.html", {"active": "index"})
+      @@include("include/nav.html", {"active": "index"}) 
 
       @@include("include/special_effect1.html")
 
@@ -41,8 +61,7 @@
                   animation: 'slide',   // 自动滑动
                   slideshowSpeed: 3000  // 自动滑动间隔
             })
-      </script>
-
+      </script> 
       @@include("include/footer.html")
 
 </body>
