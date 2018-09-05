@@ -11,12 +11,12 @@
 }
 
 /* 导航栏 */
-
 .navbar-default {
   background: url('../img/nav_bg.png') right -8px repeat-x;
 }
 
-.navbar, .dropdown-menu {
+.navbar,
+.dropdown-menu {
   /* margin: 0px; */
   background-color: white;
   border: none;
@@ -50,34 +50,64 @@
   color: black;
 }
 
-/* 首页幻灯片 */
+/* 首页卡片 */
+.card-board {
+  text-align: center;
 
-.flexslider {
-  width: 700px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  border: 0px;
+  .card {
+    padding: 10px 15px 15px 10px;
+    display: inline-block;
+  }
+
+  .card-icon {
+    box-shadow: 5px 5px 5px 4px gray;
+    border: 50px;
+    border-radius: 10px;
+    background: white;
+  }
+
+  /* 鼠标移过自动放大 */
+  img {
+    width: 160px;
+    transition: all 0.4s;
+  }
+
+  img:hover {
+    transform: scale(1.05);
+  }
+
 }
 
+/* 首页幻灯片 */
 .flexslider_wrapper {
   padding-top: 100px;
-}
 
-.video {
-  width: 700px;
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  border: 0px;
+  .flexslider {
+    width: 80%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border: 0px;
+
+    .slides img {
+      height: 200px;
+    }
+  }
 }
 
 .video_wrapper {
   padding-top: 1px;
+
+  .video {
+    width: 700px;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border: 0px;
+  }
 }
 
 /*页脚*/
-
 .footer {
   color: gray;
   clear: both;
