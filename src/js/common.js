@@ -7,3 +7,4 @@ $(document).ready(function () {
         $(this).find('.dropdown-menu').stop(true, true).slideUp();
     });
 });
+
