@@ -26,11 +26,21 @@
                   <div class="flexslider_wrapper">
                         <div class="flexslider">
                               <ul class="slides">
-                                    <li><img src="./img/slide1.jpg" alt=""></li>
-                                    <li><img src="./img/slide2.jpg" alt=""></li>
-                                    <li><img src="./img/slide3.jpg" alt=""></li>
-                                    <li><img src="./img/slide4.jpg" alt=""></li>
-                                    <li><img src="./img/slide5.jpg" alt=""></li>
+                                    <li>
+                                          <img src="./img/slide1.jpg" alt="">
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide2.jpg" alt="">
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide3.jpg" alt="">
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide4.jpg" alt="">
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide5.jpg" alt="">
+                                    </li>
                               </ul>
                         </div>
                   </div>
@@ -60,19 +70,16 @@
                               </a>
                         </div>
                   </div>
-            </div>
-      </div>
+                  @@include("include/special_effect1.html")
 
 
-      <script>
-            // 自动播放幻灯片
-            $('.flexslider').flexslider({
-                  animation: 'slide', // 自动滑动
-                  slideshowSpeed: 3000 // 自动滑动间隔
-            })
-      </script>
-
-      @@include("include/footer.html")
+                  <script>
+                        // 自动播放幻灯片
+                        $('.flexslider').flexslider({
+                              animation: 'slide', // 自动滑动
+                              slideshowSpeed: 3000 // 自动滑动间隔
+                        })
+                  </script> @@include("include/footer.html")
 
 </body>
 
