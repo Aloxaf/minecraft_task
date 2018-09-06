@@ -6,19 +6,21 @@
 </head>
 
 <body>
-    @@include("include/nav.html", {"active": "introduce"}) 
-    
+    <!-- 导航栏 -->
+    @@include("include/nav.html", {"active": "introduce"})
     @@include("include/article_body.html", {"file": "md/introduce/map.md"})
+
     <style>
         /*背景图片*/
 
         body {
-            background: url(img/guangtou.jpg);
+            background: url(./img/guangtou.jpg);
             background-size: cover;
             background-attachment: fixed;
         }
     </style>
-
+    
+    
     @@include("include/footer.html")
 </body>
 
