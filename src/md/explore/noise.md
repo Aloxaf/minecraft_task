@@ -4,7 +4,7 @@
 
 # **各种NoiseGenerator**
 
-在包net.minecraft.world.gen里可以看到几个噪声生成器，它们的命名比较乱所以不要看类名来推断算法（本来柏林噪声的命名就经常被混淆），其实MC里只有Perlin噪声和Simplex噪声
+在包net.minecraft.world.gen里可以看到几个噪声生成器，它们的命名比较乱所以不要看类名来推断算法（本来柏林噪声的命名就经常被混淆），其实MC里只有Perlin噪声和Simplex噪声 ![Alt text](\img\噪声函数.png"噪声函数")
 
 ## NoiseGeneratorImproved
 
