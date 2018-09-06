@@ -12,6 +12,7 @@
   transition: background-color 100ms ease-in-out;
   z-index: 1;
   background-color: transparent;
+  outline: 0;
 }
 
 .gototop>span {
