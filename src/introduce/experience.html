@@ -7,7 +7,8 @@
 </head>
 
 <body>
-    @@include("include/nav.html", {"active": "introduce"}) @@include("include/article_body.html", {"file": "md/introduce/experience.md"})
+    @@include("include/nav.html", {"active": "introduce"}) @@include("include/special_effect1.html") @@include("include/article_body.html",
+    {"file": "md/introduce/experience.md"})
     <style>
         /*背景图片*/
 
@@ -17,12 +18,11 @@
             background-attachment: fixed;
         }
     </style>
-    @@include("include/footer.html")
 
     <!--返回顶部按钮-->
 
-    <button class="gototop">
-        <img src="./img/button.png" alt="返回顶部">
+    <button class="gototop" title="返回顶部">
+        <img src="./img/button.png">
     </button>
 
     <!--<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
@@ -37,7 +37,8 @@
                 classname: "isvisible"
             });
         });
-    </script>
+    </script> @@include("include/footer.html")
+
 </body>
 
 </html>
