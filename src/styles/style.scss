@@ -4,44 +4,45 @@
   background-attachment: fixed;
 }
 
-.logo {
+#logo {
   margin: 7px 0px 0px 0px;
   max-width: 240px;
   max-height: 78px;
 }
 
 /* 导航栏 */
-.navbar-default {
-  background: url('../img/nav_bg.png') right -8px repeat-x;
-}
 
 .navbar,
 .dropdown-menu {
-  /* margin: 0px; */
+  margin: 0px;
   background-color: white;
   border: none;
 }
 
 .navbar-nav {
   float: right;
+
+  >li>a {
+    background: url(../img/nav_tab.png);
+  }
 }
 
-.navbar-nav>li>a {
-  background: url(../img/nav_tab.png);
-}
+.navbar-default {
+  background: url('../img/nav_bg.png') right -8px repeat-x;
 
-.navbar-default .navbar-nav>li>a {
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
-  text-align: center;
-  padding: 12px 20px 0px 20px;
-  color: black;
-  margin-top: 45px;
-}
+  .navbar-nav>li>a {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    text-align: center;
+    padding: 12px 20px 0px 20px;
+    color: black;
+    margin-top: 45px;
+  }
 
-.navbar-default .navbar-nav>.active>a {
-  margin-top: 40px;
-  padding: 12px 20px 5px 20px;
+  .navbar-nav>.active>a {
+    margin-top: 40px;
+    padding: 12px 20px 5px 20px;
+  }
 }
 
 .dropdown-menu>li>a {
@@ -50,13 +51,25 @@
   color: black;
 }
 
+#container_wrapper {
+  margin: 0 5% 0 5%;
+
+  #container {
+    background: #fbf2db;
+    opacity: 0.8;
+  }
+}
+
 /* 首页卡片 */
-.card-board {
+#card-board {
   text-align: center;
 
   .card {
     padding: 10px 15px 15px 10px;
-    display: inline-block;
+    // display: inline-block;
+    >a {
+      margin: 10px;
+    }
   }
 
   .card-icon {
@@ -75,30 +88,29 @@
   img:hover {
     transform: scale(1.05);
   }
-
 }
 
 /* 首页幻灯片 */
-.flexslider_wrapper {
-  padding-top: 100px;
+#flexslider_wrapper {
+  padding-top: 50px;
 
   .flexslider {
-    width: 80%;
+    width: 90%;
     display: block;
     margin-right: auto;
     margin-left: auto;
     border: 0px;
 
     .slides img {
-      height: 200px;
+      height: 300px;
     }
   }
 }
 
-.video_wrapper {
+#video_wrapper {
   padding-top: 1px;
 
-  .video {
+  #video {
     width: 700px;
     display: block;
     margin-right: auto;
