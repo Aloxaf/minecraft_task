@@ -2,7 +2,7 @@
 
 将以下内容概括后：
 
-![Alt text](/img/生成.jpg"流程")
+![流程图](/img/flow_chart.jpg "流程图")
 
 然后接着上篇文章我们看到这个函数
 
@@ -123,8 +123,8 @@
 
 
 接下来就非常复杂了，net.minecraft.world.gen.layer这个包里有很多GenLayer，每层都会用上一层的输出生成这一层的输出  
-![Alt text](/img/算法1.png "文件1")  
-![Alt text](/img/算法2.png "文件2")  
+![Alt text](/img/algorithm1.png "文件1")  
+![Alt text](/img/algorithm2.png "文件2")  
 它们的初始化函数如下，最后的genlayerrivermix就是用来生成生物群系的    
 
 类名net.minecraft.world.gen.layer.GenLayer
