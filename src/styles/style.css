@@ -1,0 +1,92 @@
+﻿body {
+  background: url(../img/bg.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.logo {
+  margin: 7px 0px 0px 0px;
+  max-width: 240px;
+  max-height: 78px;
+}
+
+/* 导航栏 */
+
+.navbar-default {
+  background: url('../img/nav_bg.png') right -8px repeat-x;
+}
+
+.navbar, .dropdown-menu {
+  /* margin: 0px; */
+  background-color: white;
+  border: none;
+}
+
+.navbar-nav {
+  float: right;
+}
+
+.navbar-nav>li>a {
+  background: url(../img/nav_tab.png);
+}
+
+.navbar-default .navbar-nav>li>a {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  text-align: center;
+  padding: 12px 20px 0px 20px;
+  color: black;
+  margin-top: 45px;
+}
+
+.navbar-default .navbar-nav>.active>a {
+  margin-top: 40px;
+  padding: 12px 20px 5px 20px;
+}
+
+.dropdown-menu>li>a {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: black;
+}
+
+/* 首页幻灯片 */
+
+.flexslider {
+  width: 700px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  border: 0px;
+}
+
+.flexslider_wrapper {
+  padding-top: 100px;
+}
+
+.video {
+  width: 700px;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+  border: 0px;
+}
+
+.video_wrapper {
+  padding-top: 1px;
+}
+
+/*页脚*/
+
+.footer {
+  color: gray;
+  clear: both;
+  text-align: center;
+  position: relative;
+  top: 150px;
+  width: 100%;
+  height: auto;
+  background-color: #3c3c3c;
+  font-size: 10px;
+  padding: 2px 0px;
+}
