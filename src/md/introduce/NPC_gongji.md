@@ -142,9 +142,9 @@
 经验值 | 5
 
 ## 溺尸
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">“各位玩家，我衷心地祝愿你们在水底不会碰见溺尸”————Tom Stone</span></marquee>
-</body>
+</div>
 
 生命值 | 20（★★★★★★★★★★） | 图片
 -- | --  | --

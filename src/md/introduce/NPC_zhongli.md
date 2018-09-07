@@ -2,9 +2,9 @@
 
 ## 洞穴蜘蛛
 
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">洞穴蜘蛛是一种能够造成玩家中毒的中立型生物</span></marquee>
-</body>
+</div>
 
 生命值 | 12（★★★★★★） | 图片
 -- | -- | --

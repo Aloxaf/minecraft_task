@@ -1,8 +1,8 @@
 # 效用型生物
 ## 铁傀儡
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: black;">听说如果你攻击铁傀儡，那会成为你今生最后的壮举</span></marquee>
-</body>
+</div>
 
 生命值 | 100(★×50) | 图片
 -- | -- | -- 

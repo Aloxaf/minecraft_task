@@ -16,9 +16,9 @@
 经验值 | 1-3
 
 ## 羊驼
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">作为中立型生物，羊驼能像马一样被驯服，并且能被拴在一起形成一列驼队。它们甚至还可以有小宝宝Stone</span></marquee>
-</body>
+</div>
 
 生命值 | 15（★★★★★★★☆）-30（★×15） | 图片
 -- | -- | --

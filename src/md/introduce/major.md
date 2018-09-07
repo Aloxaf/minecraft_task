@@ -9,9 +9,9 @@
 <br />
 
 ## 攻击型生物与传说生物
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">友情提示：点击图片进入相关种类生物介绍</span></marquee>
-</body>
+</div>
 有些生物拥有特殊的能力，如爬行者（creeper），是一种会爆炸的生物，它会偷偷跟踪玩家而几乎不会发出声音；末影人，是一种可瞬间移动并能拿起方块的生物，一旦游戏准心对准头部，而玩家没有把南瓜戴在头上，末影人就会攻击玩家
 
 <div align="center">
@@ -24,11 +24,11 @@
 </div>
 
 ## 中立型,效用型与可驯服型生物
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">友情提示：点击图片进入相关种类生物介绍</span></marquee>
-</body>
+</div>
 牛、猪、鸡等非敌对生物，它们可以被猎杀产生食物和制作材料。
-</body>
+
 
 <figure class="third" >
 <a href="./introduce/NPC_zhongli.html"><!-- 中立型羊驼 -->
@@ -43,9 +43,9 @@
 </figure>
 
 ## 被动型生物
-<body style="padding:10px;">
+<div style="padding:10px;">
     <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">（重要的事情说三遍(｀・ω・´)）友情提示：点击图片进入相关种类生物介绍</span></marquee>
-</body>
+</div>
 
 <a href="./introduce/NPC_buhuanji.html" ><!-- 不还击村民 -->
 <center>

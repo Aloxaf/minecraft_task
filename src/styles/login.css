@@ -1,255 +1,33 @@
-@charset "UTF-8";
+﻿form  {
+	width: 400px; 
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: 50px;
+	padding-top: 20px;
+	border: 0px;
+	font-family:Optima， serif;
+	font-size:15px;
+}
 
+form p  {
+	font-size: 10px;
+	margin-bottom: 5px;
+}
 
+#form_img  {
+	float: right;
+	height: 605px;
+	margin-top: 20px;
+	margin-right: 50px;
+}
 
-/*背景*/
-div.black_overlay{ 
-    display: none; 
-    position: absolute; 
-    top: 0%; 
-    left: 0%; 
-    width: 100%; 
-    height: 100%; 
-    background-color: black; 
-    z-index:1001; 
-    -moz-opacity: 0.8; 
-    opacity:.80; 
-    filter: alpha(opacity=88); 
+form label  {
+	font-family: "Times New Roman", Times, Serif;
+	font-size:20px;
 }
 
 
-
-        /*登录界面部分*/
-
-/*登录表单*/
-div.login{ 
-    display: none; 
-    position: fixed; 
-    top: 100px; 
-    left: 400px; 
-    width: 350px; 
-    height: 400px; 
-    padding: 20px; 
-    border: 10px solid orange; 
-    background-color: white; 
-    z-index:1002; 
-    overflow: auto; 
-}
-
-/*返回键*/
-input.login_return_button{
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    background-color: blue;
-    border: none;
-    color: white;
-    padding: 7px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-/*标题*/
-#login_head{
-	position: relative;
-	left: 70px;
-}
-
-/*验证码*/
-/*div#login_rightcode{ 
-    display: none; 
-    position: fixed; 
-    top: 100px; 
-    left: 200px; 
-    width: 17.3%; 
-    height: 40%; 
-    padding: 20px; 
-    border: 10px solid orange; 
-    background-color: white; 
-    z-index:1002; 
-    overflow: auto; 
-}*/
-
-input#login_rightcode{
-    font-family: Arial;
-    font-style: italic;
-    color: red;
-    padding: 2px 3px;
-    letter-spacing: 2px;
-    font-weight: bolder;
-    display: inline-block;
-    height: 30px;
-    width: 80px;
-}
-
-/*登录按键及动态效果（待调试）*/
-input.login_button{
-    position: relative;
-    left: 29px;
-	vertical-align:middle;
-  	display: inline-block;
-  	border-radius: 4px;
- 	background-color: #f4511e;
- 	border: none;
- 	color: #FFFFFF;
- 	text-align: center;
- 	font-size: 20px;
-  	padding: 10px;
-  	width: 200px;
-  	transition: all 0.5s;
-  	cursor: pointer;
-  	margin: 5px;
-}
-/*input.login_button{
-  	cursor: pointer;
-  	display: inline-block;
-  	position: relative;
-  	transition: 0.5s;
-}
-input.login_button:after{
-  	content: '»';
-  	position: absolute;
-  	opacity: 0;
-  	top: 0;
-  	right: -20px;
-  	transition: 0.5s;
-}
-input.login_button:hover{
-
-  	padding-right: 25px;
-}
-input.login_button:hover:after{
-  	opacity: 1;
-  	right: 0;
-}*/
-
-/*注册引导栏*/
-#if_register{
-    position: absolute;
-    left: 80px;
-}
-
-
-
-
-        /*注册界面部分*/
-
-/*注册表单*/
-div.register{ 
-    display: none; 
-    position: fixed; 
-    top: 15px; 
-    left: 300px; 
-    width: 520px; 
-    height: 780px; 
-    padding: 20px; 
-    border: 10px solid orange; 
-    background-color: white; 
-    z-index:1002; 
-    overflow: auto; 
-}
-form#register_form span{
-    font-size: 20px;
-}
-.hrLine{
-    vertical-align:middle; display:inline-block;
-}
-
-/*返回键*/
-input.register_return_button{
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    background-color: blue;
-    border: none;
-    color: white;
-    padding: 7px 16px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 12px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 50%;
-}
-
-/*标题*/
-#register_head{
-  position: relative;
-  left: 125px;
-}
-
-/*验证码*/
-#register_yan{
-    position: absolute;
-    top: 600px;
-    left: 110px;
-}
-input#register_rightcode{
-    position: absolute;
-    top: 600px;
-    left: 265px;
-    font-family: Arial;
-    font-style: italic;
-    color: red;
-    padding: 2px 3px;
-    letter-spacing: 2px;
-    font-weight: bolder;
-    display: inline-block;
-    height: 30px;
-    width: 80px;
-}
-
-/*注册按键及动态效果（待调试）*/
-input.register_button{
-    position: absolute;
-    top: 650px;
-    left: 110px;
-    vertical-align:middle;
-    display: inline-block;
-    border-radius: 4px;
-    background-color: #f4511e;
-    border: none;
-    color: #FFFFFF;
-    text-align: center;
-    font-size: 20px;
-    padding: 10px;
-    width: 200px;
-    transition: all 0.5s;
-    cursor: pointer;
-    margin: 5px;
-}
-/*input.register_button{
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
-}
-input.register_button:after{
-    content: '»';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -20px;
-    transition: 0.5s;
-}
-input.register_button:hover{
-
-    padding-right: 25px;
-}
-input.register_button:hover:after{
-    opacity: 1;
-    right: 0;
-}*/
-
-/*登录引导栏*/
-#if_login{
-    position: absolute;
-    top: 720px;
-    left: 128px;
+form legend  {
+	font-family:"宋体", sans-serif;
+	font-size:50px;
 }
