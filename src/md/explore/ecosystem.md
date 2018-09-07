@@ -1,7 +1,10 @@
-
 # 生成生物群系总流程
 
-接着上篇文章我们看到这个函数  
+将以下内容概括后：
+
+![Alt text](/img/生成.jpg"流程")
+
+然后接着上篇文章我们看到这个函数
 
 类名net.minecraft.world.gen.ChunkProviderGenerate
 

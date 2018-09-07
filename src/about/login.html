@@ -3,36 +3,17 @@
 
 <head>
     @@include("include/article_head.html", {"title": "关于我们 - 我们的话", "root": ".."})
+    <script src="./js/form_js.js"></script>
     <link rel="stylesheet" href="./css/form.css">
 </head>
 
 <body>
     @@include("include/nav.html", {"active": "about"})
 
-
-    <style>
-        /*背景图片*/
-
-        body {
-            background: url(./img/bg2.jpg);
-            background-size: cover;
-            background-attachment: fixed;
-        }
-    </style>
-
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                <div class="sidebar">
-                    <ul>
-                        <li>
-                            <a href="#top">注册</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-10">
-                <div class="content_border">
+            <div class="col-md-12">
+                <div class="content_border" style="margin-left: 20%">
                     <div class="content_border_top">
                         <div class="content_border_lefttop"></div>
                         <div class="content_border_centertop"></div>
@@ -44,66 +25,62 @@
                                 <img src="./img/注册.jpg" id="form_img">
                                 <form autocomplete="off">
                                     <fieldset>
-                                        <legend>注册内容:</legend>
-                                        <label for="usename">用户名：　</label>
-                                        <input type="text" id="usename" maxlength="10" placeholder="请输入用户名">
-                                        <br/>
+                                        <legend>注册:</legend>
+                                        <label for="usename">用户名：</label>
+                                        <input type="text" id="usename" maxlength="10" placeholder="请输入用户名"><br />
                                         <p>不超过10位,同时为了好记请不要使用奇怪字符</p>
-                                        <label for="password">密码：　　</label>
-                                        <input type="password" id="password" maxlength="8" placeholder="请输入8位密码">
-                                        <br/>
+                                        <label for="password">密码：</label>
+                                        <input type="password" id="password" maxlength="8" placeholder="请输入8位密码"><br />
                                         <label for="check">确认密码：</label>
-                                        <input type="password" id="check" maxlength="8" placeholder="请确认密码">
-                                        <br/>
+                                        <input type="password" id="check" maxlength="8" placeholder="请确认密码"><br />
                                         <label for="sex">性别：</label>
-                                        男
-                                        <input type="radio" name="sex" id="sex" value="男"> 女
-                                        <input type="radio" name="sex" id="sex" value="女">
-                                        <br/>
-                                        <label for="like">你喜欢游戏的哪方面？</label>
-                                        <br/>
-                                        <input type="checkbox" name="good" value="玩法自由度高">玩法自由度高
-                                        <br/>
-                                        <input type="checkbox" name="good" value="地图场景优美">地图场景优美
-                                        <br/>
-                                        <input type="checkbox" name="good" value="多人互动">多人互动
-                                        <br/>
-                                        <input type="checkbox" name="good" value="多地图探索">多地图探索
-                                        <br/>
+                                        男<input type="radio" name="sex" id="sex" checked="Ture" value="男">
+                                        女<input type="radio" name="sex" id="sex" value="女">
+                                        <br />
+                                        <label for="like">你喜欢游戏的哪方面？</label><br />
+                                        <input type="checkbox" name="good" value="玩法自由度高">玩法自由度高<br />
+                                        <input type="checkbox" name="good" value="地图场景优美">地图场景优美<br />
+                                        <input type="checkbox" name="good" value="多人互动">多人互动<br />
+                                        <input type="checkbox" name="good" value="多地图探索">多地图探索<br />
                                         <label for="others">其他：</label>
-                                        <input type="textarea" name="good" id="others">
-                                        <br/>
-                                        <label for="game">你最喜欢以下那款游戏？</label>
-                                        <br/>
+                                        <input type="textarea" name="good" id="others"><br />
+                                        <label for="game">你最喜欢以下那款游戏？</label><br />
                                         <select id="game">
-                                            <option selected="selected" value="英雄联盟">英雄联盟</option>
+                                            <option selected="selected" value="MineCraft">MineCraft</option>
+                                            <option value="英雄联盟">英雄联盟</option>
                                             <option value="守望先锋">守望先锋</option>
                                             <option value="炉石传说">炉石传说</option>
                                             <option value="三国杀">三国杀</option>
                                             <option value="斗地主">斗地主</option>
-                                        </select>
-                                        <br/>
+                                        </select><br />
                                         <label for="text">对我们的网页有哪些建议：</label>
-                                        <textarea cols="36" rows="8" id="text"></textarea>
-                                        <br/>
-                                        <input type="submit" onclick="alert('感谢您的浏览与支持！')" value="完成并提交">
+                                        <textarea cols="36" rows="8" id="text"></textarea><br />
+                                        <input type="button" value="提交" onclick="get()">
                                     </fieldset>
                                 </form>
-                                &nbsp;
                             </div>
                         </div>
-                    </div>
-                    <div class="content_border_bottom">
-                        <div class="content_border_leftbottom"></div>
-                        <div class="content_border_centerbottom"></div>
-                        <div class="content_border_rightbottom"></div>
+                        <div class="content_border_bottom">
+                            <div class="content_border_leftbottom"></div>
+                            <div class="content_border_centerbottom"></div>
+                            <div class="content_border_rightbottom"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <style>
+        /*背景图片*/
 
+        body {
+            background: url(./img/bg2.jpg);
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
     @@include("include/footer.html")
+
 </body>
 
 </html>
