@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // 修正侧边栏链接
     let baseurl = location.pathname;
@@ -32,3 +32,6 @@ $(document).ready(function() {
         });
     });
 });
+
+
+

@@ -3,14 +3,33 @@
 
 <head>
     @@include("include/article_head.html", {"title": "深入探索 - 生物群系", "root": ".."})
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    @@include("include/nav.html", {"active": "explore"})
+    @@include("include/nav.html", {"active": "explore"}) @@include("include/article_body.html", {"file": "md/explore/ecosystem.md"})
 
-    @@include("include/article_body.html", {"file": "md/explore/ecosystem.md"})
 
-    @@include("include/footer.html")
+    <!--返回顶部按钮-->
+    @@include("include/special_effect1.html")
+
+    <button class="gototop" title="返回顶部">
+        <img src="./img/box2.gif">
+    </button>
+
+    <!--<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
+    <script src="js/jquery.gototop.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            // $(".gototop").gototop();
+            $(".gototop").gototop({
+                position: 0,
+                duration: 1250,
+                visibleAt: 300,
+                classname: "isvisible"
+            });
+        });
+    </script> @@include("include/footer.html")
 </body>
 
 </html>
