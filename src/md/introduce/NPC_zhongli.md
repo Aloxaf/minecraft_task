@@ -62,13 +62,13 @@
 <hr >
 <figure class="third" >
 <a href="./introduce/NPC_chuanshuo.html">
-    <img border="0" src="./img/qianfan.png" alt="上一页" title="上一页" hspace="100" >
+    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
 </a>
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
 </a>
 <a href="./introduce/NPC_xiaoyong.html">
-    <img border="0" src="./img/fanye.png" alt="下一页" title="下一页" hspace="100" >
+    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
 </a>
 </figure>
 &nbsp;
