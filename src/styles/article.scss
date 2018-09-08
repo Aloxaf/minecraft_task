@@ -33,8 +33,8 @@ $content_width: 1000px;
 
 /* 边框 */
 
-.content_border {
-  float: left;
+#content_border {
+  // float: left;
   width: $content_width;
   margin-right: auto;
   margin-left: auto;
@@ -46,27 +46,27 @@ $content_width: 1000px;
     background: url(../img/bg_border_#{$pos}#{$ppos}.png) left top repeat-x;
   }
   @mixin content_border_basic($ppos) {
-    .content_border_#{$ppos} {
+    #content_border_#{$ppos} {
       height: 59px;
       width: $content_width;
-      .content_border_left#{$ppos} {
+      #content_border_left#{$ppos} {
         @include border_basic(left, $ppos, 59px);
       }
-      .content_border_center#{$ppos} {
+      #content_border_center#{$ppos} {
         @include border_basic(center, $ppos, $content_width - 59px * 2);
       }
-      .content_border_right#{$ppos} {
+      #content_border_right#{$ppos} {
         @include border_basic(right, $ppos, 59px);
       }
     }
   }
   @include content_border_basic(top);
   @include content_border_basic(bottom);
-  .content_border_left {
+  #content_border_left {
     background: url(../img/bg_border_left.png) left top repeat-y;
     background-size: 84px 100px;
   }
-  .content_border_right {
+  #content_border_right {
     background: url(../img/bg_border_right.png) right top repeat-y;
     background-size: 84px 100px;
   }
