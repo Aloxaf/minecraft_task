@@ -21,18 +21,25 @@
 掉落物 | 雪球
 经验值 | 0
 
-&nbsp;
+<br />
+<div class="align-justify">
 
-<hr >
-<figure class="third" >
+<div style="display: inline-block;">
 <a href="./introduce/NPC_zhongli.html">
-    <img border="0" src="./img/qianfan.png" alt="上一页" title="上一页" hspace="100" >
+    <img src="./img/qianfan.png" alt="上一页" title="上一页" width="75">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye.png" alt="返回NPC页面" title="返回NPC页面" width="75">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_kexun.html">
-    <img border="0" src="./img/fanye.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye.png" alt="下一页" title="下一页" width="75">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>

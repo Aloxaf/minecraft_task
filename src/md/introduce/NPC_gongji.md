@@ -175,16 +175,25 @@
 
 &nbsp;
 
-<hr >
-<figure class="third" >
-<a  onClick="return alert('您已经在第一页了哦！');">
-    <img border="0" src="./img/qianfan.png" alt="上一页" title="上一页" hspace="100" >
+<div class="align-justify">
+
+<div style="display: inline-block;">
+<a onclick="return alert('您已经在第一页了哦！');" href="javascript:;">
+    <img src="./img/qianfan.png" alt="上一页" title="上一页" width="75">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye.png" alt="返回NPC页面" title="返回NPC页面" width="75">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_chuanshuo.html">
-    <img border="0" src="./img/fanye.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye.png" alt="下一页" title="下一页" width="75">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>
+
