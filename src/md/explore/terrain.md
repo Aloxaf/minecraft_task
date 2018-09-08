@@ -2,7 +2,24 @@
 
 ## **生成基本地形**
 
-MC不是直接生成一个高度图，而是生成一个三维的“密度数组”，不知道为什么这样做。我猜是为了生成石窟这种地形，但是这样也有可能生成浮空岛
+### 基本地形
+
+山脉：
+
+<img src="./img/Mountain_Biome.png" width="100%" alt="山脉">
+
+沙滩：
+
+<img src="./img/Sand_beach_2.png" width="100%" alt="沙滩">
+
+海洋：
+
+<img src="./img/1.8_Biomes_Ocean.png" width="100%" alt="海洋">
+
+
+MC不是直接生成一个高度图，而是生成一个三维
+
+的“密度数组”，不知道为什么这样做。我猜是为了生成石窟这种地形，但是这样也有可能生成浮空岛
 
 ```java
  // 生成只有石头、水、空气的基本地形
@@ -234,6 +251,20 @@ MC不是直接生成一个高度图，而是生成一个三维的“密度数组
 
 
 ## 生成生物群系相应的方块
+
+### 成品
+
+高寒生物群系
+
+<img src="./img/800px-Extreme_Hills_M.png" width="100%" alt="高寒">
+
+积雪生物群系：
+
+<img src="./img/800px-IcePlains.png" width="100%" alt="雪原">
+
+茂盛生物群系：
+
+<img src="./img/2012-01-04_19.47.47.png" width="100%" alt="平原">
 
 ### GenLayerVoronoiZoom
 

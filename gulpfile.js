@@ -2,6 +2,7 @@
 
 let gulp = require('gulp'),
     gutil = require('gulp-util'),
+    beautify = require('gulp-html-beautify'),
     browserSync = require('browser-sync').create(),
     del = require('del'),
     fileinclude = require('gulp-file-include'),
@@ -9,6 +10,7 @@ let gulp = require('gulp'),
     highlightjs = require('highlight.js'),
     sass = require('gulp-sass'),
     marked = require('marked'),
+    prettier = require('gulp-prettier'),
     through = require('through2');
 
 let renderer = new marked.Renderer();
@@ -106,6 +108,7 @@ gulp.task('html', () => {
                 markdown: markdown
             }
         }))
+        .pipe(beautify())
         .pipe(gulp.dest('docs'));
 });
 
@@ -120,6 +123,7 @@ gulp.task('images', () => {
 gulp.task('scripts', () => {
     return gulp.src('src/js/**/*')
         .pipe(mylog())
+        .pipe(prettier())
         .pipe(gulp.dest('docs/js'));
 });
 
@@ -128,6 +132,7 @@ gulp.task('styles', () => {
     return gulp.src('src/styles/**/*')
         .pipe(mylog())
         .pipe(sass().on('error', sass.logError))
+        .pipe(prettier())
         .pipe(gulp.dest('docs/css'));
 });
 

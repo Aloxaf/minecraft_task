@@ -1,32 +1,30 @@
 <div class="container">
     <div class="row">
         <div class="col-md-2">
-            <div class="sidebar_wrapper">
-                <div class="sidebar">
-                    <!-- generated from markdown -->
-                    @@include(sidebar("@@file"))
-                </div>
+            <div id="sidebar">
+                <!-- generated from markdown -->
+                @@include(sidebar("@@file"))
             </div>
         </div>
         <div class="col-md-10">
-            <div class="content_border">
-                <div class="content_border_top">
-                    <div class="content_border_lefttop"></div>
-                    <div class="content_border_centertop"></div>
-                    <div class="content_border_righttop"></div>
+            <div id="content_border">
+                <div id="content_border_top">
+                    <div id="content_border_lefttop"></div>
+                    <div id="content_border_centertop"></div>
+                    <div id="content_border_righttop"></div>
                 </div>
-                <div class="content_border_left">
-                    <div class="content_border_right">
+                <div id="content_border_left">
+                    <div id="content_border_right">
                         <div class="content">
                             <!-- generated from markdown -->
                             @@include(markdown("@@file"))
                         </div>
                     </div>
                 </div>
-                <div class="content_border_bottom">
-                    <div class="content_border_leftbottom"></div>
-                    <div class="content_border_centerbottom"></div>
-                    <div class="content_border_rightbottom"></div>
+                <div id="content_border_bottom">
+                    <div id="content_border_leftbottom"></div>
+                    <div id="content_border_centerbottom"></div>
+                    <div id="content_border_rightbottom"></div>
                 </div>
             </div>
         </div>

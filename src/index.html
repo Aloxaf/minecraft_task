@@ -14,34 +14,90 @@
       <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
       <script src="https://cdn.bootcss.com/flexslider/2.7.0/jquery.flexslider.min.js"></script>
       <script src="./js/common.js"></script>
-      <link href="./css/style.css" rel="stylesheet">
+      <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-      <!-- 导航栏 -->
       @@include("include/nav.html", {"active": "index"})
+      <div id="container_wrapper">
+            <div id="container">
 
-      <!-- 幻灯片 -->
-      <div class="flexslider_wrapper">
-            <div class="flexslider">
-                  <ul class="slides">
-                        <li><img src="./img/slide1.jpg" alt=""></li>
-                        <li><img src="./img/slide2.jpg" alt=""></li>
-                        <li><img src="./img/slide3.jpg" alt=""></li>
-                        <li><img src="./img/slide4.jpg" alt=""></li>
-                        <li><img src="./img/slide5.jpg" alt=""></li>
-                  </ul>
+                  <!-- 幻灯片 -->
+                  <div id="flexslider_wrapper">
+                        <div class="flexslider">
+                              <ul class="slides">
+                                    <li>
+                                          <a title="我的世界官网" href="http://mc.163.com/">
+                                                <img src="./img/official.png" alt="我的世界官网">
+                                          </a>
+                                    </li>
+                                    <li>
+                                          <a title="我的世界论坛" href="http://mc.netease.com/">
+                                                <img src="./img/forum.png" alt="我的世界论坛">
+                                          </a>
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide3.jpg" alt="">
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide4.jpg" alt="">
+                                    </li>
+                                    <li>
+                                          <img src="./img/slide5.jpg" alt="">
+                                    </li>
+                              </ul>
+                        </div>
+                  </div>
+
+                  <div class="card-board">
+                        <div class="card">
+                              <a title="NPC 介绍" href="./introduce/major.html">
+                                    <img class="card-icon" src="./img/zombie.png" alt="关于我们">
+                              </a>
+                              <a title="关于我们" href="./about/about.html">
+                                    <img class="card-icon" src="./img/zombie.png" alt="关于我们">
+                              </a>
+                        </div>
+
+                        <div class="card">
+                              <a title="NPC 介绍" href="./introduce/major.html">
+                                    <img class="card-icon" src="./img/zombie.png" alt="关于我们">
+                              </a>
+                              <a title="关于我们" href="./about/about.html">
+                                    <img class="card-icon" src="./img/zombie.png" alt="关于我们">
+                              </a>
+                        </div>
+                  </div>
+
             </div>
       </div>
+
       <script>
             // 自动播放幻灯片
             $('.flexslider').flexslider({
-                  animation: 'slide',   // 自动滑动
-                  slideshowSpeed: 3000  // 自动滑动间隔
+                  animation: 'slide', // 自动滑动
+                  slideshowSpeed: 3000 // 自动滑动间隔
             })
       </script>
+      <!--返回顶部按钮-->
 
-      @@include("include/footer.html")
+      <button class="gototop" title="返回顶部">
+            <img src="./img/box.gif">
+      </button>
+
+      <!--<script src="js/jquery-1.11.0.min.js" type="text/javascript"></script>-->
+      <script src="js/jquery.gototop.min.js"></script>
+      <script type="text/javascript">
+            $(function () {
+                  // $(".gototop").gototop();
+                  $(".gototop").gototop({
+                        position: 0,
+                        duration: 1250,
+                        visibleAt: 300,
+                        classname: "isvisible"
+                  });
+            });
+      </script> @@include("include/footer.html")
 
 </body>
 
