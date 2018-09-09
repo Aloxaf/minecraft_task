@@ -1,5 +1,9 @@
 # 生成生物群系总流程
 
+先上效果图以白桦林为例：
+
+![Alt text](/img/baihualin.png"白桦林")
+
 将以下内容概括后：
 
 ![流程图](/img/flow_chart.jpg "流程图")
