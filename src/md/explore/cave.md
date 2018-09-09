@@ -2,7 +2,7 @@
 
 有了地形接下来该生成结构和建筑了，由于这部分代码很长，本篇只研究生成洞穴
 
-![Alt text](/img/Round_Cave.png "地穴")
+![地穴](/img/Round_Cave.png "地穴")
 
 完整的provideChunk：
 
@@ -76,7 +76,7 @@
 
 ## 生成洞穴
 
-![Alt text](/img/Tree_Cave.png "洞穴")  
+![洞穴](/img/Tree_Cave.png "洞穴" )  
 
 类名`net.minecraft.world.gen.MapGenBase`
 
