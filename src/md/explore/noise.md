@@ -222,6 +222,6 @@ public class NoiseGeneratorImproved extends NoiseGenerator
 
 效果图：
 
-![效果图](/img/zaosheng.jpg"效果图")
+![效果图](./img/zaosheng.jpg"效果图")
 
 以上内容来自: [CSDN博客](https://blog.csdn.net/xfgryujk/article/details/64133242)

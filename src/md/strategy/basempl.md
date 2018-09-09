@@ -1,2 +1,2 @@
 
-<img src="./img/basic_instruct.png" width=800>
+<img src="./img/basic_instruct.jpg" width=800>
