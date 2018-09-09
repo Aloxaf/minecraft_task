@@ -1,8 +1,7 @@
 # 效用型生物
 ## 铁傀儡
-<body style="padding:10px;">
-    <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: black;">听说如果你攻击铁傀儡，那会成为你今生最后的壮举</span></marquee>
-</body>
+
+*听说如果你攻击铁傀儡，那会成为你今生最后的壮举*
 
 生命值 | 100(★×50) | 图片
 -- | -- | -- 
@@ -21,18 +20,25 @@
 掉落物 | 雪球
 经验值 | 0
 
-&nbsp;
+<br />
+<div class="align-justify">
 
-<hr >
-<figure class="third" >
+<div style="display: inline-block;">
 <a href="./introduce/NPC_zhongli.html">
-    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
+    <img src="./img/qianfan2.png" alt="上一页" title="上一页" width="50">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" width="100">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_kexun.html">
-    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye2.png" alt="下一页" title="下一页" width="50">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>

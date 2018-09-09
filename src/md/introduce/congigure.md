@@ -2,6 +2,7 @@
 <img src="./img/wdsjxb_bg1.jpg" width="800" >  
 <img src="./img/wdsjxb_bg2.jpg" width="800" >    
 </div>
+
 # 配置要求
 
 ## PC端

@@ -1,4 +1,4 @@
-![](./img/slide12.jpg)
+<img src="./img/slide12.jpg" style="width: 100%;">
 
 # 历史荣耀( • ̀ω•́ )✧
 

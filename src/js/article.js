@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     // 修正侧边栏链接
     let baseurl = location.pathname;
-    $('.sidebar a').each((ind, ele) => {
+    $('#sidebar a').each((ind, ele) => {
         ele.setAttribute('href', baseurl + ele.getAttribute('href'));
     });
 
@@ -32,3 +32,6 @@ $(document).ready(function() {
         });
     });
 });
+
+
+

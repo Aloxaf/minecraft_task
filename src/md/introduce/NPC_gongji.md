@@ -4,7 +4,7 @@
 
 生命值 | 20（★★★★★★★★★★） | 图片
 -- | -- | --
-护甲值 | 2（★） |  ![僵尸1](./img/僵尸1.png)
+护甲值 | 2（★） |  ![僵尸1](./img/zombie.png)
 攻击力 | 简单2（★）<br/>普通3（★☆）<br/>困难4（★★）
 体型 | **成年个体：**高度：1.95方格<br/>宽度：0.6方格<br/>**幼年个体：**高度：1.95方格<br/>宽度：0.3方格
 生成于 | 亮度小于等于 7 的任何 1×2 空间，除了透明方块（台阶、TNT、玻璃等）<br/>**尸壳：**沙漠、沙漠山丘、沙漠 M
@@ -17,7 +17,7 @@
 
 生命值 | 20（★★★★★★★★★★） | 图片
 -- | --  | --
-护甲值 | 2（★） | ![小僵尸](./img/小僵尸1.png)
+护甲值 | 2（★） | ![小僵尸](./img/small_zombie.png)
 攻击力 | 简单2（★）<br/>普通3（★☆）<br/>困难4（★★）
 体型 | **成年个体：**高度：1.95方格<br/>宽度：0.6方格<br/>**幼年个体：**高度：0.975方格<br/>宽度：0.3方格
 生成于 | 亮度小于等于 7 的任何 1×2 空间，除了透明方块（台阶、TNT、玻璃等）<br/>**尸壳：**沙漠、沙漠山丘、沙漠 M
@@ -28,7 +28,7 @@
 
 生命值 | 20（★★★★★★★★★★） | 图片
 -- | -- | --
-护甲值 | 2（★） | ![骷髅](./img/骷髅1.png)
+护甲值 | 2（★） | ![骷髅](./img/skeleton.png)
 攻击力 | **弓：**<br/>简单1（☆）-4（★★）<br/>普通1（☆）-4（★★）<br/>困难1（☆）-5（★☆☆）<br/>**近战：**<br/>简单2（★）<br/>普通2（★★）<br/>困难3（★★★）
 体型 | **高度：1.95方格<br/>宽度：0.6方格
 生成于 | **主世界：**亮度小于等于7<br/>**下界：**亮度小于等于7的下界要塞**<br/>流浪者：**冰原、雪山和冰刺平原
@@ -142,9 +142,10 @@
 经验值 | 5
 
 ## 溺尸
-<body style="padding:10px;">
-    <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">“各位玩家，我衷心地祝愿你们在水底不会碰见溺尸”————Tom Stone</span></marquee>
-</body>
+
+*“各位玩家，我衷心地祝愿你们在水底不会碰见溺尸”————Tom Stone*
+
+</div>
 
 生命值 | 20（★★★★★★★★★★） | 图片
 -- | --  | --
@@ -175,16 +176,25 @@
 
 &nbsp;
 
-<hr >
-<figure class="third" >
-<a  onClick="return alert('您已经在第一页了哦！');">
-    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
+<div class="align-justify">
+
+<div style="display: inline-block;">
+<a onclick="return alert('您已经在第一页了哦！');" href="javascript:;">
+    <img src="./img/qianfan2.png" alt="上一页" title="上一页" width="50">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" width="100">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_chuanshuo.html">
-    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye2.png" alt="下一页" title="下一页" width="50">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>
+

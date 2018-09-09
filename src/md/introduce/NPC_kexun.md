@@ -16,9 +16,8 @@
 经验值 | 1-3
 
 ## 羊驼
-<body style="padding:10px;">
-    <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">作为中立型生物，羊驼能像马一样被驯服，并且能被拴在一起形成一列驼队。它们甚至还可以有小宝宝Stone</span></marquee>
-</body>
+
+*作为中立型生物，羊驼能像马一样被驯服，并且能被拴在一起形成一列驼队。它们甚至还可以有小宝宝Stone*
 
 生命值 | 15（★★★★★★★☆）-30（★×15） | 图片
 -- | -- | --
@@ -47,18 +46,25 @@
 掉落物 | 羽毛
 经验值 | 1-3
 
-&nbsp;
+<br />
+<div class="align-justify">
 
-<hr >
-<figure class="third" >
+<div style="display: inline-block;">
 <a href="./introduce/NPC_xiaoyong.html">
-    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
+    <img src="./img/qianfan2.png" alt="上一页" title="上一页" width="50">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" width="100">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_buhuanji.html">
-    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye2.png" alt="下一页" title="下一页" width="50">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>

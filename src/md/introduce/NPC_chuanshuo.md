@@ -2,9 +2,7 @@
 
 ### 凋灵
 
-<body style="padding:20px;">
-    <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: black;">“快给自己合成尿布吧，朋友。”————凋灵</span></marquee>
-</body>
+*“快给自己合成尿布吧，朋友。”————凋灵*
 
 生命值 | 300（★×150） | 图片
 -- | -- | --
@@ -25,9 +23,8 @@
 
 ### 远古守卫者
 
-<body style="padding:20px;">
-    <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: black;">“……即使這樣，你也無法獲得海底遺蹟的資源——潛伏的遠古深海守衛會將挖掘減速施加於你身上，使你無力舉起手中的鎬。”————Marsh Davies</span></marquee>
-</body>
+*……即使這樣，你也無法獲得海底遺蹟的資源——潛伏的遠古深海守衛會將挖掘減速施加於你身上，使你無力舉起手中的鎬。”————Marsh Davies*
+
 
 生命值 | 80（★×40） | 图片
 -- | -- | --
@@ -36,18 +33,25 @@
 生成于 | 末路之地
 经验值 | **第一次：**12,000<br/>**重生后：**500
 
-&nbsp;
+<br />
+<div class="align-justify">
 
-<hr >
-<figure class="third" >
+<div style="display: inline-block;">
 <a href="./introduce/NPC_gongji.html">
-    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
+    <img src="./img/qianfan2.png" alt="上一页" title="上一页" width="50">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" width="100">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_zhongli.html">
-    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye2.png" alt="下一页" title="下一页" width="50">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>

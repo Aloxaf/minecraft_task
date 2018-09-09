@@ -2,9 +2,7 @@
 
 ## 洞穴蜘蛛
 
-<body style="padding:10px;">
-    <marquee direction="left"><span style="font-weight: bolder:font-size: 30px; color: brown;">洞穴蜘蛛是一种能够造成玩家中毒的中立型生物</span></marquee>
-</body>
+*洞穴蜘蛛是一种能够造成玩家中毒的中立型生物*
 
 生命值 | 12（★★★★★★） | 图片
 -- | -- | --
@@ -34,9 +32,7 @@
 
 ## 海豚
 
-<body style="padding:10px">
-    <marquee direction="left"><sapn style="font-weight: bolder:font-size: 30px; color: brown">海豚，是一种非常喜欢玩耍的生物</span></marquee>
-</body>
+*海豚，是一种非常喜欢玩耍的生物*
 
 生命值 | 10（★★★★★） | 图片
 -- | -- | -- 
@@ -46,9 +42,7 @@
 
 ## 末影人
 
-<body style="padding: 10px">
-    <marquee direction="left"><span style="font-weight: bolder: font-size:30px; color: brown">末影人通常在下界和末地，在主世界它是非常罕见的。曾经与他的眼神接触然后幸存下来讲故事的人越来越少了</span></marquee>
-</body>
+*末影人通常在下界和末地，在主世界它是非常罕见的。曾经与他的眼神接触然后幸存下来讲故事的人越来越少了*
 
 生命值 | 40（★×20) | 图片
 -- | -- | -- 
@@ -57,18 +51,25 @@
 生成于 | 主世界，下界或末路之地的亮度在7以及7以下的固体方块上
 经验值 | 5
 
-&nbsp;
+<br />
+<div class="align-justify">
 
-<hr >
-<figure class="third" >
+<div style="display: inline-block;">
 <a href="./introduce/NPC_chuanshuo.html">
-    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
+    <img src="./img/qianfan2.png" alt="上一页" title="上一页" width="50">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
+    <img src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" width="100">
 </a>
+</div>
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_xiaoyong.html">
-    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
+    <img src="./img/fanye2.png" alt="下一页" title="下一页" width="50">
 </a>
-</figure>
-&nbsp;
+</div>
+
+</div>

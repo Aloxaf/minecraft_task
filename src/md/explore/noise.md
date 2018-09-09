@@ -6,6 +6,8 @@
 
 在包net.minecraft.world.gen里可以看到几个噪声生成器，它们的命名比较乱所以不要看类名来推断算法（本来柏林噪声的命名就经常被混淆），其实MC里只有Perlin噪声和Simplex噪声
 
+![噪声函数](./img/noise_func.png "噪声函数")
+
 ## NoiseGeneratorImproved
 
 用来生成一个柏林噪声
@@ -217,5 +219,9 @@ public class NoiseGeneratorImproved extends NoiseGenerator
     }
 }
 ```
+
+效果图：
+
+![效果图](/img/zaosheng.jpg"效果图")
 
 以上内容来自: [CSDN博客](https://blog.csdn.net/xfgryujk/article/details/64133242)

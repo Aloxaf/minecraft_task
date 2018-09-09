@@ -79,20 +79,28 @@
 生成于 | 村庄<br />当治愈了一个僵尸村民时
 掉落物 | 无
 经验值 | <b>交易：</b>3-6<br /><b>在有意愿时交易：</b>8-11
-&nbsp;
 
-<hr >
-<figure class="third" >
+<br />
+
+<div class="align-justify">
+
+<div style="display: inline-block;">
 <a href="./introduce/NPC_kexun.html">
-    <img border="0" src="./img/qianfan2.png" alt="上一页" title="上一页" hspace="100" >
+    <img src="./img/qianfan2.png" alt="上一页" title="上一页" width="50">
 </a>
-<a href="./introduce/major.html">
-    <img border="0" src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" hspace="100" width="10%" height="10%" >
-</a>
-<a onClick="return alert('您已经在最后一页了哦！');">
-    <img border="0" src="./img/fanye2.png" alt="下一页" title="下一页" hspace="100" >
-</a>
-</figure>
-&nbsp;
+</div>
 
+<div style="display: inline-block;">
+<a href="./introduce/major.html">
+    <img src="./img/huizhuye2.png" alt="返回NPC页面" title="返回NPC页面" width="100">
+</a>
+</div>
+
+<div style="display: inline-block;">
+<a onclick="return alert('您已经在最后一页了哦！');" href="javascript:;">
+    <img src="./img/fanye2.png" alt="下一页" title="下一页" width="50">
+</a>
+</div>
+
+</div>
 
