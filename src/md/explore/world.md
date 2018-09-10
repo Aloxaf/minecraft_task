@@ -2,7 +2,10 @@
 
 ## 世界设置
 
-首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码  
+首先从创建世界的GUI开始看，类名net.minecraft.client.gui.GuiCreateWorld，以下是点击按钮的代码和界面  
+
+![主界面](./img/timg.jpg "主界面")
+
 类名net.minecraft.client.Minecraft
 
 ```java
@@ -189,6 +192,9 @@
     }
 ```
 ## 加载世界
+
+![流程](./img/flow_chart2.png "流程")
+
 类名net.minecraft.server.integrated.IntegratedServer  
 服务器线程启动后调用这个函数
 ```

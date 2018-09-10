@@ -3,17 +3,15 @@
 
 <head>
     @@include("include/article_head.html", {"title": "游戏介绍 - 游戏背景", "root": ".."})
+    <script src="./js/jquery.gototop.min.js"></script>
 </head>
 
 <body>
-    @@include("include/nav.html", {"active": "introduce"}) 
-
+    @@include("include/nav.html", {"active": "introduce"})
     @@include("include/special_effect1.html")
-    
-    @@include("include/article_body.html", {"file": "md/introduce/bcground.md"})
+    @@include("include/article_body_nosb.html", {"file": "md/introduce/bcground.md"})
     <style>
         /*背景图片*/
-
         body {
             background: url(img/guangtou.jpg);
             background-size: cover;
@@ -21,7 +19,25 @@
         }
     </style>
 
-    @@include("include/footer.html")
+
+    <!--返回顶部按钮-->
+
+    <button class="gototop" title="返回顶部">
+        <img src="./img/box.gif">
+    </button>
+
+    <script type="text/javascript">
+        $(function () {
+            // $(".gototop").gototop();
+            $(".gototop").gototop({
+                position: 0,
+                duration: 1250,
+                visibleAt: 300,
+                classname: "isvisible"
+            });
+        });
+    </script> @@include("include/footer.html")
+
 </body>
 
 </html>

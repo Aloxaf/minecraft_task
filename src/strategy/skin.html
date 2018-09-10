@@ -3,24 +3,43 @@
 
 <head>
     @@include("include/article_head.html", {"title": "游戏攻略 - 皮肤替换教程", "root": ".."})
+    <script src="./js/jquery.gototop.min.js"></script>
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
     @@include("include/nav.html", {"active": "strategy"})
-
     @@include("include/special_effect1.html")
-
-    @@include("include/article_body.html", {"file": "md/strategy/skin.md"})
+    @@include("include/article_body_nosb.html", {"file": "md/strategy/skin.md"})
     <style>
         /*背景图片*/
+
         body {
-            background: url(img/教程背景1.jfif);
+            background: url(img/strategy_bg1.jfif);
             background-size: cover;
             background-attachment: fixed;
         }
     </style>
 
-    @@include("include/footer.html")
+
+
+    <!--返回顶部按钮-->
+
+    <button class="gototop" title="返回顶部">
+        <img src="./img/box2.gif">
+    </button>
+
+    <script type="text/javascript">
+        $(function () {
+            // $(".gototop").gototop();
+            $(".gototop").gototop({
+                position: 0,
+                duration: 1250,
+                visibleAt: 300,
+                classname: "isvisible"
+            });
+        });
+    </script> @@include("include/footer.html")
 </body>
 
 </html>

@@ -1,18 +1,14 @@
-$content_width: 1000px;
-
-.article {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
 /* 侧边栏 */
 
-.sidebar {
-  float: left;
-  background-color: #fbf2fb;
+#sidebar {
   position: fixed;
-  padding-left: 0px;
-
+  background-color: #fbf2fb;
+  padding: 5px 5px 5px 5px;
+  width: 13%;
+  max-height: 100%;
+  overflow: auto;
+  display: flex;
+  align-items: -webkit-flex;
   border: {
     style: groove;
     width: 2px;
@@ -21,8 +17,9 @@ $content_width: 1000px;
 
   box-sizing: border-box;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.06), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
+  0 3px 1px -2px rgba(0, 0, 0, 0.06),
+  0 1px 5px 0 rgba(0, 0, 0, 0.12),
+  0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
 
   ul {
     list-style: none;
@@ -31,17 +28,15 @@ $content_width: 1000px;
 }
 
 /* 内容框 */
-
 .content {
-  margin: -20px 84px -10px 84px;
+  margin: -20px 83px -10px 83px;
   background-color: #fbf2db;
 }
 
 /* 边框 */
-
-.content_border {
-  float: left;
-  width: $content_width;
+#content_border {
+  // float: left;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   overflow: hidden;
@@ -54,34 +49,33 @@ $content_width: 1000px;
   }
 
   @mixin content_border_basic($ppos) {
-    .content_border_#{$ppos} {
+    #content_border_#{$ppos} {
       height: 59px;
-      width: $content_width;
+      width: 100%;
 
-      .content_border_left#{$ppos} {
+      #content_border_left#{$ppos} {
         @include border_basic(left, $ppos, 59px);
       }
 
-      .content_border_center#{$ppos} {
-        @include border_basic(center, $ppos, $content_width - 59px * 2);
+      #content_border_center#{$ppos} {
+        @include border_basic(center, $ppos, calc(100% - 2 * 59px));
       }
 
-      .content_border_right#{$ppos} {
+      #content_border_right#{$ppos} {
         @include border_basic(right, $ppos, 59px);
       }
     }
   }
 
   @include content_border_basic(top);
-
   @include content_border_basic(bottom);
 
-  .content_border_left {
+  #content_border_left {
     background: url(../img/bg_border_left.png) left top repeat-y;
     background-size: 84px 100px;
   }
 
-  .content_border_right {
+  #content_border_right {
     background: url(../img/bg_border_right.png) right top repeat-y;
     background-size: 84px 100px;
   }
@@ -134,4 +128,12 @@ table {
     border-color: #666666;
     background-color: #ffffff;
   }
+}
+
+.align-justify {
+  text-align: justify;
+  text-justify: distribute-all-lines;/* ie6-8 */
+  text-align-last: justify; /* ie9 */
+  -moz-text-align-last: justify; /* ff */
+  -webkit-text-align-last: justify; /* chrome 20+ */
 }

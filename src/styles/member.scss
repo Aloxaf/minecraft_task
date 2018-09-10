@@ -1,0 +1,57 @@
+html {
+	background: url("../img/member_bg.jpg");
+	background-size: cover;
+}
+
+.renwu:hover {
+	transform: scale(1.05, 1.05);
+	transition: all 1s ease;
+}
+
+#wjh {
+	position: fixed;
+	top: 30%;
+	left: -6%;
+	height: 70%;
+	z-index: 5;
+}
+
+#lyl {
+	position: fixed;
+	top: 43%;
+	left: 13%;
+	height: 56%;
+	z-index: 4;
+}
+
+#stn {
+	position: fixed;
+	top: 57%;
+	left: 30%;
+	height: 42%;
+	z-index: 3;
+}
+
+#wy {
+	position: fixed;
+	top: 43%;
+	left: 42%;
+	height: 55%;
+	z-index: 2;
+}
+
+#zh {
+	position: fixed;
+	top: 40%;
+	left: 60%;
+	height: 60%;
+	z-index: 1;
+}
+
+#ymy {
+	position: fixed;
+	top: 40%;
+	left: 80%;
+	height: 60%;
+	z-index: 1;
+}

@@ -3,14 +3,83 @@
 
 <head>
     @@include("include/article_head.html", {"title": "游戏介绍 - NPC", "root": ".."})
+    <script src="./js/jquery.gototop.min.js"></script>
 </head>
 
 <body>
-    @@include("include/nav.html", {"active": "introduce"}) 
-
+    @@include("include/nav.html", {"active": "introduce"})
     @@include("include/special_effect1.html")
-    
-    @@include("include/article_body.html", {"file": "md/introduce/major.md"})
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="content_border">
+                    <div id="content_border_top">
+                        <div id="content_border_lefttop"></div>
+                        <div id="content_border_centertop"></div>
+                        <div id="content_border_righttop"></div>
+                    </div>
+                    <div id="content_border_left">
+                        <div id="content_border_right">
+                            <div class="content">
+                                <div style="text-align: center">
+                                    <img src="./img/wdsjxb_bg1.jpg" width="100%">
+                                    <img src="./img/wdsjxb_bg2.jpg" width="100%">
+                                </div>
+                                <h1>NPC介绍</h1>
+                                <br />
+                                <i><b>在minecraft的世界里，玩家可能会遇到很多的非玩家角色，称为“mob”，包括动物，村民和敌对生物。在黑暗区域如洞穴，会有敌对生物出现，如蜘蛛、骷髅、僵尸等。</i></b>
+                                <br />
+
+                                <h2>攻击型生物与传说生物</h2>
+                                有些生物拥有特殊的能力，如爬行者（creeper），是一种会爆炸的生物，它会偷偷跟踪玩家而几乎不会发出声音；末影人，是一种可瞬间移动并能拿起方块的生物，一旦游戏准心对准头部，而玩家没有把南瓜戴在头上，末影人就会攻击玩家
+                                <div class="card-board">
+                                    <div class="card">
+                                        <a title="点我进入攻击型生物图鉴" href="./introduce/NPC_gongji.html">
+                                            <img class="card-icon" src="./img/j.png" alt="攻击型生物" style="object-fit: contain; width: 150px; height: 250px;">
+                                        </a>
+                                        <a title="点我进入传说中的生物图鉴" href="./introduce/NPC_chuanshuo.html">
+                                            <img class="card-icon" src="./img/wa.png" alt="传说中的生物" style="object-fit: contain; width: 150px; height: 250px;">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <h2>中立型,效用型与可驯服型生物</h2>
+                                牛、猪、鸡等非敌对生物，它们可以被猎杀产生食物和制作材料。
+                                <div class="card-board align-justify">
+                                    <div class="card">
+                                        <a title="点我进入中立型生物图鉴" href="./introduce/NPC_zhongli.html">
+                                            <img class="card-icon" src="./img/yangt.png" alt="中立型生物" style="object-fit: contain; width: 200px; height: 200px;">
+                                        </a>
+                                        <a title="点我进入效用型生物图鉴" href="./introduce/NPC_xiaoyong.html">
+                                            <img class="card-icon" src="./img/yang.png" alt="效用型生物" style="object-fit: contain; width: 200px; height: 200px;">
+                                        </a>
+                                        <a title="点我进入可驯服型生物图鉴" href="./introduce/NPC_kexun.html">
+                                            <img class="card-icon" src="./img/ma.png" alt="可驯服型生物" style="object-fit: contain; width: 200px; height: 200px;">
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <h2>被动型生物</h2>
+                                <div class="card-board">
+                                    <div class="card">
+                                        <a title="点我进入被动型生物图鉴" href="./introduce/NPC_buhuanji.html">
+                                            <img class="card-icon" src="./img/cm.png" alt="被动型生物" style="object-fit: contain; width: 200px; height: 200px;">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content_border_bottom">
+                        <div id="content_border_leftbottom"></div>
+                        <div id="content_border_centerbottom"></div>
+                        <div id="content_border_rightbottom"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <style>
         /*背景图片*/
 
@@ -21,7 +90,25 @@
         }
     </style>
 
-    @@include("include/footer.html")
+
+    <!--返回顶部按钮-->
+
+    <button class="gototop" title="返回顶部">
+        <img src="./img/box.gif">
+    </button>
+
+    <script type="text/javascript">
+        $(function () {
+            // $(".gototop").gototop();
+            $(".gototop").gototop({
+                position: 0,
+                duration: 1250,
+                visibleAt: 300,
+                classname: "isvisible"
+            });
+        });
+    </script> @@include("include/footer.html")
+
 </body>
 
 </html>

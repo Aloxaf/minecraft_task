@@ -3,16 +3,33 @@
 
 <head>
     @@include("include/article_head.html", {"title": "深入探索 - 爆炸算法", "root": ".."})
+    <script src="./js/jquery.gototop.min.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
     @@include("include/nav.html", {"active": "explore"})
+    @@include("include/article_body_nosb.html", {"file": "md/explore/explode.md"})
 
+
+    <!--返回顶部按钮-->
     @@include("include/special_effect1.html")
 
-    @@include("include/article_body.html", {"file": "md/explore/explode.md"})
+    <button class="gototop" title="返回顶部">
+        <img src="./img/box2.gif">
+    </button>
 
-    @@include("include/footer.html")
+    <script type="text/javascript">
+        $(function () {
+            // $(".gototop").gototop();
+            $(".gototop").gototop({
+                position: 0,
+                duration: 1250,
+                visibleAt: 300,
+                classname: "isvisible"
+            });
+        });
+    </script> @@include("include/footer.html")
 </body>
 
 </html>

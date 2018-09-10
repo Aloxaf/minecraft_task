@@ -1,2 +1,2 @@
 
-<img src="./img/基本操作1.png" width=800>
+<img src="./img/basic_instruct.jpg" width=800>
