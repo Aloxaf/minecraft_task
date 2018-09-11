@@ -2,11 +2,11 @@
 
 先上效果图以白桦林为例：
 
-![白桦林](./img/baihualin.png"白桦林")
+<img src="./img/baihualin.png" style="width: 100%;" alt="白桦林">
 
 将以下内容概括后：
 
-![流程图](./img/flow_chart.jpg "流程图")
+<img src="./img/Round_Cave.png" style="width: 100%;" alt="流程图">
 
 然后接着上篇文章我们看到这个函数
 

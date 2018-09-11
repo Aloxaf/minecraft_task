@@ -8,7 +8,7 @@ MC中的爆炸其实挺科学的，在空中爆炸冲击波传得远，破坏范
 
 不科学的地方是它的爆炸范围是正方体，只不过一般范围小到看不出是正方体。至于为什么MOD里的核弹爆炸范围是球体，那是别人重新实现了爆炸函数把范围改掉了…
 
-![爆炸](./img/explode.jpg "爆炸")
+<img src="./img/explode.png" style="width: 100%;" alt="爆炸">
 
 类名net.minecraft.world.World
 
