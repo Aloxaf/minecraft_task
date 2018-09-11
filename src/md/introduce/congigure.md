@@ -1,6 +1,6 @@
 <div align="center" >
-<img src="./img/wdsjxb_bg1.jpg" width="800" >  
-<img src="./img/wdsjxb_bg2.jpg" width="800" >    
+<img src="./img/wdsjxb_bg1.jpg" style="width:100%;" >  
+<img src="./img/wdsjxb_bg2.jpg" style="width:100%;" >    
 </div>
 
 # 配置要求
@@ -17,9 +17,9 @@
 
 ## PE端
 
---- | 安卓 | ios | windows phone
---- | --- | --- | ---
-处理器 | ARMv7 Processor 以上 | Apple A5 以上 | ARMv7Processor 以上
-系统 | Android 4.0 以上 | iOS5.1.1 以上 | Windows Phone 8.1 以上
+| ---    | 安卓                 | ios           | windows phone          |
+| ------ | -------------------- | ------------- | ---------------------- |
+| 处理器 | ARMv7 Processor 以上 | Apple A5 以上 | ARMv7Processor 以上    |
+| 系统   | Android 4.0 以上     | iOS5.1.1 以上 | Windows Phone 8.1 以上 |
 
 &nbsp; <!-- 防止表格底端被边框覆盖 -->
