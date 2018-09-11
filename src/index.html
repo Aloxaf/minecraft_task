@@ -2,132 +2,254 @@
 <html>
 
 <head>
-      <base href=".">
-      <meta charset="utf-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <title>minecraft算法分析及游戏简介</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
-      <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-      <link href="https://cdn.bootcss.com/flexslider/2.7.0/flexslider.min.css" rel="stylesheet">
-      <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-      <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script src="https://cdn.bootcss.com/flexslider/2.7.0/jquery.flexslider.min.js"></script>
-      <script src="./js/common.js"></script>
-      <script src="./js/jquery.gototop.min.js"></script>
-      <link rel="stylesheet" href="./css/style.css">
+    <base href=".">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>minecraft算法分析及游戏简介</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/flexslider/2.7.0/flexslider.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/flexslider/2.7.0/jquery.flexslider.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/jquery.gototop.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-      @@include("include/nav.html", {"active": "index"})
-      <div id="container_wrapper">
-            <div id="container">
-
-                  <!-- 幻灯片 -->
-                  <div id="flexslider_wrapper">
-                        <div class="flexslider">
-                              <ul class="slides">
-                                    <li>
-                                          <a title="我的世界官网" href="http://mc.163.com/">
-                                                <img src="./img/official.png" alt="我的世界官网">
-                                          </a>
-                                    </li>
-                                    <li>
-                                          <a title="我的世界论坛" href="http://mc.netease.com/">
-                                                <img src="./img/forum.png" alt="我的世界论坛">
-                                          </a>
-                                    </li>
-                                    <li>
-                                          <a title="我的世界虎牙直播" href="https://www.huya.com/g/1732">
-                                                <img src="./img/huya.jpg" alt="我的世界虎牙直播">
-                                          </a>
-                                    </li>
-
-                              </ul>
-                        </div>
-                  </div>
-
-                  <div class="card-board">
-                        <div class="frame_title">NPC介绍</div>
-                        <div class="card">
-                              <a title="被动型生物" href="./introduce/NPC_buhuanji.html">
-                                    <img class="card-icon" src="./img/beidong.jpg" alt="被动型生物" width="240" height="350">
-                              </a>
-                              <a title="攻击型生物与传说生物" href="./introduce/NPC_gongji.html">
-                                    <img class="card-icon" src="./img/attack.jpg" alt="攻击型生物与传说生物" width="240" height="350">
-                              </a>
-                              <a title="中立型生物" href="./introduce/NPC_zhongli.html">
-                                    <img class="card-icon" src="./img/neutral.jpg" alt="中立型生物" width="240" height="350">
-                              </a>
-                        </div>
-                        <div class="wenben">我的世界NPC主要分为：攻击型生物和传说生物、中立型,效用型与可驯服型生物、被动型生物。不同的生物有不同的属性，玩家可以根据它们的不同来感受不同的游戏体验
-
-                        </div>
-
-                        <div class="frame_title">Minecraft 算法分析</div>
-                        <div class="card">
-                              <a title="地图生成算法" href="./explore/terrain.html">
-                                    <img class="card-icon" src="./img/map_creat.jpg" alt="地图生成算法" width="240" height="350">
-                              </a>
-                              <a title="生物群系" href="./explore/ecosystem.html">
-                                    <img class="card-icon" src="./img/123.jpg" alt="生物群系" width="240" height="350">
-                              </a>
-                              <a title="爆炸算法" href="./explore/explode.html">
-                                    <img class="card-icon" src="./img/1.jpg" alt="爆炸算法" width="240" height="350">
-                              </a>
-                        </div>
-                        <div class="wenben">Minecraft算法主要由地图生成函数、生物群系、爆炸算法等多种算法组成，不同的算法对应产生不同的视觉、听觉效果，现实感很强</div>
-
-                        <div class="frame_title">Minecraft 各大论坛</div>
-                        <div class="card">
-                              <a title="最mc我的世界论坛" href="http://www.zuimc.com/">
-                                    <img class="card-icon" src="./img/zuimc.png" alt="最mc我的世界论坛" width="500" height="350">
-                              </a>
-                              <a title="4399我的世界论坛" href="http://news.4399.com/wdsj/">
-                                    <img class="card-icon" src="./img/4399.jpg" alt="4399我的世界论坛" width="500" height="350">
-                              </a>
-                        </div>
-                        <div class="card">
-                              <a title="多玩我的世界论坛" href="http://mc.duowan.com/">
-                                    <img class="card-icon" src="./img/duowan.jpg" alt="多玩我的世界论坛" width="500" height="350">
-                              </a>
-                              <a title="游民星空我的世界论坛" href="https://www.gamersky.com/z/minecraft/">
-                                    <img class="card-icon" src="./img/space.jpg" alt="游民星空我的世界论坛" width="500" height="350">
-                              </a>
-                        </div>
-                        <div class="wenben">
-                              通过Minecraft论坛可以与各位大神近距离接触，体验玩家互动时的快乐。同时也可以得到自己想要的材料，学习到各种骚操作，达到事半功倍的效果
-                        </div>
-                        <br>
-                        <br>
-                  </div>
-
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- 图标 -->
+            <div class="navbar-header">
+                <a href="./index.html">
+                    <img src="./img/logo.png" id="logo" alt="首页">
+                </a>
             </div>
-      </div>
+            <!-- 导航目录 -->
+            <div>
+                <ul class="nav navbar-nav">
+                    <li id="index">
+                        <a href="./index.html">首页</a>
+                    </li>
+                    <li id="introduce" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            游戏介绍
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="./introduce/bcground.html">游戏背景</a>
+                            </li>
+                            <li>
+                                <a href="./introduce/experience.html">游戏历程</a>
+                            </li>
+                            <li>
+                                <a href="./introduce/major.html">NPC</a>
+                            </li>
+                            <li>
+                                <a href="./introduce/map.html">场景地图</a>
+                            </li>
+                            <li>
+                                <a href="./introduce/honor.html">历史荣耀</a>
+                            </li>
+                            <li>
+                                <a href="./introduce/system.html">特色系统</a>
+                            </li>
+                            <li>
+                                <a href="./introduce/congigure.html">系统配置</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="explore" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            深入探索
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="./explore/world.html">世界生成</a>
+                            </li>
+                            <li>
+                                <a href="./explore/ecosystem.html">生物群系</a>
+                            </li>
+                            <li>
+                                <a href="./explore/noise.html">噪声函数</a>
+                            </li>
+                            <li>
+                                <a href="./explore/terrain.html">基本地形</a>
+                            </li>
+                            <li>
+                                <a href="./explore/cave.html">洞穴</a>
+                            </li>
+                            <li>
+                                <a href="./explore/explode.html">爆炸算法</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="strategy" class="dropdown">
+                        <a href="./strategy.html" class="dropdown-toggle" data-toggle="dropdown">
+                            游戏攻略
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="./strategy/basempl.html">基本操作</a>
+                            </li>
+                            <li>
+                                <a href="./strategy/sourceuse.html">材质包使用教程</a>
+                            </li>
+                            <li>
+                                <a href="./strategy/skin.html">皮肤替换教程</a>
+                            </li>
+                            <li>
+                                <a href="./strategy/modstall.html">MOD安装教程</a>
+                            </li>
 
-      <button class="gototop" title="返回顶部">
-            <img src="./img/box.gif">
-      </button>
+                        </ul>
+                    </li>
+                    <li id="about" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            关于我们
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="./about/video.html">小组视频</a>
+                            </li>
+                            <li>
+                                <a href="./about/member.html">我们的话</a>
+                            </li>
+                            <li>
+                                <a href="./about/login.html">注册</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            $('#index').addClass('active')
+        </script>
+    </nav>
+    <div id="container_wrapper">
+        <div id="container">
 
-      <script>
-            // 自动播放幻灯片
-            $('.flexslider').flexslider({
-                  animation: 'slide', // 自动滑动
-                  slideshowSpeed: 3000 // 自动滑动间隔
-            })
+            <!-- 幻灯片 -->
+            <div id="flexslider_wrapper">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li>
+                            <a title="我的世界官网" href="http://mc.163.com/">
+                                <img src="./img/official.png" alt="我的世界官网">
+                            </a>
+                        </li>
+                        <li>
+                            <a title="我的世界论坛" href="http://mc.netease.com/">
+                                <img src="./img/forum.png" alt="我的世界论坛">
+                            </a>
+                        </li>
+                        <li>
+                            <a title="我的世界虎牙直播" href="https://www.huya.com/g/1732">
+                                <img src="./img/huya.jpg" alt="我的世界虎牙直播">
+                            </a>
+                        </li>
 
-            $(".gototop").gototop({
-                  position: 0,
-                  duration: 1250,
-                  visibleAt: 300,
-                  classname: "isvisible"
-            });
-      </script>
-      <!--返回顶部按钮-->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card-board">
+                <div class="frame_title">NPC介绍</div>
+                <div class="card">
+                    <a title="被动型生物" href="./introduce/NPC_buhuanji.html">
+                        <img class="card-icon" src="./img/beidong.jpg" alt="被动型生物" width="240" height="350">
+                    </a>
+                    <a title="攻击型生物与传说生物" href="./introduce/NPC_gongji.html">
+                        <img class="card-icon" src="./img/attack.jpg" alt="攻击型生物与传说生物" width="240" height="350">
+                    </a>
+                    <a title="中立型生物" href="./introduce/NPC_zhongli.html">
+                        <img class="card-icon" src="./img/neutral.jpg" alt="中立型生物" width="240" height="350">
+                    </a>
+                </div>
+                <div class="wenben">我的世界NPC主要分为：攻击型生物和传说生物、中立型,效用型与可驯服型生物、被动型生物。不同的生物有不同的属性，玩家可以根据它们的不同来感受不同的游戏体验
+
+                </div>
+
+                <div class="frame_title">Minecraft 算法分析</div>
+                <div class="card">
+                    <a title="地图生成算法" href="./explore/terrain.html">
+                        <img class="card-icon" src="./img/map_creat.jpg" alt="地图生成算法" width="240" height="350">
+                    </a>
+                    <a title="生物群系" href="./explore/ecosystem.html">
+                        <img class="card-icon" src="./img/123.jpg" alt="生物群系" width="240" height="350">
+                    </a>
+                    <a title="爆炸算法" href="./explore/explode.html">
+                        <img class="card-icon" src="./img/1.jpg" alt="爆炸算法" width="240" height="350">
+                    </a>
+                </div>
+                <div class="wenben">Minecraft算法主要由地图生成函数、生物群系、爆炸算法等多种算法组成，不同的算法对应产生不同的视觉、听觉效果，现实感很强</div>
+
+                <div class="frame_title">Minecraft 各大论坛</div>
+                <div class="card">
+                    <a title="最mc我的世界论坛" href="http://www.zuimc.com/">
+                        <img class="card-icon" src="./img/zuimc.png" alt="最mc我的世界论坛" width="500" height="350">
+                    </a>
+                    <a title="4399我的世界论坛" href="http://news.4399.com/wdsj/">
+                        <img class="card-icon" src="./img/4399.jpg" alt="4399我的世界论坛" width="500" height="350">
+                    </a>
+                </div>
+                <div class="card">
+                    <a title="多玩我的世界论坛" href="http://mc.duowan.com/">
+                        <img class="card-icon" src="./img/duowan.jpg" alt="多玩我的世界论坛" width="500" height="350">
+                    </a>
+                    <a title="游民星空我的世界论坛" href="https://www.gamersky.com/z/minecraft/">
+                        <img class="card-icon" src="./img/space.jpg" alt="游民星空我的世界论坛" width="500" height="350">
+                    </a>
+                </div>
+                <div class="wenben">
+                    通过Minecraft论坛可以与各位大神近距离接触，体验玩家互动时的快乐。同时也可以得到自己想要的材料，学习到各种骚操作，达到事半功倍的效果
+                </div>
+                <br>
+                <br>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="gototop" title="返回顶部">
+        <img src="./img/box.gif">
+    </button>
+
+    <script>
+        // 自动播放幻灯片
+        $('.flexslider').flexslider({
+            animation: 'slide', // 自动滑动
+            slideshowSpeed: 3000 // 自动滑动间隔
+        })
+
+        $(".gototop").gototop({
+            position: 0,
+            duration: 1250,
+            visibleAt: 300,
+            classname: "isvisible"
+        });
+    </script>
+    <!--返回顶部按钮-->
 
 
-      
-       @@include("include/footer.html")
+
+    <div class="footer">
+        <br>
+        <p>Copyright © 2018 Badcamp 联系QQ群：869679790 联系电话：18811792366
+            <a href="./about/about.html">关于我们</a>
+        </p>
+        <p>免责声明：本站部分内容来源于互联网。如果本站部分内容侵犯您的权益，请您告知，站长会立即处理。<br> 站内所有资源仅供学习与参考，请勿用于商业用途，否则产生的一切后果将由您自己承担！
+        </p>
+        <p>参考资料:minecraft官网 Google Baidu</p>
+    </div>
 
 </body>
 
