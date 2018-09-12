@@ -2,8 +2,6 @@
 
 ## **生成基本地形**
 
-### 基本地形
-
 山脉：
 
 <img src="./img/Mountain_Biome.png" width="100%" alt="山脉">
