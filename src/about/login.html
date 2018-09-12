@@ -34,14 +34,24 @@
                                         <label for="check">确认密码：</label>
                                         <input type="password" id="check" maxlength="8" placeholder="请确认密码"><br />
                                         <label for="sex">性别：　　</label>
-                                        男<input type="radio" name="sex" id="sex" checked="Ture" value="男">
-                                        女<input type="radio" name="sex" id="sex" value="女">
+                                        <input type="radio" name="sex" id="male" checked="Ture" value="男">&nbsp
+										<label for="male">男</label>&nbsp
+                                        <input type="radio" name="sex" id="female" value="女">&nbsp
+										<label for="female">女</label>
                                         <br />
                                         <label for="like">你喜欢游戏的哪方面？</label><br />
-                                        <input type="checkbox" name="good" value="玩法自由度高">玩法自由度高<br />
-                                        <input type="checkbox" name="good" value="地图场景优美">地图场景优美<br />
-                                        <input type="checkbox" name="good" value="多人互动">多人互动<br />
-                                        <input type="checkbox" name="good" value="多地图探索">多地图探索<br />
+                                        <input type="checkbox" name="good" id="free" value="玩法自由度高">&nbsp
+										<label for="free">玩法自由度高</label>
+										<br />
+                                        <input type="checkbox" name="good" id="scene" value="地图场景优美">&nbsp
+										<label for="scene">地图场景优美</label>
+										<br />
+                                        <input type="checkbox" name="good" id="interaction" value="多人互动">&nbsp
+										<label for="interaction">多人互动</label>
+									    <br />
+                                        <input type="checkbox" name="good" id="map" value="多地图探索">&nbsp
+										<label for="map">多地图探索</label>
+										<br />
                                         <label for="others">其他：</label>
                                         <input type="textarea" name="good" id="others"><br />
                                         <label for="game">你最喜欢以下那款游戏？</label><br />
